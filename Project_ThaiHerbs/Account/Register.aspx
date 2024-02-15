@@ -46,7 +46,7 @@
                         <asp:DropDownList ID="DropDownListYear" runat="server" AutoPostBack="True"></asp:DropDownList>
                         <br />
                         <br />
-                        <asp:Button ID="ButtonSignIn" runat="server" Text="Sign In" CssClass="logbut" />
+                        <asp:Button ID="ButtonSignIn" runat="server" Text="Register" CssClass="logbut" />
                     </td>
                     <td>&nbsp;</td>
                 </tr>
