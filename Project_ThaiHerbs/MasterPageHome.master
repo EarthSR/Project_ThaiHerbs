@@ -11,18 +11,18 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div id="tophead">
-            <asp:LinkButton ID="howtoorder" runat="server" Text="How to Order" CssClass="hyperlike-common" />&nbsp;
-            <asp:Label ID="Label1" runat="server" Text="|" />&nbsp;
-            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Login.aspx" Text="Support"
-                CssClass="hyperlike-common" />&nbsp;
-            <asp:Label ID="Label3" runat="server" Text="|" />&nbsp;
-            <asp:HyperLink ID="register" runat="server" NavigateUrl="~/Register.aspx" Text="Register"
-                CssClass="hyperlike-common" />&nbsp;
-            <asp:Label ID="Label2" runat="server" Text="|" />&nbsp;
-            <asp:HyperLink ID="login" runat="server" NavigateUrl="~/Login.aspx" Text="Login"
-                CssClass="hyperlike-common" />
-        </div>
+     <div id="tophead">
+         <asp:LinkButton ID="howtoorder" runat="server" Text="How to Order" CssClass="hyperlike-common" />&nbsp;
+         <asp:Label ID="Label1" runat="server" Text="|" />&nbsp;
+         <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Login.aspx" Text="Support"
+         CssClass="hyperlike-common" />&nbsp;
+         <asp:Label ID="Label3" runat="server" Text="|" />&nbsp;
+         <asp:HyperLink ID="register" runat="server" NavigateUrl="~/Register.aspx" Text="Register"
+             CssClass="hyperlike-common" />&nbsp;
+          <asp:Label ID="Label2" runat="server" Text="|" />&nbsp;
+         <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Login.aspx" Text="Login"
+         CssClass="hyperlike-common" />
+     </div>
         <div id="logo">
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Image/Green_Leaf_Minimalist__Organic_Shop_Logo-removebg-preview.png"
                 CssClass="logo" />
