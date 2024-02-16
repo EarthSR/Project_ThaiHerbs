@@ -20,8 +20,9 @@
                     <td class="product-image">
                         <asp:Label ID="Label4" runat="server" Text="Username" CssClass="login-text"></asp:Label>
                         &nbsp;
-                        <asp:TextBox ID="txtusername" runat="server" Height="26px" Width="170px" CssClass="input">
-                        </asp:TextBox>
+                        <asp:TextBox ID="txtusername" runat="server" Height="26px" Width="170px" 
+                            CssClass="input" AutoPostBack="True" OnTextChanged="txtusername_TextChange"></asp:TextBox>
+                        <asp:Label ID="lblCheck" runat="server"></asp:Label>
                         <br />
                         <br />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtusername"

@@ -87,4 +87,9 @@ public partial class Account_Register : System.Web.UI.Page
     {
         PopulateDayDropDown();
     }
+
+    protected void txtusername_TextChange(object sender, EventArgs e)
+    {
+
+    }
 }
