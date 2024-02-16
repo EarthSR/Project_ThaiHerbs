@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 
 public partial class Account_Register : System.Web.UI.Page
 {
@@ -90,6 +91,16 @@ public partial class Account_Register : System.Web.UI.Page
 
     protected void txtusername_TextChange(object sender, EventArgs e)
     {
+        int valueMessage = ConnectionClass.validuser(txtusername.Text);
+        if (valueMessage == 0)
+        {
+            txtusername.Text = "";
+            lblCheck.Text = "ชื่อซ้ำกรอกใหม่ด้วยครับ";
 
+        }
+        else
+        {
+            lblCheck.Text = "ชื่อนี้ใช้ได้ครับ";
+        }
     }
 }
