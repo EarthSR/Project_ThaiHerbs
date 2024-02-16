@@ -7,66 +7,88 @@
 <head runat="server">
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server" />
-    <link rel="stylesheet" type="text/css" href="~/CSS/StyleSheet.css" />
+    <link rel="stylesheet" type="text/css" href="~/CSS/StyleSheet2.css" />
+    <style type="text/css">
+        .auto-style1 {
+            text-align: center;
+        }
+
+        .auto-style2 {
+            width: 701px;
+        }
+
+        .auto-style3 {
+            width: 93%;
+        }
+        .auto-style4 {
+            width: 259px;
+        }
+    </style>
 </head>
-<body>
+<body id="bdaccount">
     <form id="form1" runat="server">
-     <div id="tophead">
-         <asp:LinkButton ID="howtoorder" runat="server" Text="How to Order" CssClass="hyperlike-common" />&nbsp;
-         <asp:Label ID="Label1" runat="server" Text="|" />&nbsp;
-         <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Login.aspx" Text="Support"
-         CssClass="hyperlike-common" />&nbsp;
-         <asp:Label ID="Label3" runat="server" Text="|" />&nbsp;
-         <asp:HyperLink ID="register" runat="server" NavigateUrl="~/Register.aspx" Text="Register"
-             CssClass="hyperlike-common" />&nbsp;
-          <asp:Label ID="Label2" runat="server" Text="|" />&nbsp;
-         <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Login.aspx" Text="Login"
-         CssClass="hyperlike-common" />
-     </div>
-        <div id="logo">
-            <asp:Image ID="Image1" runat="server" ImageUrl="~/Image/Green_Leaf_Minimalist__Organic_Shop_Logo-removebg-preview.png"
-                CssClass="logo" />
+        <div id="tophead">
+            <asp:LinkButton ID="howtoorder" runat="server" Text="How to Order" CssClass="hyperlike-common" />&nbsp;
+            <asp:Label ID="Label1" runat="server" Text="|" />&nbsp;
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Login.aspx" Text="Support"
+                CssClass="hyperlike-common" />&nbsp;
+            <asp:Label ID="Label3" runat="server" Text="|" />&nbsp;
+            <asp:LinkButton ID="register" runat="server" Text="Register" 
+                CssClass="hyperlike-common" OnClick="register_Click"></asp:LinkButton>
+            <asp:Label ID="Label2" runat="server" Text="|" />&nbsp;
+            <asp:LinkButton ID="login" runat="server" Text="Login" 
+                CssClass="hyperlike-common" OnClick="login_Click"></asp:LinkButton>
         </div>
-        <div class="search-bar">
-            <asp:TextBox ID="TextBox1" runat="server" CssClass="search-input" placeholder="Search..." />&nbsp;
-            <asp:Button ID="Button1" runat="server" Text="Search" CssClass="flexible-button" />&nbsp;
-            <asp:Button ID="Button2" runat="server" Text="Cart" CssClass="flexible-button" />
-        </div>
-        <div id="typeproduct">
-            <table style="width: 100%;" class="tabletypeproduct">
+        <table class="auto-style3">
+            <tr>
+                <td class="auto-style4">
+                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Image/Green_Leaf_Minimalist__Organic_Shop_Logo-removebg-preview.png"
+                        CssClass="logo" /></td>
+                <td class="auto-style2">
+                    <asp:TextBox ID="TextBox2" runat="server" CssClass="search-input" placeholder="Search..." />
+                </td>
+                <td>
+                    <asp:Button ID="Button3" runat="server" Text="Search" CssClass="flexible-button" />
+                    &nbsp;
+                    <asp:Button ID="Button4" runat="server" Text="Cart" CssClass="flexible-button" />
+                </td>
+            </tr>
+
+        </table>
+        <div class="typeproduct">
+            <table style="width: 100%;" class="typeproduct">
                 <tr>
-                    <td>
+                    <td class="auto-style1">
                         <asp:LinkButton ID="LinkButton1" runat="server" Text="สมุนไพรเเห้ง" CssClass="hyperlike-common" />
                     </td>
-                    <td>
+                    <td class="auto-style1">
                         <asp:LinkButton ID="LinkButton2" runat="server" Text="สมุนไพรรับประทาน" CssClass="hyperlike-common" />
                     </td>
-                    <td>
+                    <td class="auto-style1">
                         <asp:LinkButton ID="LinkButton3" runat="server" Text="สมุนไพรเกี่ยวกับเส้นผม" CssClass="hyperlike-common" />
                     </td>
-                    <td>
+                    <td class="auto-style1">
                         <asp:LinkButton ID="LinkButton4" runat="server" Text="สมุนไพรเกี่ยวกับใบหน้า" CssClass="hyperlike-common" />
                     </td>
-                    <td>
+                    <td class="auto-style1">
                         <asp:LinkButton ID="LinkButton5" runat="server" Text="สมุนไพรเกี่ยวกับช่องปาก" CssClass="hyperlike-common" />
                     </td>
-                    <td>
+                    <td class="auto-style1">
                         <asp:LinkButton ID="LinkButton6" runat="server" Text="อาหารเสริม" CssClass="hyperlike-common" />
                     </td>
-                    <td>
+                    <td class="auto-style1">
                         <asp:LinkButton ID="LinkButton7" runat="server" Text="สมุนไพรขัดผิว" CssClass="hyperlike-common" />
                     </td>
-                  
                 </tr>
             </table>
         </div>
         <div>
-
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
         </div>
         <div id="footer">
             สงวนลิขสิทธิ์ © บริษัทไทยเฮิร์บ (ประเทศไทย) จำกัด
         </div>
     </form>
+
 </body>
 </html>

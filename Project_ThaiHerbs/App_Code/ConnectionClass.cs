@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Net;
-using System.Security.Policy;
-using System.Web;
+using System;
 
-/// <summary>
-/// Summary description for Connection
-/// </summary>
 public class ConnectionClass
 {
     private static SqlConnection conn;
     private static SqlCommand command;
+
     static ConnectionClass()
     {
         string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
@@ -24,68 +17,51 @@ public class ConnectionClass
     public static User LoginUser(string username, string password)
     {
         User user = null;
-        String query = string.Format("SELECT COUNT(*) FROM users WHERE username = '{0}'", username);
+        string query = string.Format("SELECT COUNT(*) FROM users WHERE username = '{0}' AND password = '{1}'", username, password);
         command.CommandText = query;
+
         try
         {
             conn.Open();
-            int amoutofusers = (int)command.ExecuteScalar();
-            if (amoutofusers == 1)
+            int amountOfUsers = (int)command.ExecuteScalar();
+            if (amountOfUsers == 1)
             {
-                query = string.Format("SELECT password FROM users WHERE username = '{0}'", username);
+                query = string.Format("SELECT email, typeofuser, birthday, phone, address, fristname, lastname FROM users WHERE username = '{0}'", username);
                 command.CommandText = query;
-                string dbpassword = command.ExecuteScalar().ToString();
-                if (dbpassword == password)
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
                 {
-                    query = string.Format("SELECT email, user_type FROM users WHERE username = '{0}'", username);
-                    command.CommandText = query;
-                    SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        string email = reader.GetString(0);
-                        string usertype = reader.GetString(1);
-                        DateTime birthday = reader.GetDateTime(2);
-                        string phone = reader.GetString(3);
-                        string address = reader.GetString(4);
-                        string fristname = reader.GetString(5);
-                        string lastname = reader.GetString(6);
-                        user = new User(username, password, email, usertype, birthday, phone, address, fristname, lastname);
-                    }
-
-                    return user;
+                    string email = reader.GetString(0);
+                    string userType = reader.GetString(1);
+                    DateTime birthday = reader.GetDateTime(2);
+                    string phone = reader.IsDBNull(3) ? null : reader.GetString(3);
+                    string address = reader.IsDBNull(4) ? null : reader.GetString(4);
+                    string firstName = reader.IsDBNull(5) ? null : reader.GetString(5);
+                    string lastName = reader.IsDBNull(6) ? null : reader.GetString(6);
+                    user = new User(username, password, email, userType, birthday, phone, address, firstName, lastName);
                 }
-                else
-                {
-                    return null;
-                }
-
+                reader.Close();
             }
-            else
-            {
-                return null;
-            }
-
+            return user;
         }
         finally
         {
             conn.Close();
-
         }
-
-
     }
 
-    public static int validuser(string username)
+    public static int ValidUser(string username)
     {
         string query = string.Format("SELECT COUNT(*) FROM users WHERE username = '{0}'", username);
         command.CommandText = query;
+
         try
         {
             conn.Open();
             int amountofusers = (int)command.ExecuteScalar();
             if (amountofusers > 0)
             {
-                return 0;
+                return 0; 
             }
             else
             {
@@ -96,33 +72,38 @@ public class ConnectionClass
         {
             conn.Close();
         }
-
     }
 
-    public static string Registeruser(User user)
+    public static string RegisterUser(User user)
     {
         string query = string.Format("SELECT COUNT(*) FROM users WHERE username = '{0}'", user.UserName);
         command.CommandText = query;
+
         try
         {
             conn.Open();
-            int amountOfusers = (int)command.ExecuteScalar();
-            if (amountOfusers < 1)
+            int amountOfUsers = (int)command.ExecuteScalar();
+            if (amountOfUsers < 1)
             {
                 query = "INSERT INTO users (typeofuser, username, password, email, birthday) VALUES (@typeofuser, @username, @password, @email, @birthday)";
                 command.CommandText = query;
-                command.Parameters.Add(new SqlParameter("@username", user.UserName));
-                command.Parameters.Add(new SqlParameter("@password", user.Password));
-                command.Parameters.Add(new SqlParameter("@typeofuser", user.UserType));
-                command.Parameters.Add(new SqlParameter("@email", user.Email));
-                command.Parameters.Add(new SqlParameter("@birthday", user.Birthday));
+
+                // Clear existing parameters
+                command.Parameters.Clear();
+
+                // Add parameters
+                command.Parameters.AddWithValue("@typeofuser", user.UserType);
+                command.Parameters.AddWithValue("@username", user.UserName);
+                command.Parameters.AddWithValue("@password", user.Password);
+                command.Parameters.AddWithValue("@email", user.Email);
+                command.Parameters.AddWithValue("@birthday", user.Birthday);
 
                 command.ExecuteNonQuery();
                 return "register user success!!!";
             }
             else
             {
-                return "has alrady user!!!";
+                return "user already exists!!!";
             }
         }
         finally
@@ -130,5 +111,4 @@ public class ConnectionClass
             conn.Close();
         }
     }
-
 }

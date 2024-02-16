@@ -91,7 +91,7 @@ public partial class Account_Register : System.Web.UI.Page
 
     protected void txtusername_TextChange(object sender, EventArgs e)
     {
-        int valueMessage = ConnectionClass.validuser(txtusername.Text);
+        int valueMessage = ConnectionClass.ValidUser(txtusername.Text);
         if (valueMessage == 0)
         {
             txtusername.Text = "";
@@ -101,6 +101,7 @@ public partial class Account_Register : System.Web.UI.Page
         else
         {
             lblCheck.Text = "ชื่อนี้ใช้ได้ครับ";
+            
         }
     }
 
@@ -110,7 +111,7 @@ public partial class Account_Register : System.Web.UI.Page
         int month = int.Parse(DropDownListMonth.SelectedValue);
         int day = int.Parse(DropDownListDay.SelectedValue);
         DateTime birthday = new DateTime(year, month, day);
-        User user = new User(txtusername.Text,txtconpassword.Text,txtemail.Text, "users",birthday);
-        lblresult.Text = ConnectionClass.Registeruser(user);
+        User user = new User(txtusername.Text,txtconpassword.Text,txtemail.Text, "users", birthday);
+        lblresult.Text = ConnectionClass.RegisterUser(user);
     }
 }

@@ -18,15 +18,17 @@
                 <td class="product-image">
                     <asp:Label ID="Label4" runat="server" Text="Username" CssClass="login-text"></asp:Label>
                     &nbsp;
-                    <asp:TextBox ID="TextBoxUsername" runat="server" Height="26px" Width="170px" CssClass="input"></asp:TextBox>
+                    <asp:TextBox ID="txtusername" runat="server" Height="26px" Width="170px" CssClass="input"></asp:TextBox>
                     <br />
                     <br />
                     <asp:Label ID="Label5" runat="server" Text="Password" CssClass="login-text"></asp:Label>
                     &nbsp;
-                    <asp:TextBox ID="TextBoxPassword" runat="server" TextMode="Password" Height="26px" Width="170px" CssClass="input"></asp:TextBox>
+                    <asp:TextBox ID="txtpassword" runat="server" TextMode="Password" Height="26px" Width="170px" CssClass="input"></asp:TextBox>
                     <br />
+                    <asp:Label ID="lblerror" runat="server" Text=""></asp:Label>
                     <br />
-                    <asp:Button ID="ButtonSignIn" runat="server" Text="Sign In"  CssClass="logbut"/>
+                    <asp:Button ID="ButtonSignIn" runat="server" Text="Sign In"  CssClass="logbut" 
+                        OnClick="ButtonSignIn_Click"/>
                 </td>
                 <td>&nbsp;</td>
             </tr>

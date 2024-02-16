@@ -11,4 +11,19 @@ public partial class _Default : System.Web.UI.Page
     {
 
     }
+
+    protected void ButtonSignIn_Click(object sender, EventArgs e)
+    {
+        User user = ConnectionClass.LoginUser(txtusername.Text,txtpassword.Text);
+        if (user != null)
+        {
+            Session["Login"] = user.UserName;
+            Session["type"] = user.UserType;
+            Response.Redirect("~/Home.aspx");
+        }
+        else
+        {
+            lblerror.Text = "Login failed!!!";
+        }
+    }
 }
