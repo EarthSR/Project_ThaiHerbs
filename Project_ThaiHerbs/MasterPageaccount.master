@@ -18,7 +18,7 @@
             CssClass="hyperlike-common" />&nbsp;
             <asp:Label ID="Label3" runat="server" Text="|" />&nbsp;
             <asp:HyperLink ID="register" runat="server" NavigateUrl="~/Register.aspx" Text="Register"
-                CssClass="hyperlike-common" />&nbsp;
+            CssClass="hyperlike-common" />&nbsp;
              <asp:Label ID="Label2" runat="server" Text="|" />&nbsp;
             <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Login.aspx" Text="Login"
             CssClass="hyperlike-common" />
