@@ -44,12 +44,12 @@ public class ConnectionClass
                     {
                         string email = reader.GetString(0);
                         string usertype = reader.GetString(1);
-                        DateTime brithday = reader.GetDateTime(2);
+                        DateTime birthday = reader.GetDateTime(2);
                         string phone = reader.GetString(3);
                         string address = reader.GetString(4);
                         string fristname = reader.GetString(5);
                         string lastname = reader.GetString(6);
-                        user = new User(username, password, email, usertype, brithday, phone, address, fristname, lastname);
+                        user = new User(username, password, email, usertype, birthday, phone, address, fristname, lastname);
                     }
 
                     return user;
@@ -109,12 +109,13 @@ public class ConnectionClass
             int amountOfusers = (int)command.ExecuteScalar();
             if (amountOfusers < 1)
             {
-                query = "INSERT INTO users (typeofuser_fk, username, password, email, birthday) VALUES (@typeofuser, @username, @password, @email, @birthday)";
+                query = "INSERT INTO users (typeofuser, username, password, email, birthday) VALUES (@typeofuser, @username, @password, @email, @birthday)";
                 command.CommandText = query;
                 command.Parameters.Add(new SqlParameter("@username", user.UserName));
                 command.Parameters.Add(new SqlParameter("@password", user.Password));
-                command.Parameters.Add(new SqlParameter("@type", user.UserType));
+                command.Parameters.Add(new SqlParameter("@typeofuser", user.UserType));
                 command.Parameters.Add(new SqlParameter("@email", user.Email));
+                command.Parameters.Add(new SqlParameter("@birthday", user.Birthday));
 
                 command.ExecuteNonQuery();
                 return "register user success!!!";

@@ -22,6 +22,7 @@
                         &nbsp;
                         <asp:TextBox ID="txtusername" runat="server" Height="26px" Width="170px" 
                             CssClass="input" AutoPostBack="True" OnTextChanged="txtusername_TextChange"></asp:TextBox>
+                        <br />
                         <asp:Label ID="lblCheck" runat="server"></asp:Label>
                         <br />
                         <br />
@@ -32,9 +33,8 @@
                         <br />
                         <asp:Label ID="Label5" runat="server" Text="Password" CssClass="login-text"></asp:Label>
                         &nbsp;
-                    <asp:TextBox ID="txtpassword" runat="server" TextMode="Password" Height="26px"
-                        Width="170px" CssClass="input">
-                    </asp:TextBox>
+                    <asp:TextBox ID="txtpassword" runat="server" Height="26px"
+                        Width="170px" CssClass="input" TextMode="Password"></asp:TextBox>
                         <br />
                         <br />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtpassword"
@@ -69,7 +69,7 @@
                             ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
                         <br />
                         <br />
-                        <asp:Label ID="Label3" runat="server" Text="Brithday" CssClass="login-text"></asp:Label>
+                        <asp:Label ID="Label3" runat="server" Text="Birthday" CssClass="login-text"></asp:Label>
                         &nbsp;
                         <asp:DropDownList ID="DropDownListDay" runat="server" AutoPostBack="True"></asp:DropDownList>
                         <asp:DropDownList ID="DropDownListMonth" runat="server" OnSelectedIndexChanged="DropDownListMonth_SelectedIndexChanged"
@@ -78,7 +78,10 @@
                         <asp:DropDownList ID="DropDownListYear" runat="server" AutoPostBack="True"></asp:DropDownList>
                         <br />
                         <br />
-                        <asp:Button ID="ButtonSignIn" runat="server" Text="Register" CssClass="logbut" />
+                        <asp:Button ID="ButtonSignIn" runat="server" Text="Register" CssClass="logbut" 
+                            OnClick="ButtonSignIn_Click" />
+                        <br />
+                        <asp:Label id="lblresult" runat="server" Text=""></asp:Label>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

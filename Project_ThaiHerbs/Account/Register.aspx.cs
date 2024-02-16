@@ -103,4 +103,14 @@ public partial class Account_Register : System.Web.UI.Page
             lblCheck.Text = "ชื่อนี้ใช้ได้ครับ";
         }
     }
+
+    protected void ButtonSignIn_Click(object sender, EventArgs e)
+    {
+        int year = int.Parse(DropDownListYear.SelectedValue);
+        int month = int.Parse(DropDownListMonth.SelectedValue);
+        int day = int.Parse(DropDownListDay.SelectedValue);
+        DateTime birthday = new DateTime(year, month, day);
+        User user = new User(txtusername.Text,txtconpassword.Text,txtemail.Text, "users",birthday);
+        lblresult.Text = ConnectionClass.Registeruser(user);
+    }
 }
