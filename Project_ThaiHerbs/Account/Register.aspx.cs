@@ -15,7 +15,6 @@ public partial class Account_Register : System.Web.UI.Page
         {
             PopulateMonthDropDown();
             PopulateYearDropDown();
-            // Initially populate the day dropdown based on the current month
             PopulateDayDropDown();
         }
     }
@@ -37,7 +36,6 @@ public partial class Account_Register : System.Web.UI.Page
 
             for (int day = 1; day <= daysInMonth; day++)
             {
-                // Disable days greater than the current day if the month and year are current
                 if (selectedYear == currentYear && selectedMonth == currentMonth && day > currentDay)
                 {
                     DropDownListDay.Items.Add(new ListItem(day.ToString(), day.ToString()) { Enabled = false });
