@@ -1,0 +1,18 @@
+﻿body {
+
+
+}
+
+
+#supportpage {
+    border: 20px ;
+    margin: 20px;
+    padding: 40px;
+    text-align: center;
+}
+.imgContect {
+    display: inline-block;
+    padding: 1rem 1rem;
+    vertical-align: middle;
+    width : 40%;
+}

@@ -1,91 +1,48 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPageaccount.master" AutoEventWireup="true"
-    CodeFile="Register.aspx.cs" Inherits="Account_Register" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPageaccount.master" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="Account_Register" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div id="content-container">
-        <div id="logo">
-            <asp:Image ID="Image1" runat="server" ImageUrl="~/Image/Green_Leaf_Minimalist__Organic_Shop_Logo-removebg-preview.png"
-                CssClass="logo-account" />
+        <div class ="logo">
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Image/Green_Leaf_Minimalist__Organic_Shop_Logo-removebg-preview.png" CssClass="auto-style1" Width="225px"/>
+            <br />
+            <br />
         </div>
-        <div id="login">
-            <asp:Label ID="LabelSignIn" runat="server" Text="Register" CssClass="login-text">
-            </asp:Label>
-            <br />
-            <br />
-            <table style="width: 100%;">
-                <tr>
-                    <td>&nbsp;</td>
-                    <td class="product-image">
-                        <asp:Label ID="Label4" runat="server" Text="Username" CssClass="login-text"></asp:Label>
-                        &nbsp;
-                        <asp:TextBox ID="txtusername" runat="server" Height="26px" Width="170px" 
-                            CssClass="input" AutoPostBack="True" OnTextChanged="txtusername_TextChange"></asp:TextBox>
-                        <br />
-                        <asp:Label ID="lblCheck" runat="server"></asp:Label>
-                        <br />
-                        <br />
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtusername"
-                            ErrorMessage="please enter username" ForeColor="#FF3300">
-                        </asp:RequiredFieldValidator>
-                        <br />
-                        <br />
-                        <asp:Label ID="Label5" runat="server" Text="Password" CssClass="login-text"></asp:Label>
-                        &nbsp;
-                    <asp:TextBox ID="txtpassword" runat="server" Height="26px"
-                        Width="170px" CssClass="input" TextMode="Password"></asp:TextBox>
-                        <br />
-                        <br />
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtpassword"
-                            ErrorMessage="please enter password" ForeColor="#FF3300">
-                        </asp:RequiredFieldValidator>
-                        <br />
-                        <br />
-                        <asp:Label ID="Label1" runat="server" Text="Confirm password" CssClass="login-text">
-                        </asp:Label>
-                        &nbsp;
-                    <asp:TextBox ID="txtconpassword" runat="server" Height="26px" Width="170px" 
-                            CssClass="input" TextMode="Password"></asp:TextBox>
-                        <br />
-                        <br />
-                        <asp:CompareValidator runat="server" ErrorMessage="password not match" 
-                            ForeColor="#FF3300" ControlToCompare="txtpassword" 
-                            ControlToValidate="txtconpassword"></asp:CompareValidator>
-                        <br />
-                        <br />
-                        <asp:Label ID="Label2" runat="server" Text="E-mail" CssClass="login-text"></asp:Label>
-                        &nbsp;
-                             <asp:TextBox ID="txtemail" runat="server" TextMode="Email" Height="26px" Width="170px"
-                                 CssClass="input"></asp:TextBox>
-                        <br />
+        <div class ="login">
+        <asp:Label ID="Label1" runat="server" Text="REGISTER" CssClass="login-text"></asp:Label>
+        <br />
+        <div class ="txtregister">
+        <p class = "textregister"><asp:Label ID="lbllogin" runat="server" Text="Username" CssClass="login-text"></asp:Label></p>
+        <p><asp:TextBox ID="txtusername" runat="server" CssClass="designbox" Height="26px" Width="170px" AutoPostBack="True" OnTextChanged="txtusername_TextChange"></asp:TextBox></p>
 
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtemail"
-                            ErrorMessage="enter email" ForeColor="#FF3300">
-                        </asp:RequiredFieldValidator>
-                        <br />
-                        <asp:RegularExpressionValidator runat="server" 
-                            ErrorMessage="Email format is incorrect." ControlToValidate="txtemail" 
-                            ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
-                        <br />
-                        <br />
-                        <asp:Label ID="Label3" runat="server" Text="Birthday" CssClass="login-text"></asp:Label>
-                        &nbsp;
-                        <asp:DropDownList ID="DropDownListDay" runat="server" AutoPostBack="True"></asp:DropDownList>
-                        <asp:DropDownList ID="DropDownListMonth" runat="server" OnSelectedIndexChanged="DropDownListMonth_SelectedIndexChanged"
-                            AutoPostBack="true">
-                        </asp:DropDownList>
-                        <asp:DropDownList ID="DropDownListYear" runat="server" AutoPostBack="True"></asp:DropDownList>
-                        <br />
-                        <br />
-                        <asp:Button ID="ButtonSignIn" runat="server" Text="Register" CssClass="logbut" 
-                            OnClick="ButtonSignIn_Click" />
-                        <br />
-                        <asp:Label id="lblresult" runat="server" Text=""></asp:Label>
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
-            </table>
+
+        <p class = "textregister"><asp:Label ID="txtlogin" runat="server" Text="Password" CssClass="login-text"></asp:Label></p>
+        <p><asp:TextBox ID="txtpassword" runat="server" Height="26px" Width="170px" CssClass="designbox" TextMode="Password"></asp:TextBox></p>
+
+            
+            
+        <p class = "textregister2"><asp:Label ID="lblcomfirm" runat="server" Text="Confirm password" CssClass="login-text"></asp:Label></p>
+        <p><asp:TextBox ID="txtconpassword" runat="server" Height="26px" Width="170px" CssClass="designbox" TextMode="Password"></asp:TextBox></p>
+
+
+        <p class = "textregister3" ><asp:Label ID="lblemail" runat="server" Text="Email" CssClass="login-text"></asp:Label></p>
+        <p><asp:TextBox ID="txtemail" runat="server" Height="26px" Width="170px" CssClass="designbox" TextMode="Email"></asp:TextBox></p>
+
+        <p class= "textregister4" ><asp:Label ID="lblbirthday" runat="server" Text="Birthday" CssClass="login-text"></asp:Label></p>
+        <p><asp:DropDownList ID="DropDownListDay" runat="server" AutoPostBack="True" CssClass="designdrop"></asp:DropDownList>
+        <asp:DropDownList ID="DropDownListMonth" runat="server" OnSelectedIndexChanged="DropDownListMonth_SelectedIndexChanged" AutoPostBack="true" CssClass="designdrop" ></asp:DropDownList>
+        <asp:DropDownList ID="DropDownListYear" runat="server" AutoPostBack="True" CssClass="designdrop" ></asp:DropDownList></p>
+        <p><asp:Button ID="ButtonSignIn" runat="server" Text="CONFIRM" CssClass="designbox" OnClick="ButtonSignIn_Click" Height="36px" Width="208px" /></p>
+            
+        <asp:Label id="lblresult" runat="server" Text=""></asp:Label>
+        
+        </div> 
+
+        <br />
+        <br />
+        <br />
+        </div>
         </div>
     </div>
 </asp:Content>

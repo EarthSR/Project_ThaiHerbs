@@ -94,13 +94,13 @@ public partial class Account_Register : System.Web.UI.Page
         int valueMessage = ConnectionClass.ValidUser(txtusername.Text);
         if (valueMessage == 0)
         {
-            txtusername.Text = "";
-            lblCheck.Text = "ชื่อซ้ำกรอกใหม่ด้วยครับ";
+           
+            
 
         }
         else
         {
-            lblCheck.Text = "ชื่อนี้ใช้ได้ครับ";
+            
             
         }
     }
