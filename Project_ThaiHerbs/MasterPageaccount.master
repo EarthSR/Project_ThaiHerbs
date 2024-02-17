@@ -11,18 +11,15 @@
 </head>
 <body id="bdaccount">
     <form id="form1" runat="server">
-        <div id="tophead">
-            <asp:LinkButton ID="howtoorder" runat="server" Text="How to Order" CssClass="hyperlike-common" />&nbsp;
-            <asp:Label ID="Label1" runat="server" Text="|" />&nbsp;
-            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Login.aspx" Text="Support"
-            CssClass="hyperlike-common" />&nbsp;
-            <asp:Label ID="Label3" runat="server" Text="|" />&nbsp;
-            <asp:HyperLink ID="register" runat="server" NavigateUrl="~/Register.aspx" Text="Register"
-            CssClass="hyperlike-common" />&nbsp;
-             <asp:Label ID="Label2" runat="server" Text="|" />&nbsp;
-            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Login.aspx" Text="Login"
-            CssClass="hyperlike-common" />&nbsp;&nbsp;
-        </div>
+      <div id="tophead">
+   <asp:LinkButton ID="howtoorder" runat="server" Text="How to Order" CssClass="hyperlike-common" />
+    <asp:HyperLink ID="HyperLink1" runat="server" Text="Support" CssClass="hyperlike-common" />
+    <asp:LinkButton ID="register" runat="server" Text="Register" CssClass="hyperlike-common" PostBackUrl="~/Account/Register.aspx" />
+    <asp:LinkButton ID="login" runat="server" Text="Login" CssClass="hyperlike-common" PostBackUrl="~/Account/Login.aspx" />
+    <asp:LinkButton ID="Logout" runat="server" Text="Logout" CssClass="hyperlike-common" Visible="False" OnClick="Logout_Click" />
+    <asp:LinkButton ID="user" runat="server" Text="" CssClass="hyperlike-common" Visible="False" />
+
+</div>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
         </div>

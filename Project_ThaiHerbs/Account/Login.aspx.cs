@@ -18,7 +18,14 @@ public partial class _Default : System.Web.UI.Page
         if (user != null)
         {
             Session["Login"] = user.UserName;
-            Session["type"] = user.UserType;
+            Session["Type"] = user.UserType;
+            Session["Password"] = user.Password;
+            Session["Email"] = user.Email;
+            Session["Phone"] = user.Phone;
+            Session["Birthday"] = user.Birthday;
+            Session["Firstname"] = user.FirstName;
+            Session["Lastname"] = user.LastName;
+            Session["Address"] = user.Address;
             Response.Redirect("~/Home.aspx");
         }
         else
