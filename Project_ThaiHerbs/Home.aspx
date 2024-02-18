@@ -16,6 +16,8 @@
     <a class = "txtonimg4">นิยมนำมาทำอาหารเนื่องจากมีสีสันสวยงามและให้กลิ่นหอม</a>
     <asp:Button ID="ButtonSignIn" runat="server" Text="ดูเพิ่มเติม" CssClass="designbox"  Height="36px" Width="208px" />
 
+    <asp:Label ID="lblshow" runat="server" Text=""></asp:Label>
+
 
 </asp:Content>
 

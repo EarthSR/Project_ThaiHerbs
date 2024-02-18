@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data.SqlClient;
 using System;
+using System.Collections;
 
 public class ConnectionClass
 {
@@ -88,10 +89,10 @@ public class ConnectionClass
                 query = "INSERT INTO users (typeofuser, username, password, email, birthday) VALUES (@typeofuser, @username, @password, @email, @birthday)";
                 command.CommandText = query;
 
-                // Clear existing parameters
+                
                 command.Parameters.Clear();
 
-                // Add parameters
+                
                 command.Parameters.AddWithValue("@typeofuser", user.UserType);
                 command.Parameters.AddWithValue("@username", user.UserName);
                 command.Parameters.AddWithValue("@password", user.Password);
@@ -110,5 +111,66 @@ public class ConnectionClass
         {
             conn.Close();
         }
+    }
+    public static ArrayList GetproductByType(string Producttype)
+    {
+        ArrayList list = new ArrayList();
+        string querry = string.Format("SELECT * From product WHERE ptype LIKE '{0}'", Producttype);
+
+        try
+        {
+            conn.Open();
+            command.CommandText = querry;
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = reader.GetInt32(0);
+                string name = reader.GetString(1);
+                double price = reader.GetDouble(2);
+                string detail = reader.GetString(3);
+                string type = reader.GetString(4);
+                int amount = reader.GetInt32(5);
+                string image = reader.GetString(6);
+
+                Product product = new Product(id,name, price, detail, type, amount, image);
+
+                list.Add(product);
+            }
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return list;
+    }
+
+    public static Product GetProductById(int id)
+    {
+        Product product = null;
+        string query = string.Format("SELECT * From product WHERE productid = '{0}'", id);
+        command.CommandText = query;
+        try
+        {
+            conn.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                string name = reader.GetString(0);
+                float price = reader.GetFloat(1);
+                string detail = reader.GetString(2);
+                string type = reader.GetString(3);
+                int amount = reader.GetInt32(4);
+                string image = reader.GetString(5);
+
+                product = new Product(name, price, detail, type, amount, image);
+
+            }
+        }
+        finally
+        {
+            conn.Close();
+        }
+        return product;
     }
 }
