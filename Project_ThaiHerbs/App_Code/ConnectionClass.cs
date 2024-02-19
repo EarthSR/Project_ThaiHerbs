@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using System;
 using System.Collections;
 using System.Web;
+using System.Collections.Generic;
 
 public class ConnectionClass
 {
@@ -27,6 +28,8 @@ public class ConnectionClass
             int amountOfUsers = (int)command.ExecuteScalar();
             if (amountOfUsers == 1)
             {
+                command.Parameters.Clear();
+
                 query = string.Format("SELECT userid, email, typeofuser_fk, birthday, phone, address, firstname, lastname FROM users WHERE username = '{0}'", username);
                 command.CommandText = query;
                 SqlDataReader reader = command.ExecuteReader();
@@ -34,13 +37,13 @@ public class ConnectionClass
                 {
                     int userId = reader.GetInt32(0);
                     string email = reader.GetString(1);
-                    int userType = reader.GetInt32(2);
+                    string typeofuser_fk = reader.GetString(2); 
                     DateTime birthday = reader.GetDateTime(3);
                     string phone = reader.IsDBNull(4) ? null : reader.GetString(4);
                     string address = reader.IsDBNull(5) ? null : reader.GetString(5);
                     string firstName = reader.IsDBNull(6) ? null : reader.GetString(6);
                     string lastName = reader.IsDBNull(7) ? null : reader.GetString(7);
-                    user = new User(userId, username, password, email, userType, birthday, phone, address, firstName, lastName);
+                    user = new User(userId, username, password, email, typeofuser_fk.ToString(), birthday, phone, address, firstName, lastName);
                 }
                 reader.Close();
             }
@@ -52,9 +55,11 @@ public class ConnectionClass
         }
     }
 
-    public static typeofuser CheckTypeOfUser(int userId)
+
+    public static string CheckTypeOfUser(int userId)
     {
-        typeofuser result = default(typeofuser);
+        string result = "";
+
         string query = "SELECT tu.typeofuser FROM users u INNER JOIN typeofuser tu ON u.typeofuser_fk = tu.typeofuserid WHERE u.userid = @UserId;";
         command.CommandText = query;
         command.Parameters.AddWithValue("@UserId", userId);
@@ -66,7 +71,7 @@ public class ConnectionClass
 
             if (reader.Read())
             {
-                result = (typeofuser)reader["typeofuser"];
+                result = reader["typeofuser"].ToString();
             }
         }
         finally
@@ -76,6 +81,8 @@ public class ConnectionClass
 
         return result;
     }
+
+
 
 
     public static int ValidUser(string username)
@@ -113,11 +120,12 @@ public class ConnectionClass
             int amountOfUsers = (int)command.ExecuteScalar();
             if (amountOfUsers < 1)
             {
-                query = "INSERT INTO users (typeofuser_fk, username, password, email, birthday) VALUES (1, @username, @password, @email, @birthday)";
+                query = "INSERT INTO users (typeofuser_fk, username, password, email, birthday) VALUES (@typeofuser, @username, @password, @email, @birthday)";
                 command.CommandText = query;
 
                 
                 command.Parameters.Clear();
+                command.Parameters.AddWithValue("@typeofuser", user.UserType);
                 command.Parameters.AddWithValue("@username", user.UserName);
                 command.Parameters.AddWithValue("@password", user.Password);
                 command.Parameters.AddWithValue("@email", user.Email);
@@ -197,7 +205,36 @@ public class ConnectionClass
         }
         return product;
     }
-   
+
+    public static string Serchbar(string serch)
+    {
+        string result = "";
+        string query = "";
+        command.CommandText = query;
+        command.Parameters.AddWithValue("@serch", serch);
+
+        try
+        {
+            conn.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                string name = reader.GetString(1);
+                double price = reader.GetDouble(2);
+                string detail = reader.GetString(3);
+                string type = reader.GetString(4);
+                Product product = new Product(name, price, detail, type);
+
+            }
+
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return result;
+    }
 
 }
 

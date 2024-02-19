@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection.Emit;
 using System.Web.UI.WebControls;
 
 public partial class MasterPageHome : System.Web.UI.MasterPage
@@ -12,6 +13,7 @@ public partial class MasterPageHome : System.Web.UI.MasterPage
             register.Visible = false;
             user.Visible = true;
             Logout.Visible = true;
+            
         }
         else
         {

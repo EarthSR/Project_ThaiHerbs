@@ -18,8 +18,8 @@ public partial class _Default : System.Web.UI.Page
         if (user != null)
         {
             Session["Login"] = user.UserName;
-            typeofuser userType = ConnectionClass.CheckTypeOfUser(user.IdUsers);
-            Session["usertype"] = userType.ToString();
+            string userType = ConnectionClass.CheckTypeOfUser(user.IdUsers);
+            Session["usertype"] = userType;
             Session["Password"] = user.Password;
             Session["Email"] = user.Email;
             Session["Phone"] = user.Phone;

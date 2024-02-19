@@ -34,4 +34,12 @@ public class Product
         Amount = amount;
         Image = image;
     }
+
+    public Product(string name, double price, string pdetail, string type)
+    {
+        Name = name;
+        Price = price;
+        Pdetail = pdetail;
+        Type = type;
+    }
 }
