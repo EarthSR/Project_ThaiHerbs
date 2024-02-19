@@ -111,7 +111,7 @@ public partial class Account_Register : System.Web.UI.Page
         int month = int.Parse(DropDownListMonth.SelectedValue);
         int day = int.Parse(DropDownListDay.SelectedValue);
         DateTime birthday = new DateTime(year, month, day);
-        User user = new User(txtusername.Text,txtconpassword.Text,txtemail.Text, "users", birthday);
+        User user = new User(txtusername.Text,txtconpassword.Text,txtemail.Text,"1", birthday);
         lblresult.Text = ConnectionClass.RegisterUser(user);
     }
 }

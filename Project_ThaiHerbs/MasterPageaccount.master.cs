@@ -16,6 +16,7 @@ public partial class MasterPageaccount : System.Web.UI.MasterPage
             register.Visible = false;
             user.Visible = true;
             Logout.Visible = true;
+            
         }
         else
         {

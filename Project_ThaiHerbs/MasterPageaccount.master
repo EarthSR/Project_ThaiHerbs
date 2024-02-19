@@ -19,6 +19,7 @@
     <asp:LinkButton ID="login" runat="server" Text="Login" CssClass="hyperlike-common" PostBackUrl="~/Account/Login.aspx" />
     <asp:LinkButton ID="Logout" runat="server" Text="Logout" CssClass="hyperlike-common" Visible="False" OnClick="Logout_Click" />
     <asp:LinkButton ID="user" runat="server" Text="" CssClass="hyperlike-common" Visible="False" />
+   
 
 </div>
         <div>
