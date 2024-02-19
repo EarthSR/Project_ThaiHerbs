@@ -12,14 +12,14 @@ public class User
     public string UserName { get; set; }
     public string Password { get; set; }
     public string Email { get; set; }
-    public string UserType { get; set; }
+    public int UserType { get; set; }
     public DateTime Birthday { get; set; } 
     public string Phone { get; set; } 
     public string Address { get; set; }
     public string FirstName { get; set; } 
     public string LastName { get; set; } 
 
-    public User(int idUsers, string userName, string password, string email, string userType, DateTime birthday, string phone, string address, string firstName, string lastName)
+    public User(int idUsers, string userName, string password, string email, int userType, DateTime birthday, string phone, string address, string firstName, string lastName)
     {
         IdUsers = idUsers;
         UserName = userName;
@@ -33,7 +33,7 @@ public class User
         LastName = lastName;
     }
 
-    public User(string userName, string password, string email, string userType, DateTime birthday, string phone, string address, string firstName, string lastName)
+    public User(string userName, string password, string email, int userType, DateTime birthday, string phone, string address, string firstName, string lastName)
     {
         UserName = userName;
         Password = password;

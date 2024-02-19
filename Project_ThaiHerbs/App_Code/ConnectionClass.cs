@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System;
 using System.Collections;
+using System.Web;
 
 public class ConnectionClass
 {
@@ -18,28 +19,28 @@ public class ConnectionClass
     public static User LoginUser(string username, string password)
     {
         User user = null;
-        string query = string.Format("SELECT COUNT(*) FROM users WHERE username = '{0}' AND password = '{1}'", username, password);
+        string query = string.Format("SELECT COUNT(*) FROM users WHERE username = '{0}' AND [password] = '{1}'", username, password);
         command.CommandText = query;
-
         try
         {
             conn.Open();
             int amountOfUsers = (int)command.ExecuteScalar();
             if (amountOfUsers == 1)
             {
-                query = string.Format("SELECT email, typeofuser, birthday, phone, address, fristname, lastname FROM users WHERE username = '{0}'", username);
+                query = string.Format("SELECT userid, email, typeofuser_fk, birthday, phone, address, firstname, lastname FROM users WHERE username = '{0}'", username);
                 command.CommandText = query;
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    string email = reader.GetString(0);
-                    string userType = reader.GetString(1);
-                    DateTime birthday = reader.GetDateTime(2);
-                    string phone = reader.IsDBNull(3) ? null : reader.GetString(3);
-                    string address = reader.IsDBNull(4) ? null : reader.GetString(4);
-                    string firstName = reader.IsDBNull(5) ? null : reader.GetString(5);
-                    string lastName = reader.IsDBNull(6) ? null : reader.GetString(6);
-                    user = new User(username, password, email, userType, birthday, phone, address, firstName, lastName);
+                    int userId = reader.GetInt32(0);
+                    string email = reader.GetString(1);
+                    int userType = reader.GetInt32(2);
+                    DateTime birthday = reader.GetDateTime(3);
+                    string phone = reader.IsDBNull(4) ? null : reader.GetString(4);
+                    string address = reader.IsDBNull(5) ? null : reader.GetString(5);
+                    string firstName = reader.IsDBNull(6) ? null : reader.GetString(6);
+                    string lastName = reader.IsDBNull(7) ? null : reader.GetString(7);
+                    user = new User(userId, username, password, email, userType, birthday, phone, address, firstName, lastName);
                 }
                 reader.Close();
             }
@@ -50,6 +51,32 @@ public class ConnectionClass
             conn.Close();
         }
     }
+
+    public static typeofuser CheckTypeOfUser(int userId)
+    {
+        typeofuser result = default(typeofuser);
+        string query = "SELECT tu.typeofuser FROM users u INNER JOIN typeofuser tu ON u.typeofuser_fk = tu.typeofuserid WHERE u.userid = @UserId;";
+        command.CommandText = query;
+        command.Parameters.AddWithValue("@UserId", userId);
+
+        try
+        {
+            conn.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                result = (typeofuser)reader["typeofuser"];
+            }
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return result;
+    }
+
 
     public static int ValidUser(string username)
     {
@@ -86,14 +113,11 @@ public class ConnectionClass
             int amountOfUsers = (int)command.ExecuteScalar();
             if (amountOfUsers < 1)
             {
-                query = "INSERT INTO users (typeofuser, username, password, email, birthday) VALUES (@typeofuser, @username, @password, @email, @birthday)";
+                query = "INSERT INTO users (typeofuser_fk, username, password, email, birthday) VALUES (1, @username, @password, @email, @birthday)";
                 command.CommandText = query;
 
                 
                 command.Parameters.Clear();
-
-                
-                command.Parameters.AddWithValue("@typeofuser", user.UserType);
                 command.Parameters.AddWithValue("@username", user.UserName);
                 command.Parameters.AddWithValue("@password", user.Password);
                 command.Parameters.AddWithValue("@email", user.Email);
@@ -173,4 +197,8 @@ public class ConnectionClass
         }
         return product;
     }
+   
+
 }
+
+
