@@ -27,8 +27,7 @@
                     </asp:TextBox>
                 </p>
                 <p>
-                    <asp:RequiredFieldValidator runat="server" ErrorMessage="Please Enter username"
-                        ControlToValidate="txtusername" ForeColor="Red">
+                    <asp:RequiredFieldValidator runat="server" ErrorMessage="Please Enter username" ControlToValidate="txtusername" ForeColor="Red">
                     </asp:RequiredFieldValidator>
                 </p>
                 <p class="textregister">
@@ -36,19 +35,16 @@
                     </asp:Label>
                 </p>
                 <p>
-                    <asp:TextBox ID="txtpassword" runat="server" TextMode="Password" Height="26px" Width="190px"
-                        CssClass="designbox"></asp:TextBox>
+                    <asp:TextBox ID="txtpassword" runat="server" TextMode="Password" Height="26px" Width="190px" CssClass="designbox"></asp:TextBox>
                 </p>
                 <p>
-                    <asp:RequiredFieldValidator runat="server" ErrorMessage="Please Enter Password"
-                        ControlToValidate="txtpassword" ForeColor="Red">
+                    <asp:RequiredFieldValidator runat="server" ErrorMessage="Please Enter Password" ControlToValidate="txtpassword" ForeColor="Red">
                     </asp:RequiredFieldValidator>
                 </p>
-                <asp:Label ID="lblerror" runat="server" Text=""></asp:Label>
-                <br />
                 <p>
-                    <asp:Button ID="ButtonSignIn" runat="server" Text="LOGIN" CssClass="designbox" OnClick="ButtonSignIn_Click"
-                        Height="31px" Width="121px" />
+                    <asp:Button ID="ButtonSignIn" runat="server" Text="LOGIN" CssClass="designbox" OnClick="ButtonSignIn_Click" Height="31px" Width="121px" />
+                    <br />
+                    <asp:Label ID="lblerror" runat="server" Text=""></asp:Label>
                 </p>
                 <p>&nbsp;</p>
                 <p>&nbsp;</p>

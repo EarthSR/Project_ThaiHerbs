@@ -6,8 +6,10 @@
 <head runat="server">
     <title>ThaiHerb</title>
     <asp:ContentPlaceHolder ID="head" runat="server" />
-    <link rel="stylesheet" type="text/css" href="~/CSS/MasterHome.css" />
-    <link rel="stylesheet" type="text/css" href="~/CSS/Subport.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/MasterHome.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/Product.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/HowtoOrder.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/Subport.css" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -22,7 +24,7 @@
         </div>
         <table class="auto-style3">
             <tr>
-                <td class="auto-style4">
+                <td class="logo">
                     <asp:Image ID="logo" runat="server" ImageUrl="~/Image/Logo.png" CssClass="logo" Width="403px"
                         Height="226px" Style="margin-bottom: 0px" /></td>
                 <td class="auto-style2">
