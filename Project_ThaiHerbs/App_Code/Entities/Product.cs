@@ -25,8 +25,8 @@ public class Product
         Amount = amount;
         Image = image;
     }
-    public Product(string name,double price,string pdetail,string type,int amount,string image) 
-    { 
+    public Product(string name, double price, string pdetail, string type, int amount, string image)
+    {
         Name = name;
         Price = price;
         Pdetail = pdetail;

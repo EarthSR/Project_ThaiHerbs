@@ -1,10 +1,17 @@
 ﻿body {
 }
 
+.box {
+    display: flex;
+    margin: auto;
+    width: 50%;
+}
+
 .product-card {
-    width: 300px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    width: 250px;
+    border: 1px solid #F4F4F4;
+    border: 1px solid #F4F4F4;
+    border-radius: 10px;
     padding: 10px;
     margin: 10px;
     display: flex;
@@ -22,40 +29,45 @@
 
 .product-details {
     margin-top: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
     .product-details h2 {
         font-size: 1.2em;
         margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     .product-details p {
         font-size: 1em;
         color: #666;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
 .price {
     font-size: 1.2em;
-    font-weight: bold;
     margin-top: 5px;
 }
 
 .buttons {
     align-self: flex-end;
+    
 }
 
 .btn-add-to-cart {
     background-color: gray;
     color: #FFFFFF;
     border: none;
-    border-radius: 3px;
+    border-radius: 10px;
     padding: 8px 15px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-right: 5px;
+    width: 100%;
 }
 
     .btn-add-to-cart:hover {
+        
         color: black;
         background-color: #F4F4F4;
     }

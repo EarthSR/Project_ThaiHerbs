@@ -14,7 +14,7 @@
     <a class = "txtonimg2">สมุนไพรคู่ครัวที่คนไทยรู้จักกันดี </a>
     <a class = "txtonimg3 "> อุดมไปด้วยวิตามินและแร่ธาตุหลายชนิด</a>        
     <a class = "txtonimg4">นิยมนำมาทำอาหารเนื่องจากมีสีสันสวยงามและให้กลิ่นหอม</a>
-    <asp:Button ID="ButtonSignIn" runat="server" Text="ดูเพิ่มเติม" CssClass="designbox"  Height="36px" Width="208px" />
+    <asp:Button ID="btnmore" runat="server" Text="ดูเพิ่มเติม" CssClass="designbox"  Height="36px" Width="208px" />
 
     <asp:Label ID="lblshow" runat="server" Text=""></asp:Label>
 
