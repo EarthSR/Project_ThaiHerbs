@@ -46,7 +46,7 @@ public class User
         LastName = lastName;
     }
 
-    public User(string username, string password, string email, string usertype, DateTime birthday)
+    public User(string username, string password, string email, int usertype, DateTime birthday)
     {
         UserName = username;
         Password = password;
