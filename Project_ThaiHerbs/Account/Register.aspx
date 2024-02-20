@@ -20,9 +20,7 @@
                 <p>
                     <asp:TextBox ID="txtusername" runat="server" CssClass="designbox" Height="26px" Width="170px" AutoPostBack="True" OnTextChanged="txtusername_TextChange"></asp:TextBox>
                 </p>
-                <p>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtusername" ErrorMessage="Please enter username" ForeColor="#FF3300" ValidationGroup="RegisterValidation"></asp:RequiredFieldValidator>
-                </p>
                 <p>
                     <asp:Label ID="lblCheck" runat="server" ForeColor="Red"></asp:Label>
                 </p>
