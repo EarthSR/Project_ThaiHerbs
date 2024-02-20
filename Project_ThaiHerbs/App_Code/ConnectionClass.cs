@@ -206,35 +206,36 @@ public class ConnectionClass
         return product;
     }
 
-    public static string Serchbar(string serch)
+    public static Product Searchbar(string searchs)
     {
-        string result = "";
-        string query = "";
+        string query = "SELECT product.pname, product.pprice, product.pdetail, product.pprice FROM product WHERE pname LIKE @search OR pdetail LIKE @search";
         command.CommandText = query;
-        command.Parameters.AddWithValue("@serch", serch);
-
+        command.Parameters.Clear();
+        command.Parameters.AddWithValue("@search", "%" + searchs + "%");
+        
         try
         {
             conn.Open();
             SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
+            if (reader.Read())
             {
-                string name = reader.GetString(1);
-                double price = reader.GetDouble(2);
-                string detail = reader.GetString(3);
-                string type = reader.GetString(4);
-                Product product = new Product(name, price, detail, type);
-
+                string name = reader.GetString(0);
+                double price = reader.GetDouble(1);
+                string detail = reader.GetString(2);
+                string type = reader.GetString(3);
+                return new Product(name, price, detail, type);
             }
-
+            else
+            {
+                return null;
+            }
         }
         finally
         {
             conn.Close();
         }
-
-        return result;
     }
+
 
 }
 

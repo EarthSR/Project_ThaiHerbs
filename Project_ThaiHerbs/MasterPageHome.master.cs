@@ -29,4 +29,11 @@ public partial class MasterPageHome : System.Web.UI.MasterPage
         Session.Clear();
         Response.Redirect("~/Home.aspx");
     }
+
+    protected void search_Click(object sender, EventArgs e)
+    {
+        string search = txtsearch.Text;
+        Session["search"] = search;
+        ConnectionClass.Searchbar(search);
+    }
 }
