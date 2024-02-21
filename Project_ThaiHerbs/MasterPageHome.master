@@ -19,15 +19,19 @@
 </head>
 <body>
     <form id="form1" runat="server">
-         <div id="tophead">
-           <asp:LinkButton ID="howtoorder" runat="server" Text="How to Order" CssClass="hyperlike-common" />
-            <asp:HyperLink ID="HyperLink1" runat="server" Text="Support" CssClass="hyperlike-common" />
-            <asp:LinkButton ID="register" runat="server" Text="Register" CssClass="hyperlike-common" PostBackUrl="~/Account/Register.aspx" />
-            <asp:LinkButton ID="login" runat="server" Text="Login" CssClass="hyperlike-common" PostBackUrl="~/Account/Login.aspx" />
-            <asp:LinkButton ID="Logout" runat="server" Text="Logout" CssClass="hyperlike-common" Visible="False" OnClick="Logout_Click" />
-            <asp:LinkButton ID="user" runat="server" Text="" CssClass="hyperlike-common" Visible="False" />
+               <div id="tophead">
+          <asp:LinkButton ID="Home" runat="server" Text="Home" 
+              CssClass="hyperlike-common" PostBackUrl="~/Home.aspx" />
+   <asp:LinkButton ID="howtoorder" runat="server" Text="How to Order" 
+              CssClass="hyperlike-common" PostBackUrl="~/HowtoOrder.aspx" />
+    <asp:LinkButton ID="support" runat="server" Text="Supports" CssClass="hyperlike-common" PostBackUrl="~/Support.aspx" />
+    <asp:LinkButton ID="register" runat="server" Text="Register" CssClass="hyperlike-common" PostBackUrl="~/Account/Register.aspx" />
+    <asp:LinkButton ID="login" runat="server" Text="Login" CssClass="hyperlike-common" PostBackUrl="~/Account/Login.aspx" />
+    <asp:LinkButton ID="Logout" runat="server" Text="Logout" CssClass="hyperlike-common" Visible="False" OnClick="Logout_Click" />
+    <asp:LinkButton ID="user" runat="server" Text="" CssClass="hyperlike-common" Visible="False" />
+   
 
-        </div>
+</div>
         <table class="auto-style3">
             <tr>
                 <td class="logo">
@@ -36,7 +40,8 @@
                 <td class="auto-style2">
                     <asp:TextBox ID="txtsearch" runat="server" CssClass="search-input" placeholder="Search..." />
                 </td>
-                <td>&nbsp;&nbsp;<asp:Button ID="search" runat="server" Text="Search" CssClass="flexible-button" />
+                <td>&nbsp;&nbsp;<asp:Button ID="search" runat="server" Text="Search" 
+                        CssClass="flexible-button" OnClick="search_Click" />
                     &nbsp;&nbsp;<asp:Button ID="Button4" runat="server" Text="Cart" CssClass="flexible-button" />
                 </td>
             </tr>

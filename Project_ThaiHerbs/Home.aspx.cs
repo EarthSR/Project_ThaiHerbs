@@ -23,9 +23,10 @@ public partial class Home : System.Web.UI.Page
 
         StringBuilder sb = new StringBuilder();
         sb.Append("<link rel='stylesheet' type='text/css' href='CSS/Product.css'/>");
-        foreach (Product product in productlist)
+        foreach ( Product product in productlist)
         {
             sb.Append(string.Format(@"
+            <div class='box'>
             <div class='product-card'>
                 <div class='product-image'>
                     <img src='{0}'/>
@@ -36,9 +37,9 @@ public partial class Home : System.Web.UI.Page
                     <div class='price'>${3}</div>
                     <p>Total amount {4}</p>
                 </div>
+            </div>
             </div>",
                 product.Image, product.Name, product.Pdetail, product.Price, product.Amount));
-            ((Dictionary<int, int>)Session["ProductAmounts"]).Add(product.Id, product.Amount);
         }
         lblshow.Text = sb.ToString();
     }
