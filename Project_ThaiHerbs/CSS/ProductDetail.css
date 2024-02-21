@@ -1,0 +1,109 @@
+﻿body {
+
+}
+
+.detail-container {
+    border: 20px;
+    margin: 20px;
+    text-align: center;
+}
+
+.detail-image {
+    display: inline-block;
+    padding: 1rem 1rem;
+    vertical-align: middle;
+    width: 25%;
+    vertical-align: text-top;
+    text-align : left;
+}
+
+.detail-img {
+    width: 330px;
+    height: 330px;
+    border-radius: 40px;
+    margin : 20px;
+}
+
+
+.bottons {
+    align-self: flex-end;
+}
+
+.btn-adddetail {
+    background-color: #f4f4f4;
+    color: black;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 5px;
+    width: 40%;
+    height 40px;
+}
+    .btn-adddetail:hover {
+        color: white;
+        background-color: darkslategrey;
+    }
+
+
+.quantity {
+    display: inline-block;
+}
+
+    .quantity .input-text.qty {
+        width: 35px;
+        height: 40px;
+        padding: 0 5px;
+        text-align: center;
+        background-color: transparent;
+        border: 1px solid #efefef;
+    }
+
+    .quantity.buttons_added {
+        text-align: left;
+        position: relative;
+        white-space: nowrap;
+        vertical-align: top;
+    }
+
+        .quantity.buttons_added input {
+            display: inline-block;
+            margin: 0;
+            vertical-align: top;
+            box-shadow: none;
+        }
+
+        .quantity.buttons_added .minus,
+        .quantity.buttons_added .plus {
+            padding: 7px 10px 8px;
+            height: 41px;
+            background-color: #f4f4f4;
+            border: 1px solid #efefef;
+            cursor: pointer;
+        }
+
+        .quantity.buttons_added .minus {
+            border-right: 0;
+        }
+
+        .quantity.buttons_added .plus {
+            border-left: 0;
+        }
+
+            .quantity.buttons_added .minus:hover,
+            .quantity.buttons_added .plus:hover {
+                background: darkslategrey;
+            }
+
+    .quantity input::-webkit-outer-spin-button,
+    .quantity input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        margin: 0;
+    }
+
+    .quantity.buttons_added .minus:focus,
+    .quantity.buttons_added .plus:focus {
+        outline: none;
+    }
+

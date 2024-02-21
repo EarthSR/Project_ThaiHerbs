@@ -6,7 +6,7 @@
     <div class ="box">
     <div class="product-card">
         <div class="product-image">
-            <img src=""/>
+            <img src="ImgHerb/กัญชา.jpg"/>
         </div>
         <div class="product-details">
             <h2>Product Name</h2>

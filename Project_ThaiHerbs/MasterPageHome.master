@@ -8,8 +8,14 @@
     <asp:ContentPlaceHolder ID="head" runat="server" />
     <link rel="stylesheet" type="text/css" href= "~/CSS/MasterHome.css" />
     <link rel="stylesheet" type="text/css" href= "~/CSS/Product.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/ProductDetail.css" />
     <link rel="stylesheet" type="text/css" href= "~/CSS/HowtoOrder.css" />
     <link rel="stylesheet" type="text/css" href= "~/CSS/Subport.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/Tracking.css" />
+
+
+
+    <script src="Productdetail.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">

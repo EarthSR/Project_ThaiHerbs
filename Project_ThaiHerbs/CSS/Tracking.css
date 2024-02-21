@@ -1,0 +1,38 @@
+﻿body {
+}
+
+
+
+
+
+.texttracking {
+    margin-left: 100px;
+}
+
+.tracking-container {
+    height: 500px;
+    width: 100%;
+    position: relative;
+}
+
+.tracking-box {
+    width: 85%;
+    height: 150px;
+    border: 1px solid red;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.imgtracking {
+    width: 120px;
+    height: 130px;
+    border-radius: 25px;
+    margin: 10px;
+    margin-left: 40px;
+    border-radius: 25px;
+    
+}
+> txttracking {
+    margin-top :0px;
+
+}
