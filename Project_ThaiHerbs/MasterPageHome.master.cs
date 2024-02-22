@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Reflection.Emit;
+using System.Collections;
+using System.Text;
 using System.Web.UI.WebControls;
 
 public partial class MasterPageHome : System.Web.UI.MasterPage
@@ -13,7 +14,6 @@ public partial class MasterPageHome : System.Web.UI.MasterPage
             register.Visible = false;
             user.Visible = true;
             Logout.Visible = true;
-            
         }
         else
         {
@@ -22,6 +22,7 @@ public partial class MasterPageHome : System.Web.UI.MasterPage
             user.Visible = false;
             Logout.Visible = false;
         }
+
     }
 
     protected void Logout_Click(object sender, EventArgs e)
@@ -32,8 +33,14 @@ public partial class MasterPageHome : System.Web.UI.MasterPage
 
     protected void search_Click(object sender, EventArgs e)
     {
-        string search = txtsearch.Text;
-        Session["search"] = search;
-        ConnectionClass.Searchbar(search);
+        string searchQuery = txtsearch.Text;
+        Session["search"] = searchQuery;
+        Response.Redirect("~/Home.aspx");
+    }
+
+
+    protected void Home_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Home.aspx");
     }
 }

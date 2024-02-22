@@ -3,8 +3,8 @@
 
 .box {
     display: flex;
-    margin: auto;
-    width: 50%;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .product-card {
@@ -73,3 +73,9 @@
         color: black;
         background-color: #F4F4F4;
     }
+
+#product-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
