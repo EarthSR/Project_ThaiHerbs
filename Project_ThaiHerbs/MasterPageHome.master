@@ -13,12 +13,26 @@
     <link rel="stylesheet" type="text/css" href= "~/CSS/Subport.css" />
     <link rel="stylesheet" type="text/css" href= "~/CSS/Tracking.css" />
 
+    <script type ="text/javascript" charset ="window-1251">
+    function mainmenu() {
+        $(" #nav ul ").css({ display: "none" });
+        $(" #nav li ").hover(function () { $(this).find('ul:first').css({ visibility: "visible", display: "none" }).show(400); },
+            function () {
+                $(this).find('ul:first').css({ visibility: "hidden" });
+            });
+            }
+            $(window).load(function () {
+                mainmenu();
+            });
+    </script>
 
 
-    <script src="Productdetail.js"></script>
+
+
+
 </head>
 <body>
-    <form id="form1" runat="server">
+        <form id="form1" runat="server">
                <div id="tophead">
           <asp:LinkButton ID="Home" runat="server" Text="Home" 
               CssClass="hyperlike-common" PostBackUrl="~/Home.aspx" />
@@ -27,10 +41,8 @@
     <asp:LinkButton ID="support" runat="server" Text="Supports" CssClass="hyperlike-common" PostBackUrl="~/Support.aspx" />
     <asp:LinkButton ID="register" runat="server" Text="Register" CssClass="hyperlike-common" PostBackUrl="~/Account/Register.aspx" />
     <asp:LinkButton ID="login" runat="server" Text="Login" CssClass="hyperlike-common" PostBackUrl="~/Account/Login.aspx" />
-    <asp:LinkButton ID="Logout" runat="server" Text="Logout" CssClass="hyperlike-common" Visible="False" OnClick="Logout_Click" />
-    <asp:LinkButton ID="user" runat="server" Text="" CssClass="hyperlike-common" Visible="False" />
-   
-
+                   <asp:LinkButton ID="Logout" runat="server" Text="Logout" CssClass="hyperlike-common" Visible="False" OnClick="Logout_Click" />
+<asp:LinkButton ID="user" runat="server" Text="" CssClass="hyperlike-common" Visible="False" />
 </div>
         <table class="auto-style3">
             <tr>
@@ -46,7 +58,7 @@
                 </td>
             </tr>
         </table>
-        <div class="typeproduct">
+            <div class="typeproduct">
             <table style="width: 100%;" class="tabletypeproduct">
                 <tr>
                     <td>

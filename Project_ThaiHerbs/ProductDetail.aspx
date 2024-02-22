@@ -7,6 +7,34 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class = "detail-container">
+
+
+
+
+
+        <script type="text/javascript">
+            function decreaseQuantity() {
+                var quantityInput = document.getElementById('<%= quantityInput.ClientID %>');
+        if (parseInt(quantityInput.value) > 1) {
+            quantityInput.value = parseInt(quantityInput.value) - 1;
+        }
+        return false; // เพื่อป้องกันการโพสต์กลับเซิร์ฟเวอร์
+    }
+
+    function increaseQuantity() {
+        var quantityInput = document.getElementById('<%= quantityInput.ClientID %>');
+                if (parseInt(quantityInput.value) < 100) {
+                    quantityInput.value = parseInt(quantityInput.value) + 1;
+                }
+                return false; // เพื่อป้องกันการโพสต์กลับเซิร์ฟเวอร์
+            }
+        </script>
+
+
+
+
+
+
             <div class="detail-image">
                 <asp:Image ID="logo" runat="server" ImageUrl="~/ImgHerb/กระเจี๊ยบแดง.jpg" CssClass="detail-img"/>
            </div>
@@ -18,10 +46,10 @@
                 <br />
                 <div class="quantity buttons_added">
                     <a><asp:Label ID="Label2" runat="server" Text="จำนวน : " /></a>
-	            <input type="button" value="-" class="minus" style="width: 40px; height: 26px;">
-                <input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="" style="width: 53px; height: 24px;">
-                <input type="button" value="+" class="plus" style="width: 40px; height: 26px;">
-                 </div>
+	            <asp:Button ID="minusButton" runat="server" Text="-" CssClass="minus" OnClientClick="return decreaseQuantity();" style="width: 40px; height: 26px;" />
+                <asp:TextBox ID="quantityInput" runat="server" Text="1" CssClass="input-text qty text" Width="53px" Height="24px" pattern="\d*" inputmode="numeric" />
+                <asp:Button ID="plusButton" runat="server" Text="+" CssClass="plus" OnClientClick="return increaseQuantity();" style="width: 40px; height: 26px;" />
+                     </div>
                 <br />
                 <br />
                 <div class = "bottons">
@@ -33,21 +61,22 @@
                 <h2><asp:Label ID="Label3" runat="server" Text="คะแนนสินค้า" /></h2>     
                 <br />
                                 <form class="star-rating">
-                                  <asp:Image ID="Image1" runat="server" ImageUrl="~/ImgHerb/กระเจี๊ยบแดง.jpg" CssClass="review-img"/>
-                                  <input class="radio-input" type="radio" id="star5" name="star-input" value="5" />
-                                  <label class="radio-label" class for="star5" title="5 stars">5 stars</label>
-                                    
-                                  <input class="radio-input" type="radio" id="star4" name="star-input" value="4" />
-                                  <label class="radio-label" for="star4" title="4 stars">4 stars</label>
-
-                                  <input class="radio-input" type="radio" id="star3" name="star-input" value="3" />
-                                  <label class="radio-label" for="star3" title="3 stars">3 stars</label>
-
-                                  <input class="radio-input" type="radio" id="star2" name="star-input" value="2" />
-                                  <label class="radio-label" for="star2" title="2 stars">2 stars</label>
-
-                                  <input class="radio-input" type="radio" id="star1" name="star-input" value="1" />
-                                  <label class="radio-label" for="star1" title="1 star">1 star</label>
+                                    <asp:Image ID="Image1" runat="server" ImageUrl="~/ImgHerb/กระเจี๊ยบแดง.jpg" CssClass="review-img" />
+    
+                                    <label class="radio-label" for="star1" title="1 star">1 star</label>
+                                    <asp:RadioButton ID="star1" runat="server" CssClass="radio-input" GroupName="star-input" Text="1 stars" value="1" />
+    
+                                    <label class="radio-label" for="star2" title="2 stars">2 stars</label>
+                                    <asp:RadioButton ID="star2" runat="server" CssClass="radio-input" GroupName="star-input" Text="2 stars" value="2" />
+    
+                                    <label class="radio-label" for="star3" title="3 stars">3 stars</label>
+                                    <asp:RadioButton ID="star3" runat="server" CssClass="radio-input" GroupName="star-input" Text="3 stars" value="3" />
+    
+                                    <label class="radio-label" for="star4" title="4 stars">4 stars</label>
+                                    <asp:RadioButton ID="star4" runat="server" CssClass="radio-input" GroupName="star-input" Text="4 stars" value="4" />
+    
+                                    <label class="radio-label" for="star5" title="5 stars">5 stars</label>
+                                    <asp:RadioButton ID="star5" runat="server" CssClass="radio-input" GroupName="star-input" Text="5 stars" value="5" />
                                 </form>
                             <div class = "txtreview">
                              <p><asp:Label ID="Label5" runat="server" Text="Bob01 : " />
