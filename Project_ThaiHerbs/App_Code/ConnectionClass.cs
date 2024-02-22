@@ -206,34 +206,40 @@ public class ConnectionClass
         return product;
     }
 
-    public static Product Searchbar(string searchs)
+    public static ArrayList Searchbar(string searchs)
     {
-        string query = "SELECT product.pname, product.pprice, product.pdetail, product.pprice FROM product WHERE pname LIKE @search OR pdetail LIKE @search";
+        ArrayList list = new ArrayList();
+        string query = "SELECT * From product WHERE pname LIKE @search OR pdetail LIKE @search";
         command.CommandText = query;
         command.Parameters.Clear();
         command.Parameters.AddWithValue("@search", "%" + searchs + "%");
-        
+
         try
         {
             conn.Open();
+            command.CommandText = query;
             SqlDataReader reader = command.ExecuteReader();
-            if (reader.Read())
+            while (reader.Read())
             {
-                string name = reader.GetString(0);
-                double price = reader.GetDouble(1);
-                string detail = reader.GetString(2);
-                string type = reader.GetString(3);
-                return new Product(name, price, detail, type);
-            }
-            else
-            {
-                return null;
+                int id = reader.GetInt32(0);
+                string name = reader.GetString(1);
+                double price = reader.GetDouble(2);
+                string detail = reader.GetString(3);
+                string type = reader.GetString(4);
+                int amount = reader.GetInt32(5);
+                string image = reader.GetString(6);
+
+                Product product = new Product(id, name, price, detail, type, amount, image);
+
+                list.Add(product);
             }
         }
         finally
         {
             conn.Close();
         }
+
+        return list;
     }
 
 

@@ -35,7 +35,7 @@
         <form id="form1" runat="server">
                <div id="tophead">
           <asp:LinkButton ID="Home" runat="server" Text="Home" 
-              CssClass="hyperlike-common" PostBackUrl="~/Home.aspx" />
+              CssClass="hyperlike-common" OnClick="Home_Click" />
    <asp:LinkButton ID="howtoorder" runat="server" Text="How to Order" 
               CssClass="hyperlike-common" PostBackUrl="~/HowtoOrder.aspx" />
     <asp:LinkButton ID="support" runat="server" Text="Supports" CssClass="hyperlike-common" PostBackUrl="~/Support.aspx" />
@@ -88,6 +88,8 @@
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
         </div>
+        <div><asp:Label ID="lblserch" runat="server" Text=""></asp:Label></div>
+        <div></div>
         <div id="footer">
             สงวนลิขสิทธิ์ © บริษัทไทยเฮิร์บ (ประเทศไทย) จำกัด
         </div>
