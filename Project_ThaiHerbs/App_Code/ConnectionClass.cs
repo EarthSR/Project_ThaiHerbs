@@ -242,6 +242,41 @@ public class ConnectionClass
         return list;
     }
 
+    public static ArrayList getproid(int proid)
+    {
+        ArrayList list = new ArrayList();
+        string query = string.Format("SELECT * From product WHERE productid = '{0}'", proid);
+        command.CommandText = query;
+        command.Parameters.Clear();
+
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = reader.GetInt32(0);
+                string name = reader.GetString(1);
+                double price = reader.GetDouble(2);
+                string detail = reader.GetString(3);
+                string type = reader.GetString(4);
+                int amount = reader.GetInt32(5);
+                string image = reader.GetString(6);
+
+                Product product = new Product(id, name, price, detail, type, amount, image);
+
+                list.Add(product);
+            }
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return list;
+    }
+
 
 }
 
