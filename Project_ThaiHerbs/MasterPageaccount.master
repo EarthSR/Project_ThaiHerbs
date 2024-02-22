@@ -11,26 +11,28 @@
 </head>
 <body id="bdaccount">
     <form id="form1" runat="server">
-      <div id="tophead">
-          <asp:LinkButton ID="Home" runat="server" Text="Home" 
-              CssClass="hyperlike-common" PostBackUrl="~/Home.aspx" 
-              OnClick="Home_Click" />
-   <asp:LinkButton ID="howtoorder" runat="server" Text="How to Order" 
-              CssClass="hyperlike-common" PostBackUrl="~/HowtoOrder.aspx" />
-    <asp:LinkButton ID="support" runat="server" Text="Supports" CssClass="hyperlike-common" PostBackUrl="~/Support.aspx" />
-    <asp:LinkButton ID="register" runat="server" Text="Register" CssClass="hyperlike-common" PostBackUrl="~/Account/Register.aspx" />
-    <asp:LinkButton ID="login" runat="server" Text="Login" CssClass="hyperlike-common" PostBackUrl="~/Account/Login.aspx" />
-    <asp:LinkButton ID="Logout" runat="server" Text="Logout" CssClass="hyperlike-common" Visible="False" OnClick="Logout_Click" />
-    <asp:LinkButton ID="user" runat="server" Text="" CssClass="hyperlike-common" Visible="False" />
-   
-
-</div>
+        <div id="tophead">
+            <asp:LinkButton ID="Home" runat="server" Text="Home"
+                CssClass="hyperlike-common" PostBackUrl="~/Home.aspx"
+                OnClick="Home_Click" />
+            <asp:LinkButton ID="howtoorder" runat="server" Text="How to Order"
+                CssClass="hyperlike-common" PostBackUrl="~/HowtoOrder.aspx" />
+            <asp:LinkButton ID="support" runat="server" Text="Supports" CssClass="hyperlike-common"
+                PostBackUrl="~/Support.aspx" />
+            <asp:LinkButton ID="register" runat="server" Text="Register" CssClass="hyperlike-common"
+                PostBackUrl="~/Account/Register.aspx" />
+            <asp:LinkButton ID="login" runat="server" Text="Login" CssClass="hyperlike-common"
+                PostBackUrl="~/Account/Login.aspx" />
+            <asp:LinkButton ID="Logout" runat="server" Text="Logout" CssClass="hyperlike-common"
+                Visible="False" OnClick="Logout_Click" />
+            <asp:LinkButton ID="user" runat="server" Text="" CssClass="hyperlike-common" Visible="False" />
+        </div>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
         </div>
-        <div id="footer">
-            สงวนลิขสิทธิ์ © บริษัทไทยเฮิร์บ (ประเทศไทย) จำกัด
-        </div>
     </form>
+    <div id="footer">
+        สงวนลิขสิทธิ์ © บริษัทไทยเฮิร์บ (ประเทศไทย) จำกัด
+    </div>
 </body>
 </html>
