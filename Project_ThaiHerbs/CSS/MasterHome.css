@@ -144,3 +144,14 @@
     border: 5px;
     border-radius: 25px;
 }
+
+.hyperlike-common1 {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.hyperlike-common.selected {
+    border: none; /* Or any other styling to remove the box effect */
+}

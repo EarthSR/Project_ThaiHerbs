@@ -1,0 +1,105 @@
+﻿body {
+}
+/* Product Detail Container */
+.detail-container {
+    text-align: center;
+    background-color: white;
+    align-content: center;
+}
+
+/* Product Image */
+.detail-image {
+    display: inline-block;
+    padding: 1rem;
+    vertical-align: middle;
+    width: 25%;
+    text-align: left;
+    padding-top: 80px;
+}
+
+.detail-img {
+    width: 330px;
+    height: 330px;
+    border-radius: 40px;
+    margin: 20px;
+}
+
+/* Product Information */
+.detail-info {
+    display: inline-block;
+    width: 65%;
+    vertical-align: top;
+    text-align: left;
+    padding-top: 80px; /* Adjust as needed */
+}
+
+/* Quantity Buttons */
+.quantity {
+    display: inline-block;
+}
+
+    .quantity .input-text.qty {
+        width: 35px;
+        height: 40px;
+        padding: 0 5px;
+        text-align: center;
+        background-color: transparent;
+        border: 1px solid #efefef;
+    }
+
+    .quantity.buttons_added {
+        text-align: left;
+        position: relative;
+        white-space: nowrap;
+        vertical-align: top;
+    }
+
+        .quantity.buttons_added input {
+            display: inline-block;
+            margin: 0;
+            vertical-align: top;
+            box-shadow: none;
+        }
+
+        .quantity.buttons_added .minus,
+        .quantity.buttons_added .plus {
+            padding: 7px 10px 8px;
+            height: 41px;
+            background-color: #f4f4f4;
+            border: 1px solid #efefef;
+            cursor: pointer;
+        }
+
+        .quantity.buttons_added .minus {
+            border-right: 0;
+        }
+
+        .quantity.buttons_added .plus {
+            border-left: 0;
+        }
+
+            .quantity.buttons_added .minus:hover,
+            .quantity.buttons_added .plus:hover {
+                background: darkslategrey;
+            }
+
+/* Add to Cart and Back to Shop Buttons */
+.buttons {
+    margin-top: 20px;
+}
+
+.btn-adddetail {
+    background-color: #f4f4f4;
+    color: black;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 5px;
+    width: 40%;
+}
+
+    .btn-adddetail:hover {
+        color: white;
+        background-color: darkslategrey;
+    }

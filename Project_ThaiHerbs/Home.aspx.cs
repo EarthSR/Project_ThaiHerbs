@@ -37,19 +37,17 @@ public partial class Home : System.Web.UI.Page
         {
             sb.Append(string.Format(@"
         <div class='box'>
-            <div class='product-card'>
+            <a href='ProductDetail.aspx?productId={0}' target='_blank' class='product-card'> <!-- Modified to open in new page -->
                 <div class='product-image'>
-                    <img src='{0}'/>
+                    <img src='{1}'/>
                 </div>
                 <div class='product-details'>
-                    <h2>{1}</h2>
-                    <p>{2}</p>
+                    <h2>{2}</h2>
                     <div class='price'>${3}</div>
-                    <p>Total amount {4}</p>
                 </div>
-            </div>
+            </a>
         </div>",
-            product.Image, product.Name, product.Pdetail, product.Price, product.Amount));
+            product.Id, product.Image, product.Name, product.Price));
         }
         sb.Append("</div>");
         lblshow.Text = sb.ToString();
@@ -57,32 +55,31 @@ public partial class Home : System.Web.UI.Page
 
     private void FillPage()
     {
-        ArrayList productlist = ConnectionClass.GetproductByType("%");
+        ArrayList productList = ConnectionClass.GetproductByType("%");
 
         StringBuilder sb = new StringBuilder();
         sb.Append("<link rel='stylesheet' type='text/css' href='CSS/Product.css'/>");
         sb.Append("<div id='product-container'>");
-        foreach (Product product in productlist)
+        foreach (Product product in productList)
         {
             sb.Append(string.Format(@"
         <div class='box'>
-            <div class='product-card'>
+            <a href='ProductDetail.aspx?productId={0}' target='_blank' class='product-card'> <!-- Modified to open in new page -->
                 <div class='product-image'>
-                    <img src='{0}'/>
+                    <img src='{1}'/>
                 </div>
                 <div class='product-details'>
-                    <h2>{1}</h2>
-                    <p>{2}</p>
+                    <h2>{2}</h2>
                     <div class='price'>${3}</div>
-                    <p>Total amount {4}</p>
                 </div>
-            </div>
+            </a>
         </div>",
-            product.Image, product.Name, product.Pdetail, product.Price, product.Amount));
+            product.Id, product.Image, product.Name, product.Price));
         }
         sb.Append("</div>");
         lblshow.Text = sb.ToString();
     }
+
 
 
 }
