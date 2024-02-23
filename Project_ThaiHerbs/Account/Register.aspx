@@ -5,21 +5,21 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div id="content-container">
-        <div class = "register-box">
+        <div class ="box-login">
         <div class="logo">
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Image/Green_Leaf_Minimalist__Organic_Shop_Logo-removebg-preview.png" CssClass="auto-style1" Width="225px" />
             <br />
             <br />
         </div>
         <div class="login">
-            <asp:Label ID="Label1" runat="server" Text="REGISTER" CssClass="login-text"></asp:Label>
+           <h1> <asp:Label ID="Label1" runat="server" Text="REGISTER" CssClass="login-text"></asp:Label></h1>
             <br />
             <div class="txtregister">
                 <p class="textregister">
                     <asp:Label ID="lbllogin" runat="server" Text="Username" CssClass="login-text"></asp:Label>
                 </p>
                 <p>
-                    <asp:TextBox ID="txtusername" runat="server" CssClass="designbox" Height="26px" Width="170px" AutoPostBack="True" OnTextChanged="txtusername_TextChange"></asp:TextBox>
+                    <asp:TextBox ID="txtusername" runat="server" CssClass="designbox" Height="26px" Width="286px" AutoPostBack="True" OnTextChanged="txtusername_TextChange"></asp:TextBox>
                 </p>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtusername" ErrorMessage="Please enter username" ForeColor="#FF3300" ValidationGroup="RegisterValidation"></asp:RequiredFieldValidator>
                 <p>
@@ -29,7 +29,7 @@
                     <asp:Label ID="txtlogin" runat="server" Text="Password" CssClass="login-text"></asp:Label>
                 </p>
                 <p>
-                    <asp:TextBox ID="txtpassword" runat="server" Height="26px" Width="170px" 
+                    <asp:TextBox ID="txtpassword" runat="server" Height="26px" Width="286px" 
                         CssClass="designbox" 
                        ></asp:TextBox>
                 </p>
@@ -40,10 +40,9 @@
                     <asp:Label ID="lblcomfirm" runat="server" Text="Confirm password" CssClass="login-text"></asp:Label>
                 </p>
                 <p>
-                    <asp:TextBox ID="txtconpassword" runat="server" Height="26px" Width="170px" 
+                    <asp:TextBox ID="txtconpassword" runat="server" Height="26px" Width="286px" 
                         CssClass="designbox"></asp:TextBox>
                 </p>
-
                 <p>
                     <asp:CompareValidator runat="server" ErrorMessage="Password does not match" ControlToCompare="txtpassword" ControlToValidate="txtconpassword" ForeColor="#FF3300" ValidationGroup="RegisterValidation"></asp:CompareValidator>
                 </p>
@@ -51,26 +50,11 @@
                     <asp:Label ID="lblemail" runat="server" Text="Email" CssClass="login-text"></asp:Label>
                 </p>
                 <p>
-                    <asp:TextBox ID="txtemail" runat="server" Height="26px" Width="170px" CssClass="designbox" TextMode="Email"></asp:TextBox>
+                    <asp:TextBox ID="txtemail" runat="server" Height="26px" Width="286px" CssClass="designbox" TextMode="Email"></asp:TextBox>
                 </p>
                 <p>
                     <asp:RegularExpressionValidator runat="server" ErrorMessage="Email format is incorrect." ControlToValidate="txtemail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ForeColor="Red" ValidationGroup="RegisterValidation"></asp:RegularExpressionValidator>
                 </p>
-                <p class="textregister3">
-                        <asp:Label ID="Label2" runat="server" Text="Phone" CssClass="login-text"></asp:Label>
-                    </p>
-                    <p>
-                        <asp:TextBox ID="TextBox1" runat="server" Height="26px" Width="170px" CssClass="designbox" TextMode="Email"></asp:TextBox>
-                    </p>
-                    <p>
-                        <asp:RegularExpressionValidator runat="server" ErrorMessage="Email format is incorrect." ControlToValidate="txtemail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ForeColor="Red" ValidationGroup="RegisterValidation"></asp:RegularExpressionValidator>
-                    </p>
-                <p class = "textregister4">
-                        <asp:Label ID="Label3" runat="server" Text=" Gender" CssClass="login-text"></asp:Label>
-                    </p>
-                <p>
-                    <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" CssClass="designdrop" Width="174px"></asp:DropDownList>
-                        </p>
                 <p class="textregister4">
                     <asp:Label ID="lblbirthday" runat="server" Text="Birthday" CssClass="login-text"></asp:Label>
                 </p>
@@ -80,12 +64,12 @@
                     <asp:DropDownList ID="DropDownListYear" runat="server" AutoPostBack="True" CssClass="designdrop"></asp:DropDownList>
                 </p>
                 <p>
-                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorDay" ControlToValidate="DropDownListDay" ErrorMessage="Please select day" ForeColor="#FF3300" InitialValue="0" ValidationGroup="RegisterValidation"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorDay" ControlToValidate="DropDownListDay" ErrorMessage="Please select day" ForeColor="#FF3300" InitialValue="0" ValidationGroup="RegisterValidation" ></asp:RequiredFieldValidator>
                     <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorMonth" ControlToValidate="DropDownListMonth" ErrorMessage="Please select month" ForeColor="#FF3300" InitialValue="0" ValidationGroup="RegisterValidation"></asp:RequiredFieldValidator>
                     <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorYear" ControlToValidate="DropDownListYear" ErrorMessage="Please select year" ForeColor="#FF3300" InitialValue="0" ValidationGroup="RegisterValidation"></asp:RequiredFieldValidator>
                 </p>
                 <p>
-                    <asp:Button ID="ButtonSignIn" runat="server" Text="CONFIRM" CssClass="designbox" OnClick="ButtonSignIn_Click" Height="36px" Width="208px" ValidationGroup="RegisterValidation" />
+                    <asp:Button ID="ButtonSignIn" runat="server" Text="CONFIRM" CssClass="ButtonSignIn" OnClick="ButtonSignIn_Click" Height="36px" Width="208px" ValidationGroup="RegisterValidation" />
                 </p>
                 <asp:Label ID="lblresult" runat="server" Text=""></asp:Label>
             </div>

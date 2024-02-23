@@ -1,8 +1,9 @@
-﻿body {
+﻿﻿body {
     background-color: white;
-    margin : 0px;
-    padding : 0px;
+    margin: 0px;
+    padding: 0px;
 }
+
 #tophead {
     position: fixed;
     top: 0;
@@ -15,14 +16,14 @@
     align-items: center;
     z-index: 1000;
 }
-#logo {
-    margin-top: 10px;
-    float: left;
-    margin-right: 20px;
-    width: 400px;
-    height: 200px;
-}
 
+#logo {
+        margin-top: 10px;
+        float: left;
+        margin-right: 20px;
+        width: 400px;
+        height: 200px;
+    }
 
 #searchBar {
     float: none;
@@ -30,20 +31,9 @@
 }
 
 #footer {
-    width: 100%;
-    padding: 10px 0; /* Adjust padding as needed */
-    background-color: #333; /* Dark background color */
-    color: #fff; /* White text color */
+    color : black;
     text-align: center;
-    position: fixed; /* Fix the footer to the bottom */
-    bottom: 0;
-    left: 0;
-    z-index: 999; /* Ensure footer stays above other content */
 }
-
-
-
-
 
 .logo-account {
     width: 444px;
@@ -94,7 +84,6 @@
     margin: 0px;
     padding: 10px;
     background-color: #F4F4F4;
-
 }
 
 .imgHome {
@@ -106,7 +95,7 @@
     position: absolute;
     bottom: 8px;
     left: 20%;
-    color : white;
+    color: white;
     font-size: 85px;
 }
 
@@ -118,6 +107,7 @@
     font-size: 20px;
     height: 50px;
 }
+
 .txtonimg3 {
     position: absolute;
     bottom: -88px;
@@ -126,6 +116,7 @@
     font-size: 20px;
     height: 50px;
 }
+
 .txtonimg4 {
     position: absolute;
     bottom: -120px;
@@ -134,6 +125,7 @@
     font-size: 20px;
     height: 50px;
 }
+
 .designbox {
     position: absolute;
     bottom: -150px;
