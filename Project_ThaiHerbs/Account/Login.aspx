@@ -40,10 +40,8 @@
                     <br />
                     <asp:Label ID="lblerror" runat="server" Text=""></asp:Label>
                 </p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
+                <p>
+                    &nbsp;</p>
             </div>
         </div>
     </div>

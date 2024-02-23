@@ -42,5 +42,14 @@ public partial class MasterPageHome : System.Web.UI.MasterPage
     protected void Home_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/Home.aspx");
+      
     }
+
+    protected void LinkButton_Click(object sender, EventArgs e)
+    {
+        LinkButton clickedButton = (LinkButton)sender;
+        Session["selectedtype"] = clickedButton.Text;
+        Response.Redirect("~/selecttype.aspx");
+    }
+
 }
