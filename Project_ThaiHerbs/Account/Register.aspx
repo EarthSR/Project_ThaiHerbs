@@ -5,6 +5,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div id="content-container">
+        <div class = "register-box">
         <div class="logo">
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Image/Green_Leaf_Minimalist__Organic_Shop_Logo-removebg-preview.png" CssClass="auto-style1" Width="225px" />
             <br />
@@ -42,9 +43,7 @@
                     <asp:TextBox ID="txtconpassword" runat="server" Height="26px" Width="170px" 
                         CssClass="designbox"></asp:TextBox>
                 </p>
-                <p>
-                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtpassword" ErrorMessage="Please enter password" ForeColor="#FF3300" ValidationGroup="RegisterValidation"></asp:RequiredFieldValidator>
-                </p>
+
                 <p>
                     <asp:CompareValidator runat="server" ErrorMessage="Password does not match" ControlToCompare="txtpassword" ControlToValidate="txtconpassword" ForeColor="#FF3300" ValidationGroup="RegisterValidation"></asp:CompareValidator>
                 </p>
@@ -57,6 +56,21 @@
                 <p>
                     <asp:RegularExpressionValidator runat="server" ErrorMessage="Email format is incorrect." ControlToValidate="txtemail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ForeColor="Red" ValidationGroup="RegisterValidation"></asp:RegularExpressionValidator>
                 </p>
+                <p class="textregister3">
+                        <asp:Label ID="Label2" runat="server" Text="Phone" CssClass="login-text"></asp:Label>
+                    </p>
+                    <p>
+                        <asp:TextBox ID="TextBox1" runat="server" Height="26px" Width="170px" CssClass="designbox" TextMode="Email"></asp:TextBox>
+                    </p>
+                    <p>
+                        <asp:RegularExpressionValidator runat="server" ErrorMessage="Email format is incorrect." ControlToValidate="txtemail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ForeColor="Red" ValidationGroup="RegisterValidation"></asp:RegularExpressionValidator>
+                    </p>
+                <p class = "textregister4">
+                        <asp:Label ID="Label3" runat="server" Text=" Gender" CssClass="login-text"></asp:Label>
+                    </p>
+                <p>
+                    <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" CssClass="designdrop" Width="174px"></asp:DropDownList>
+                        </p>
                 <p class="textregister4">
                     <asp:Label ID="lblbirthday" runat="server" Text="Birthday" CssClass="login-text"></asp:Label>
                 </p>
@@ -79,5 +93,6 @@
             <br />
             <br />
         </div>
+            </div>
     </div>
 </asp:Content>
