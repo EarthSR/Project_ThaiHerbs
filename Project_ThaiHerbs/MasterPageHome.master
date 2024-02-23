@@ -89,7 +89,6 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
         </div>
         <div><asp:Label ID="lblserch" runat="server" Text=""></asp:Label></div>
-        <div></div>
         <div id="footer">
             สงวนลิขสิทธิ์ © บริษัทไทยเฮิร์บ (ประเทศไทย) จำกัด
         </div>
