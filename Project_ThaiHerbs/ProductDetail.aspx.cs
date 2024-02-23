@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -19,6 +20,7 @@ public partial class ProductDetail : System.Web.UI.Page
                 int productId;
                 if (int.TryParse(Request.QueryString["productId"], out productId))
                 {
+                    Session["ProductId"] = productId;
                     FillPage(productId);
                 }
             }
@@ -50,20 +52,51 @@ public partial class ProductDetail : System.Web.UI.Page
         LiteralControl productControl = new LiteralControl(sb.ToString());
         productContainer.Controls.Add(productControl);
     }
-    protected void decreaseQuantity_Click(object sender, EventArgs e)
+
+    protected void Unnamed1_Click(object sender, EventArgs e)
     {
-        int currentValue = int.Parse(quantityInput.Text);
-        if (currentValue > 1)
+        int productId;
+        int.TryParse(Request.QueryString["productId"], out productId);
+        if (Session["userid"] != null)
         {
-            quantityInput.Text = (currentValue - 1).ToString();
+            int userid = (int)Session["userid"];
+            bool isDuplicate = ConnectionClass.CheckDuplicateProductInCart(productId, userid);
+            if (isDuplicate)
+            {
+                lble.Text = "This product is already in your cart.";
+            }
+            else
+            {
+                Product product = ConnectionClass.GetProductById(productId);
+                if (product != null)
+                {
+                    string resultMessage = ConnectionClass.InsertCart(productId,product.Price, "incart", userid);
+                    if (resultMessage == "Cart inserted successfully.")
+                    {
+                        // Provide a confirmation message
+                        lble.Text = "Product added to cart successfully!";
+                    }
+                    else
+                    {
+                        // Handle insertion failure
+                        lble.Text = "Failed to add product to cart. Please try again later.";
+                    }
+                }
+                else
+                {
+                    // Handle product not found
+                    lble.Text = "Product not found. Please select a valid product.";
+                }
+            }
+            // Redirect to the same page after processing
+
+            Response.Redirect(Request.RawUrl);
+        }
+        else
+        {
+            // Redirect to login page if user is not logged in
+            Response.Redirect("~/Account/Login.aspx");
         }
     }
-
-    protected void increaseQuantity_Click(object sender, EventArgs e)
-    {
-        int currentValue = int.Parse(quantityInput.Text);
-        quantityInput.Text = (currentValue + 1).ToString();
-    }
-
 
 }

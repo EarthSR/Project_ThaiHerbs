@@ -4,41 +4,16 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
     </style>
-    <script type="text/javascript">
-    function decreaseQuantity() {
-        var quantityInput = document.getElementById('<%= quantityInput.ClientID %>');
-        if (parseInt(quantityInput.value) > 1) {
-        quantityInput.value = parseInt(quantityInput.value) - 1;
-        }
-    return false; // เพื่อป้องกันการโพสต์กลับเซิร์ฟเวอร์
-    }
-
-    function increaseQuantity() {
-        var quantityInput = document.getElementById('<%= quantityInput.ClientID %>');
-    if (parseInt(quantityInput.value) < 100) {
-        quantityInput.value = parseInt(quantityInput.value) + 1;
-        }
-    return false; // เพื่อป้องกันการโพสต์กลับเซิร์ฟเวอร์
-    }
-    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="detail-container">
         <asp:PlaceHolder ID="productContainer" runat="server"></asp:PlaceHolder>
-        <div class="quantity buttons_added">
-            <a>
-                <label for="quantityInput">จำนวน : </label>
-            </a>
-             <button type='button' class='minus' onclick='return decreaseQuantity();'>-</button>
-             <asp:TextBox ID='quantityInput' runat='server' CssClass='input-text qty text' Text='1'
-                 Width='53px' Height='24px' pattern='\d*' inputmode='numeric' />
-             <button type='button' class='plus' onclick='return increaseQuantity();'>+</button>
-        </div>
         <br />
         <br />
         <div class="bottons">
-            <asp:Button runat="server" Text="Add to Cart" CssClass="btn-adddetail" />
+            <asp:Button ID="btbadd" runat="server" Text="Add to Cart" CssClass="btn-adddetail" OnClick="Unnamed1_Click" />
         </div>
+        <asp:Label ID="lble" runat="server"></asp:Label>
     </div>
     <div class="review">
         <h2>

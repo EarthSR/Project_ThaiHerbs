@@ -52,4 +52,16 @@ public partial class MasterPageHome : System.Web.UI.MasterPage
         Response.Redirect("~/selecttype.aspx");
     }
 
+
+    protected void Button4_Click(object sender, EventArgs e)
+    {
+        if (Session["Login"] != null)
+        {
+            Response.Redirect("~/Cart.aspx");
+        }
+        else
+        {
+            Response.Redirect("~/Home.aspx");
+        }
+    }
 }

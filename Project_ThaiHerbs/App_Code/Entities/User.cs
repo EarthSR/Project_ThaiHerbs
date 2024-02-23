@@ -18,6 +18,7 @@ public class User
     public string Address { get; set; }
     public string FirstName { get; set; } 
     public string LastName { get; set; } 
+    public string Gender { get; set; }
 
     public User(int idUsers, string userName, string password, string email, string userType, DateTime birthday, string phone, string address, string firstName, string lastName)
     {
@@ -46,12 +47,13 @@ public class User
         LastName = lastName;
     }
 
-    public User(string username, string password, string email, string usertype, DateTime birthday)
+    public User(string username, string password, string email, string usertype, string gender)
     {
         UserName = username;
         Password = password;
         Email = email;
         UserType = usertype;
-        Birthday = birthday;
+        Gender = gender;
+
     }
 }
