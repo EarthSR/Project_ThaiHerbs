@@ -55,7 +55,6 @@
         </table>
         <div class="typeproduct">
             <table class="auto-style1">
-                <asp:Literal ID="ScriptLiteral" runat="server"></asp:Literal>
                 <tr>
                     <td>
                         <asp:LinkButton ID="lbl1" runat="server" Text="สมุนไพรเเห้ง" 
@@ -123,10 +122,6 @@
         }
     }
 </script>
-
-
-
-
             <div id="footer">
             สงวนลิขสิทธิ์ © บริษัทไทยเฮิร์บ (ประเทศไทย) จำกัด
         </div>
