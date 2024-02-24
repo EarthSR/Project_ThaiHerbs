@@ -400,6 +400,43 @@ public class ConnectionClass
         return productList;
     }
 
+    public static string DeleteCartItem(int orderId)
+    {
+        string resultMessage = null;
+
+        string query = "DELETE FROM orderdetail WHERE orderid = @OrderId";
+
+        command.CommandText = query;
+        command.Parameters.Clear();
+        command.Parameters.AddWithValue("@OrderId", orderId);
+
+        try
+        {
+            conn.Open();
+            int rowsAffected = command.ExecuteNonQuery();
+
+            if (rowsAffected > 0)
+            {
+                resultMessage = "Cart item deleted successfully.";
+            }
+            else
+            {
+                resultMessage = "Failed to delete cart item.";
+            }
+        }
+        catch (Exception ex)
+        {
+            resultMessage = "Error: " + ex.Message;
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return resultMessage;
+    }
+
+
 
 }
 
