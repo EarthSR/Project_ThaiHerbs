@@ -403,7 +403,7 @@ public class ConnectionClass
     {
         string resultMessage = null;
 
-        string query = "DELETE FROM cart WHERE userid = @userid";
+        string query = "DELETE FROM orderdetail WHERE orderid = @OrderId";
 
         command.CommandText = query;
         command.Parameters.Clear();
