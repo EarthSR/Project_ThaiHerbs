@@ -65,6 +65,10 @@ public partial class Cart : System.Web.UI.Page
     
     protected void Unnamed1_Click(object sender, EventArgs e)
     {
+        int userid = (int)Session["userid"];
+        lblresult.Text = ConnectionClass.DeleteCartItem(userid);
+        Response.Redirect("~/Home.aspx");
+        Response.Redirect("~/Cart.aaspx");
 
     }
 }

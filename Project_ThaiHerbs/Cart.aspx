@@ -12,6 +12,7 @@
     <div class="cart-container">
         <div class="cart-top">
             <asp:Button runat="server" Text="Delete All Product in cart" CssClass="btnDeleteItem" OnClick="Unnamed1_Click"  />
+            <asp:Label ID="lblresult" runat="server"></asp:Label>
         </div> 
         
         <asp:Label ID="lblshow" runat="server"></asp:Label>
