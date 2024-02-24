@@ -39,4 +39,16 @@ public partial class MasterPageSearch : System.Web.UI.MasterPage
         Session["search"] = search;
         ConnectionClass.Searchbar(search);
     }
+
+    protected void Button4_Click(object sender, EventArgs e)
+    {
+        if (Session["Login"] != null)
+        {
+            Response.Redirect("~/Cart.aspx");
+        }
+        else
+        {
+            Response.Redirect("~/Account/Login.aspx");
+        }
+    }
 }

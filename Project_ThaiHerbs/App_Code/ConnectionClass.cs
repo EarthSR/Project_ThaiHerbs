@@ -22,8 +22,10 @@ public class ConnectionClass
     public static User LoginUser(string username, string password)
     {
         User user = null;
-        string query = string.Format("SELECT COUNT(*) FROM users WHERE username = '{0}' AND [password] = '{1}'", username, password);
+        string query = "SELECT COUNT(*) FROM users WHERE username = @username AND [password] = @password";
         command.CommandText = query;
+        command.Parameters.AddWithValue("@username", username);
+        command.Parameters.AddWithValue("@password", password);
         try
         {
             conn.Open();
@@ -32,20 +34,22 @@ public class ConnectionClass
             {
                 command.Parameters.Clear();
 
-                query = string.Format("SELECT userid, email, typeofuser_fk, birthday, phone, address, firstname, lastname FROM users WHERE username = '{0}'", username);
+                query = "SELECT userid, email, typeofuser_fk, birthday, phone, address, firstname, lastname, gender FROM users WHERE username = @username";
                 command.CommandText = query;
+                command.Parameters.AddWithValue("@username", username);
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
                     int userId = reader.GetInt32(0);
                     string email = reader.GetString(1);
-                    string typeofuser_fk = reader.GetString(2); 
-                    DateTime birthday = reader.GetDateTime(3);
+                    string typeofuser_fk = reader.GetString(2);
+                    DateTime? birthday = reader.IsDBNull(3) ? (DateTime?)null : reader.GetDateTime(3);
                     string phone = reader.IsDBNull(4) ? null : reader.GetString(4);
                     string address = reader.IsDBNull(5) ? null : reader.GetString(5);
                     string firstName = reader.IsDBNull(6) ? null : reader.GetString(6);
                     string lastName = reader.IsDBNull(7) ? null : reader.GetString(7);
-                    user = new User(userId, username, password, email, typeofuser_fk.ToString(), birthday, phone, address, firstName, lastName);
+                    string gender = reader.IsDBNull(8) ? null : reader.GetString(8); 
+                    user = new User(userId, username, password, email, typeofuser_fk, birthday, phone, address, firstName, lastName, gender);
                 }
                 reader.Close();
             }
@@ -56,6 +60,7 @@ public class ConnectionClass
             conn.Close();
         }
     }
+
 
 
     public static string CheckTypeOfUser(int userId)
@@ -287,12 +292,12 @@ public class ConnectionClass
         return list;
     }
 
-    public static string InsertCart(int productId,double priceOfProduct, int userId)
+    public static string InsertCart(int productId,double priceOfProduct, int userId,int amount)
     {
         string resultMessage = null;
 
-        string query = "INSERT INTO cart (productid, price, userid) " +
-                       "VALUES (@ProductId, @PriceOfProduct, @UserId)";
+        string query = "INSERT INTO cart (productid, price, userid,amount) " +
+                       "VALUES (@ProductId, @PriceOfProduct, @UserId,@amount)";
 
         command.CommandText = query;
         command.Parameters.Clear();
@@ -300,6 +305,7 @@ public class ConnectionClass
         command.Parameters.AddWithValue("@ProductId", productId);
         command.Parameters.AddWithValue("@PriceOfProduct", priceOfProduct);
         command.Parameters.AddWithValue("@UserId", userId);
+        command.Parameters.AddWithValue("@amount", amount);
 
         try
         {
@@ -365,7 +371,7 @@ public class ConnectionClass
     public static ArrayList GetProductsByUserId(int userId)
     {
         ArrayList productList = new ArrayList();
-        string query = "SELECT * FROM product p " +
+        string query = "SELECT p.productid,p.pname,p.pprice,p.pdetail,p.ptype,c.amount,p.pimage FROM product p " +
                        "INNER JOIN cart c ON p.productid = c.productid " +
                        "WHERE c.userid = @UserId";
 
@@ -450,6 +456,7 @@ public class ConnectionClass
             while (reader.Read())
             {
                 int amount = reader.GetInt32(0);
+                proamount = amount; // กำหนดค่า proamount เมื่ออ่านข้อมูลสำเร็จ
             }
         }
         finally
@@ -457,8 +464,42 @@ public class ConnectionClass
             conn.Close();
         }
 
-        return proamount;
+        return proamount; // คืนค่า proamount ที่ถูกต้อง
     }
+
+    public static void UpdateAvailableQuantity(int productId, int newQuantity)
+    {
+        try
+        {
+            {
+                conn.Open();
+                string updateQuery = "UPDATE product SET pamount = @NewQuantity WHERE productid = @ProductId";
+                command.CommandText = updateQuery;
+                {
+                    command.Parameters.AddWithValue("@NewQuantity", newQuantity);
+                    command.Parameters.AddWithValue("@ProductId", productId);
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected == 0)
+                    {
+                        throw new Exception("Product not found or quantity not updated.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Quantity updated successfully.");
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error updating quantity: " + ex.Message);
+        }
+        finally { 
+            conn.Close(); 
+        }
+    }
+
+
 
 }
 

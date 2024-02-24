@@ -42,11 +42,13 @@ public partial class ProductDetail : System.Web.UI.Page
             <div class='detail-image'>
                 <h2>{1}</h2>
                 <h3>{2}</h3>
-                <a>${3}</a>
+                <a>{3} บาท</a>
+                <br />
+                <a>จำนวนทั้งหมด : {4} </a> 
                 <br />
                 <br />
                ",
-                product.Image, product.Name, product.Pdetail, product.Price));
+                product.Image, product.Name, product.Pdetail, product.Price,product.Amount));
         }
 
         lblshow.Text = sb.ToString();
@@ -55,47 +57,111 @@ public partial class ProductDetail : System.Web.UI.Page
     protected void Unnamed1_Click(object sender, EventArgs e)
     {
         int productId;
-        int.TryParse(Request.QueryString["productId"], out productId);
-        if (Session["userid"] != null)
+        if (int.TryParse(Request.QueryString["productId"], out productId))
         {
-            int userid = (int)Session["userid"];
-            bool isDuplicate = ConnectionClass.CheckDuplicateProductInCart(productId, userid);
-            if (isDuplicate)
+            if (Session["userid"] != null)
             {
-                lble.Text = "This product is already in your cart.";
-            }
-            else
-            {
-                Product product = ConnectionClass.GetProductById(productId);
-                if (product != null)
+                int userid = (int)Session["userid"];
+                bool isDuplicate = ConnectionClass.CheckDuplicateProductInCart(productId, userid);
+                if (isDuplicate)
                 {
-                    string resultMessage = ConnectionClass.InsertCart(productId, product.Price, userid);
-                    if (resultMessage == "Cart inserted successfully.")
-                    {
-                        // Provide a confirmation message
-                        lble.Text = "Product added to cart successfully!";
-                    }
-                    else
-                    {
-                        // Handle insertion failure
-                        lble.Text = "Failed to add product to cart. Please try again later.";
-                    }
+                    lble.Text = "This product is already in your cart.";
                 }
                 else
                 {
-                    // Handle product not found
-                    lble.Text = "Product not found. Please select a valid product.";
+                    int enteredQuantity;
+                    if (int.TryParse(txtamount.Text, out enteredQuantity))
+                    {
+                        int availableQuantity = GetAvailableQuantity(productId);
+                        if (enteredQuantity <= availableQuantity)
+                        {
+                            Product product = ConnectionClass.GetProductById(productId);
+                            if (product != null)
+                            {
+                                string resultMessage = ConnectionClass.InsertCart(productId, product.Price, userid, enteredQuantity);
+                                if (resultMessage == "Cart inserted successfully.")
+                                {
+                                    // Subtract entered quantity from available quantity in stock
+                                    ConnectionClass.UpdateAvailableQuantity(productId, availableQuantity - enteredQuantity);
+                                    lble.Text = "Product added to cart successfully!";
+                                }
+                                else
+                                {
+                                    lble.Text = "Failed to add product to cart. Please try again later.";
+                                }
+                            }
+                            else
+                            {
+                                lble.Text = "Product not found. Please select a valid product.";
+                            }
+                        }
+                        else
+                        {
+                            enteredQuantity = availableQuantity;
+                            lble.Text = "Quantity entered exceeds available quantity. Quantity adjusted to maximum available quantity.";
+                            // Subtract maximum available quantity from available quantity in stock
+                            ConnectionClass.UpdateAvailableQuantity(productId,0);
+                        
+                        }
+                    }
+                    else
+                    {
+                        lble.Text = "Please enter a valid quantity.";
+                    }
                 }
             }
-            // Redirect to the same page after processing
-
-            Response.Redirect(Request.RawUrl);
+            else
+            {
+                Response.Redirect("~/Account/Login.aspx");
+            }
         }
         else
         {
-            // Redirect to login page if user is not logged in
-            Response.Redirect("~/Account/Login.aspx");
+            lble.Text = "Invalid product ID.";
         }
+    }
+
+
+    protected void minus_Click(object sender, EventArgs e)
+    {
+        int currentValue;
+        if (int.TryParse(txtamount.Text, out currentValue))
+        {
+            if (currentValue > 1)
+            {
+                currentValue--;
+                txtamount.Text = currentValue.ToString();
+            }
+        }
+        else
+        {
+            lble.Text = "Please enter a valid quantity.";
+        }
+    }
+
+    protected void plus_Click(object sender, EventArgs e)
+    {
+        int currentValue;
+        if (int.TryParse(txtamount.Text, out currentValue))
+        {
+            currentValue++;
+            txtamount.Text = currentValue.ToString();
+        }
+        else
+        {
+            lble.Text = "Please enter a valid quantity.";
+        }
+    }
+
+    public static int GetAvailableQuantity(int productId)
+    {
+        int availableQuantity = ConnectionClass.getprobyid(productId);
+        return availableQuantity;
+    }
+
+    public static void UpdateAvailableQuantity(int productId, int newQuantity)
+    {
+        ConnectionClass.UpdateAvailableQuantity(productId, newQuantity);
     }
 
 }

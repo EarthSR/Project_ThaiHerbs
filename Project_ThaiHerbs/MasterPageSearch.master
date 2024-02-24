@@ -36,7 +36,7 @@
                         </td>
                         <td>&nbsp;&nbsp;<asp:Button ID="search" runat="server" Text="Search" 
                                 CssClass="flexible-button" OnClick="search_Click" />
-                            &nbsp;&nbsp;<asp:Button ID="Button4" runat="server" Text="Cart" CssClass="flexible-button" />
+                            &nbsp;&nbsp;<asp:Button ID="Button4" runat="server" Text="Cart" CssClass="flexible-button" OnClick="Button4_Click" />
                         </td>
                     </tr>
                 </table>
