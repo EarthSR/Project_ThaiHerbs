@@ -101,70 +101,47 @@ public partial class ProductDetail : System.Web.UI.Page
     protected void btnadd_Click(object sender, EventArgs e)
     {
         int productId;
-        if (int.TryParse(Request.QueryString["productId"], out productId))
+        int.TryParse(Request.QueryString["productId"], out productId);
+        if (Session["userid"] != null)
         {
-            if (Session["userid"] != null)
+            int userid = (int)Session["userid"];
+            bool isDuplicate = ConnectionClass.CheckDuplicateProductInCart(productId, userid);
+            if (isDuplicate)
             {
-
-                int userid = (int)Session["userid"];
-                bool isDuplicate = ConnectionClass.CheckDuplicateProductInCart(productId, userid);
-                if (isDuplicate)
-                {
-                    lble.Text = "This product is already in your cart.";
-                }
-                else
-                {
-                    int enteredQuantity;
-                    if (int.TryParse(txtamount.Text, out enteredQuantity))
-                    {
-                        int availableQuantity = GetAvailableQuantity(productId);
-                        if (enteredQuantity <= availableQuantity)
-                        {
-                            Product product = ConnectionClass.GetProductById(productId);
-                            if (product != null)
-                            {
-                                string resultMessage = ConnectionClass.InsertCart(productId, product.Price, userid, enteredQuantity);
-                                if (resultMessage == "Cart inserted successfully.")
-                                {
-                                    // Subtract entered quantity from available quantity in stock
-                                    int update = availableQuantity - enteredQuantity;
-                                    Console.WriteLine("ProductId: " + productId);
-                                    Console.WriteLine("New Quantity: " + update);
-                                    UpdateAvailableQuantity(productId, update);
-                                    lble.Text = "Product added to cart successfully!";
-                                }
-                                else
-                                {
-                                    lble.Text = "Failed to add product to cart. Please try again later.";
-                                }
-                            }
-                            else
-                            {
-                                lble.Text = "Product not found. Please select a valid product.";
-                            }
-                        }
-                        else
-                        {
-                            enteredQuantity = availableQuantity;
-                            lble.Text = "Quantity entered exceeds available quantity. Quantity adjusted to maximum available quantity.";
-                            // Subtract maximum available quantity from available quantity in stock
-                            UpdateAvailableQuantity(productId, 0);
-                        }
-                    }
-                    else
-                    {
-                        lble.Text = "Please enter a valid quantity.";
-                    }
-                }
+                lble.Text = "This product is already in your cart.";
             }
             else
             {
-                Response.Redirect("~/Account/Login.aspx");
+                Product product = ConnectionClass.GetProductById(productId);
+                if (product != null)
+                {
+                    string resultMessage = ConnectionClass.InsertCart(productId, product.Price, userid);
+                    if (resultMessage == "Cart inserted successfully.")
+                    {
+                        // Provide a confirmation message
+                        lble.Text = "Product added to cart successfully!";
+                    }
+                    else
+                    {
+                        // Handle insertion failure
+                        lble.Text = "Failed to add product to cart. Please try again later.";
+                    }
+                }
+                else
+                {
+                    // Handle product not found
+                    lble.Text = "Product not found. Please select a valid product.";
+                }
             }
+            // Redirect to the same page after processing
+
+            Response.Redirect(Request.RawUrl);
         }
         else
         {
-            lble.Text = "Invalid product ID.";
+            // Redirect to login page if user is not logged in
+            Response.Redirect("~/Account/Login.aspx");
         }
     }
+
 }
