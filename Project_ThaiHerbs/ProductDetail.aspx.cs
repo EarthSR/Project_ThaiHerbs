@@ -54,7 +54,7 @@ public partial class ProductDetail : System.Web.UI.Page
         lblshow.Text = sb.ToString();
     }
 
-   
+
 
     protected void minus_Click(object sender, EventArgs e)
     {
@@ -127,10 +127,6 @@ public partial class ProductDetail : System.Web.UI.Page
                                 if (resultMessage == "Cart inserted successfully.")
                                 {
                                     // Subtract entered quantity from available quantity in stock
-                                    int update = availableQuantity - enteredQuantity;
-                                    Console.WriteLine("ProductId: " + productId);
-                                    Console.WriteLine("New Quantity: " + update);
-                                    UpdateAvailableQuantity(productId, update);
                                     lble.Text = "Product added to cart successfully!";
                                 }
                                 else
@@ -147,8 +143,6 @@ public partial class ProductDetail : System.Web.UI.Page
                         {
                             enteredQuantity = availableQuantity;
                             lble.Text = "Quantity entered exceeds available quantity. Quantity adjusted to maximum available quantity.";
-                            // Subtract maximum available quantity from available quantity in stock
-                            UpdateAvailableQuantity(productId, 0);
                         }
                     }
                     else
@@ -168,3 +162,4 @@ public partial class ProductDetail : System.Web.UI.Page
         }
     }
 }
+
