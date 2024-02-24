@@ -21,26 +21,9 @@
         <div class="cart-container">
        <div class="btn">
             <asp:Label ID="Label3" runat="server" Text="ราคารวม :" />
-            <div id="totalPrice">0.00</div>&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Button runat="server" Text="สั่งซื้อ" CssClass="btncart" OnClick="Unnamed2_Click" />
        </div>
         </div>
     </div>
-
-    <script type="text/javascript">
-        function calculateTotal(inputId) {
-            var inputElement = document.getElementById('quantityInput' + inputId);
-            var quantity = inputElement.value;
-            var priceElement = document.getElementById('price' + inputId);
-            var price = parseFloat(priceElement.innerText); // ดึงราคาสินค้าออกมาและแปลงเป็นตัวเลข
-
-            var totalElement = document.getElementById('totalPrice');
-            var currentTotal = parseFloat(totalElement.innerText);
-
-            var newTotal = currentTotal + (quantity * price);
-            totalElement.innerText = newTotal.toFixed(2); // แสดงราคารวมใหม่โดยมีทศนิยม 2 ตำแหน่ง
-        }
-        
-
-    </script>
 </asp:Content>

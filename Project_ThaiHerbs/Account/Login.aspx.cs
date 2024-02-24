@@ -28,6 +28,7 @@ public partial class _Default : System.Web.UI.Page
             Session["Firstname"] = user.FirstName;
             Session["Lastname"] = user.LastName;
             Session["Address"] = user.Address;
+            Session["gender"] = user.Gender;
             Response.Redirect("~/Home.aspx");
         }
         else

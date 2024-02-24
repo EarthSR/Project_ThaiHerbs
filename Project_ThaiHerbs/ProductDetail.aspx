@@ -7,13 +7,19 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="detail-container">
-        <asp:Label ID="lblshow" runat="server" Text="Label"></asp:Label>
+        <asp:Label ID="lblshow" runat="server" ></asp:Label>
         <br />
+        <div>
+        <asp:Button ID="minus" runat="server" Text="-" OnClick="minus_Click" />
+        <asp:TextBox ID="txtamount" runat="server" Width="49px" style="text-align: center">1</asp:TextBox>
+        <asp:Button ID="plus" runat="server" Text="+" OnClick="plus_Click" />
+        </div>
+        <br />
+        <asp:Label ID="lble" runat="server"></asp:Label>
         <br />
         <div class="bottons">
-            <asp:Button ID="btbadd" runat="server" Text="Add to Cart" CssClass="btn-adddetail" OnClick="Unnamed1_Click" />
+            <asp:Button runat="server" Text="Button" ID="btnadd" OnClick="btnadd_Click" />
         </div>
-        <asp:Label ID="lble" runat="server"></asp:Label>
     </div>
     <div class="review">
         <h2>

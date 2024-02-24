@@ -48,14 +48,12 @@ public partial class Cart : System.Web.UI.Page
             <td class='cart-nameproduct'>&nbsp;&nbsp;&nbsp;&nbsp;<a>{1}</a></td>
             <td><a id='price{3}'>{2} บาท</a></td>
             <td>
-                <div class='quantity buttons_added'>
-                    <input type='text' id='quantityInput{3}' class='input-text qty text' style='width: 53px; height: 24px;' pattern='\d*' inputmode='numeric' onchange='calculateTotal({3})'/>
-                </div>
+             <a></a>
             </td>
         </tr>
     </table>
 ",
-            product.Image, product.Name, product.Price, inputCounter);
+            product.Image, product.Name, product.Price,product.Amount,inputCounter);
         }
 
             sb.Append("</div>");
@@ -75,10 +73,7 @@ public partial class Cart : System.Web.UI.Page
     {
 
     }
-    [WebMethod]
-    public static int GetAvailableQuantity(int productId)
-    {
-        int availableQuantity = ConnectionClass.getprobyid(productId);
-        return availableQuantity;
-    }
+
+
+
 }

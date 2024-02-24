@@ -61,7 +61,7 @@ public partial class MasterPageHome : System.Web.UI.MasterPage
         }
         else
         {
-            Response.Redirect("~/Home.aspx");
+            Response.Redirect("~/Account/Login.aspx");
         }
     }
 }
