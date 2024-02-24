@@ -7,7 +7,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="detail-container">
-        <asp:PlaceHolder ID="productContainer" runat="server"></asp:PlaceHolder>
+        <asp:Label ID="lblshow" runat="server" Text="Label"></asp:Label>
         <br />
         <br />
         <div class="bottons">

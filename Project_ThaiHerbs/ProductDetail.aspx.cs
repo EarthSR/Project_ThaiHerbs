@@ -49,8 +49,7 @@ public partial class ProductDetail : System.Web.UI.Page
                 product.Image, product.Name, product.Pdetail, product.Price));
         }
 
-        LiteralControl productControl = new LiteralControl(sb.ToString());
-        productContainer.Controls.Add(productControl);
+        lblshow.Text = sb.ToString();
     }
 
     protected void Unnamed1_Click(object sender, EventArgs e)
@@ -70,7 +69,7 @@ public partial class ProductDetail : System.Web.UI.Page
                 Product product = ConnectionClass.GetProductById(productId);
                 if (product != null)
                 {
-                    string resultMessage = ConnectionClass.InsertCart(productId, product.Price, "incart", userid);
+                    string resultMessage = ConnectionClass.InsertCart(productId, product.Price, userid);
                     if (resultMessage == "Cart inserted successfully.")
                     {
                         // Provide a confirmation message

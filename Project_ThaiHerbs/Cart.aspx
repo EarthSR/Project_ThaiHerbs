@@ -16,12 +16,15 @@
         </div> 
         
         <asp:Label ID="lblshow" runat="server"></asp:Label>
-
+        <br />
+        <br />
+        <div class="cart-container">
        <div class="btn">
             <asp:Label ID="Label3" runat="server" Text="ราคารวม :" />
             <div id="totalPrice">0.00</div>&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button runat="server" Text="สั่งซื้อ" CssClass="btncart" />
+            <asp:Button runat="server" Text="สั่งซื้อ" CssClass="btncart" OnClick="Unnamed2_Click" />
        </div>
+        </div>
     </div>
 
     <script type="text/javascript">
@@ -37,5 +40,7 @@
             var newTotal = currentTotal + (quantity * price);
             totalElement.innerText = newTotal.toFixed(2); // แสดงราคารวมใหม่โดยมีทศนิยม 2 ตำแหน่ง
         }
+        
+
     </script>
 </asp:Content>

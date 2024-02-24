@@ -287,7 +287,7 @@ public class ConnectionClass
         return list;
     }
 
-    public static string InsertCart(int productId,double priceOfProduct, string statusOfOrder, int userId)
+    public static string InsertCart(int productId,double priceOfProduct, int userId)
     {
         string resultMessage = null;
 
@@ -403,7 +403,7 @@ public class ConnectionClass
     {
         string resultMessage = null;
 
-        string query = "DELETE FROM orderdetail WHERE orderid = @OrderId";
+        string query = "DELETE FROM cart WHERE userid = @userid";
 
         command.CommandText = query;
         command.Parameters.Clear();
@@ -435,7 +435,30 @@ public class ConnectionClass
         return resultMessage;
     }
 
+    public static int getprobyid(int proid)
+    {
+        int proamount = 0;
+        string query = string.Format("SELECT pamount From product WHERE productid = '{0}'", proid);
+        command.CommandText = query;
+        command.Parameters.Clear();
 
+        try
+        {
+            conn.Open();
+            command.CommandText = query;
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int amount = reader.GetInt32(0);
+            }
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return proamount;
+    }
 
 }
 

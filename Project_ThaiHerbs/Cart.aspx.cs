@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
@@ -34,10 +35,10 @@ public partial class Cart : System.Web.UI.Page
 
         // Append product details for each product in the list
         sb.Append("<div class='cart-product'>");
-        int inputCounter = 0; // เพิ่มตัวแปรนับจำนวน input
+        int inputCounter = 0;
         foreach (Product product in productList)
         {
-            inputCounter++; // เพิ่มค่าตัวนับทุกครั้งที่วนลูป
+            inputCounter++; 
             sb.AppendFormat(@"
     <table style='width: 100%;'>
         <tr>
@@ -67,8 +68,17 @@ public partial class Cart : System.Web.UI.Page
     {
         int userid = (int)Session["userid"];
         lblresult.Text = ConnectionClass.DeleteCartItem(userid);
-        Response.Redirect("~/Home.aspx");
-        Response.Redirect("~/Cart.aaspx");
 
+    }
+
+    protected void Unnamed2_Click(object sender, EventArgs e)
+    {
+
+    }
+    [WebMethod]
+    public static int GetAvailableQuantity(int productId)
+    {
+        int availableQuantity = ConnectionClass.getprobyid(productId);
+        return availableQuantity;
     }
 }
