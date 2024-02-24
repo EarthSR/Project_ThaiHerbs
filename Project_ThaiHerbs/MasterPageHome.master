@@ -12,15 +12,10 @@
     <link rel="stylesheet" type="text/css" href= "~/CSS/HowtoOrder.css" />
     <link rel="stylesheet" type="text/css" href= "~/CSS/Subport.css" />
     <link rel="stylesheet" type="text/css" href= "~/CSS/Tracking.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/ProfileUser.css" />
 
     <script src="Productdetail.js"></script>
     <style>
-        .hyperlike-common:active,
-        .hyperlike-common.selected {
-        border: 2px solid black;
-        padding: 10px; 
-        border-radius: 5px; 
-        }
         .auto-style1 {
             width: 100%;
         }

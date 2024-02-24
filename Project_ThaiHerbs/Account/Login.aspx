@@ -15,7 +15,7 @@
         </div>
         
         <div class="login">
-            <h1><asp:Label ID="LabelSignIn" runat="server" Text="LOGIN" CssClass="login-text"></asp:Label></h1>
+            <h1><asp:Label ID="LabelSignIn" runat="server" Text="LOGIN" CssClass="login-text1"></asp:Label></h1>
             <br />
             <div class="log">
                 <p class="textregister">

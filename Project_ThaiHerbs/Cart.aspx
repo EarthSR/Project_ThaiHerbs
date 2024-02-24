@@ -69,22 +69,8 @@
                 </td>
             </tr>
         </table>
-        </div>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        </div>  
+
         <div class ="btn">
             <asp:Label ID="Label3" runat="server" Text="ราคารวม :" />
                 <asp:Label ID="Label2" runat="server" Text="(000)  ฿" />&nbsp;&nbsp;&nbsp;&nbsp;

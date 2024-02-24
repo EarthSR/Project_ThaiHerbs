@@ -7,7 +7,8 @@
 <head runat="server">
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server" />
-    <link rel="stylesheet" type="text/css" href="~/CSS/Account.css" />
+    <link rel="stylesheet" type="text/css" href="~/CSS/MasterAccount.css" />
+    <link rel="stylesheet" type="text/css" href="~/CSS/ProfileUser.css" />
 </head>
         <body id="bdaccount">
             <form id="form1" runat="server">

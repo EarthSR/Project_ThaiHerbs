@@ -1,10 +1,15 @@
 ﻿body {
 }
 
+
 .user-product {
+    width: 90%;
+    margin: 0 auto;
+    background-color: #ff6a00;
+    padding: 20px;
+    height : 1000px;
+}
 
-
-
+.profile-box{
 
 }
-    
