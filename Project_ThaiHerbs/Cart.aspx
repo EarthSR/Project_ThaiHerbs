@@ -7,26 +7,34 @@
         }
     </style>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-
-    <div class ="cart-container">
-    <div class = "cart-top ">
-        <div class ="chkbox">
-        <label class="material-checkbox">
-        <input type="checkbox" class="auto-style1">
-        <span class="checkmark"></span>
-        เลือกสินค้าทั้งหมด
-      </label>
-            </div>
-     </div> 
+    <div class="cart-container">
+        <div class="cart-top">
+            <asp:Button runat="server" Text="Delete All Product in cart" CssClass="btnDeleteItem" OnClick="Unnamed1_Click"  />
+        </div> 
         
-        <asp:Label ID="lblshow" runat="server" ></asp:Label>
-       
-        <div class ="btn">
-            <asp:Label ID="Label3" runat="server" Text="ราคารวม :" />
-                <asp:Label ID="Label2" runat="server" Text="(000)  ฿" />&nbsp;&nbsp;&nbsp;&nbsp;
-       <asp:Button runat="server" Text="สั่งซื้อ" CssClass="btncart" />
-        </div>
-    </div>
-</asp:Content>
+        <asp:Label ID="lblshow" runat="server"></asp:Label>
 
+       <div class="btn">
+            <asp:Label ID="Label3" runat="server" Text="ราคารวม :" />
+            <div id="totalPrice">0.00</div>&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Button runat="server" Text="สั่งซื้อ" CssClass="btncart" />
+       </div>
+    </div>
+
+    <script type="text/javascript">
+        function calculateTotal(inputId) {
+            var inputElement = document.getElementById('quantityInput' + inputId);
+            var quantity = inputElement.value;
+            var priceElement = document.getElementById('price' + inputId);
+            var price = parseFloat(priceElement.innerText); // ดึงราคาสินค้าออกมาและแปลงเป็นตัวเลข
+
+            var totalElement = document.getElementById('totalPrice');
+            var currentTotal = parseFloat(totalElement.innerText);
+
+            var newTotal = currentTotal + (quantity * price);
+            totalElement.innerText = newTotal.toFixed(2); // แสดงราคารวมใหม่โดยมีทศนิยม 2 ตำแหน่ง
+        }
+    </script>
+</asp:Content>

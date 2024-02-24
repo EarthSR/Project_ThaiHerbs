@@ -291,15 +291,14 @@ public class ConnectionClass
     {
         string resultMessage = null;
 
-        string query = "INSERT INTO orderdetail (productid_fk, priceofproduct, statusoforder, userid) " +
-                       "VALUES (@ProductId, @PriceOfProduct, @StatusOfOrder, @UserId)";
+        string query = "INSERT INTO cart (productid, price, userid) " +
+                       "VALUES (@ProductId, @PriceOfProduct, @UserId)";
 
         command.CommandText = query;
         command.Parameters.Clear();
 
         command.Parameters.AddWithValue("@ProductId", productId);
         command.Parameters.AddWithValue("@PriceOfProduct", priceOfProduct);
-        command.Parameters.AddWithValue("@StatusOfOrder", statusOfOrder);
         command.Parameters.AddWithValue("@UserId", userId);
 
         try
@@ -334,7 +333,7 @@ public class ConnectionClass
         bool isDuplicate = false;
         
         {
-            string query = "SELECT COUNT(*) FROM orderdetail WHERE productid_fk = @ProductId AND userid = @UserId AND statusoforder = 'incart'";
+            string query = "SELECT COUNT(*) FROM cart WHERE productid = @ProductId AND userid = @UserId";
             command.CommandText = query;
             {
                 command.Parameters.AddWithValue("@ProductId", productId);
@@ -367,8 +366,8 @@ public class ConnectionClass
     {
         ArrayList productList = new ArrayList();
         string query = "SELECT * FROM product p " +
-                       "INNER JOIN orderdetail o ON p.productid = o.productid_fk " +
-                       "WHERE o.userid = @UserId";
+                       "INNER JOIN cart c ON p.productid = c.productid " +
+                       "WHERE c.userid = @UserId";
 
         command.CommandText = query;
         command.Parameters.Clear();
@@ -399,6 +398,43 @@ public class ConnectionClass
 
         return productList;
     }
+
+    public static string DeleteCartItem(int userid)
+    {
+        string resultMessage = null;
+
+        string query = "DELETE FROM cart WHERE userid = @userid";
+
+        command.CommandText = query;
+        command.Parameters.Clear();
+        command.Parameters.AddWithValue("@userid", userid);
+
+        try
+        {
+            conn.Open();
+            int rowsAffected = command.ExecuteNonQuery();
+
+            if (rowsAffected > 0)
+            {
+                resultMessage = "Cart item deleted successfully.";
+            }
+            else
+            {
+                resultMessage = "Failed to delete cart item.";
+            }
+        }
+        catch (Exception ex)
+        {
+            resultMessage = "Error: " + ex.Message;
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return resultMessage;
+    }
+
 
 
 }
