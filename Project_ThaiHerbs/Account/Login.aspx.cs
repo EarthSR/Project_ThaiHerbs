@@ -17,6 +17,7 @@ public partial class _Default : System.Web.UI.Page
         User user = ConnectionClass.LoginUser(txtusername.Text,txtpassword.Text);
         if (user != null)
         {
+            Session["userid"] = user.IdUsers;
             Session["Login"] = user.UserName;
             string userType = ConnectionClass.CheckTypeOfUser(user.IdUsers);
             Session["usertype"] = userType;

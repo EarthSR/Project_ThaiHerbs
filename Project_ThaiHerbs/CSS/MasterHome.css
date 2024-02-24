@@ -1,4 +1,4 @@
-﻿﻿body {
+﻿body {
     background-color: white;
     margin: 0px;
     padding: 0px;
@@ -72,12 +72,43 @@
     border-radius: 10px;
 }
 
+    .flexible-button:hover {
+        background-color: darkslategrey;
+        border-radius: 50px;
+        color: white;
+        font-size: 20px;
+    }
+
+
 .hyperlike-common {
     text-decoration: none;
     color: inherit;
     cursor: pointer;
     margin-right: 15px;
+    transition: background-color 0.3s ease;
+    position: relative; 
 }
+
+    .hyperlike-common:hover {
+        font-size: 20px;
+        color: white;
+        background-color: darkslategray;
+        padding: 10px;
+        border-radius: 50px;
+    }
+
+    .hyperlike-common::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background-color: inherit;
+        filter: blur(50px);
+        z-index: -1;
+    }
+
 
 .typeproduct {
     text-align: center;
@@ -87,9 +118,21 @@
 }
 
 .imgHome {
-    filter: blur(4px);
-    -webkit-filter: blur(4px);
+    display: flex;
+    justify-content: center; /* จัดภาพให้อยู่ตรงกลางในแนวนอน */
+    align-items: center;
+    height : 600px;
+    padding: 20px;
 }
+
+.logo1 {
+    max-width: 100%; /* ปรับขนาดภาพให้ไม่เกินขนาดของ div */
+    max-height: 100%; /* ปรับขนาดภาพให้ไม่เกินขนาดของ div */
+    height: auto; /* ปรับสัดส่วนของภาพ */
+    width: auto; /* ปรับสัดส่วนของภาพ */
+    filter: blur(1px);
+}
+
 
 .txtonimg {
     position: absolute;
@@ -146,4 +189,33 @@
 
 .hyperlike-common.selected {
     border: none; /* Or any other styling to remove the box effect */
+}
+
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.slideInRight {
+    animation: slideInRight 0.3s forwards;
+}
+
+.slideOutLeft {
+    animation: slideOutLeft 0.3s forwards;
 }

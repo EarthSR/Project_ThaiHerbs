@@ -79,3 +79,14 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
+
+/* CSS/Product.css */
+a.product-card {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color */
+}
+
+    a.product-card:hover {
+        text-decoration: none; /* Remove underline on hover */
+        color: inherit; /* Inherit text color on hover */
+    }

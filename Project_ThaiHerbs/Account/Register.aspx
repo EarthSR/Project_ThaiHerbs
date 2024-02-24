@@ -59,10 +59,9 @@
                     <asp:Label ID="lblbirthday" runat="server" Text="Birthday" CssClass="login-text"></asp:Label>
                 </p>
                 <p>
-                    <asp:DropDownList ID="DropDownListDay" runat="server" AutoPostBack="True" CssClass="designdrop"></asp:DropDownList>
-                    <asp:DropDownList ID="DropDownListMonth" runat="server" OnSelectedIndexChanged="DropDownListMonth_SelectedIndexChanged" AutoPostBack="true" CssClass="designdrop"></asp:DropDownList>
-                    <asp:DropDownList ID="DropDownListYear" runat="server" AutoPostBack="True" CssClass="designdrop"></asp:DropDownList>
-                </p>
+                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorMonth0" ControlToValidate="DropDownList1" ErrorMessage="Enter your gender" ForeColor="#FF3300" InitialValue="0" ValidationGroup="RegisterValidation"></asp:RequiredFieldValidator>
+                        </p>
+                
                 <p>
                     <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorDay" ControlToValidate="DropDownListDay" ErrorMessage="Please select day" ForeColor="#FF3300" InitialValue="0" ValidationGroup="RegisterValidation" ></asp:RequiredFieldValidator>
                     <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidatorMonth" ControlToValidate="DropDownListMonth" ErrorMessage="Please select month" ForeColor="#FF3300" InitialValue="0" ValidationGroup="RegisterValidation"></asp:RequiredFieldValidator>
@@ -71,11 +70,12 @@
                 <p>
                     <asp:Button ID="ButtonSignIn" runat="server" Text="CONFIRM" CssClass="ButtonSignIn" OnClick="ButtonSignIn_Click" Height="36px" Width="208px" ValidationGroup="RegisterValidation" />
                 </p>
-                <asp:Label ID="lblresult" runat="server" Text=""></asp:Label>
+                
             </div>
             <br />
             <br />
             <br />
+                    <asp:Label ID="lblresult" runat="server" Text=""></asp:Label>
         </div>
             </div>
     </div>

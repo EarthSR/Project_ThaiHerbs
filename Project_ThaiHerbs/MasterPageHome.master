@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href= "~/CSS/Subport.css" />
     <link rel="stylesheet" type="text/css" href= "~/CSS/Tracking.css" />
     <link rel="stylesheet" type="text/css" href= "~/CSS/ProfileUser.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/Review.css" />
 
     <script src="Productdetail.js"></script>
     <style>
@@ -25,14 +26,14 @@
     <form id="form1" runat="server">
         <div id="tophead">
             <asp:LinkButton ID="Home" runat="server" Text="Home" 
-                CssClass="hyperlike-common1" OnClick="Home_Click" />
+                CssClass="hyperlike-common" OnClick="Home_Click" />
             <asp:LinkButton ID="howtoorder" runat="server" Text="How to Order" 
-                CssClass="hyperlike-common1" PostBackUrl="~/HowtoOrder.aspx" />
-            <asp:LinkButton ID="support" runat="server" Text="Supports" CssClass="hyperlike-common1" PostBackUrl="~/Support.aspx" />
-            <asp:LinkButton ID="register" runat="server" Text="Register" CssClass="hyperlike-common1" PostBackUrl="~/Account/Register.aspx" />
-            <asp:LinkButton ID="login" runat="server" Text="Login" CssClass="hyperlike-common1" PostBackUrl="~/Account/Login.aspx" />
-            <asp:LinkButton ID="Logout" runat="server" Text="Logout" CssClass="hyperlike-common1" Visible="False" OnClick="Logout_Click" />
-            <asp:LinkButton ID="user" runat="server" Text="" CssClass="hyperlike-common1" Visible="False" />
+                CssClass="hyperlike-common" PostBackUrl="~/HowtoOrder.aspx" />
+            <asp:LinkButton ID="support" runat="server" Text="Supports" CssClass="hyperlike-common" PostBackUrl="~/Support.aspx" />
+            <asp:LinkButton ID="register" runat="server" Text="Register" CssClass="hyperlike-common" PostBackUrl="~/Account/Register.aspx" />
+            <asp:LinkButton ID="login" runat="server" Text="Login" CssClass="hyperlike-common" PostBackUrl="~/Account/Login.aspx" />
+            <asp:LinkButton ID="Logout" runat="server" Text="Logout" CssClass="hyperlike-common" Visible="False" OnClick="Logout_Click" />
+            <asp:LinkButton ID="user" runat="server" Text="" CssClass="hyperlike-common" Visible="False" />
         </div>
         <table class="auto-style3">
             <tr>
@@ -40,11 +41,10 @@
                     <asp:Image ID="logo" runat="server" ImageUrl="~/Image/Logo.png" CssClass="logo" Width="403px"
                         Height="226px" Style="margin-bottom: 0px" /></td>
                 <td class="auto-style2">
-                    <asp:TextBox ID="txtsearch" runat="server" CssClass="search-input" placeholder="Search..." />
+                    <asp:TextBox ID="txtsearch" runat="server" CssClass="search-input" placeholder="🔍Search..." />
                 </td>
-                <td>&nbsp;&nbsp;<asp:Button ID="search" runat="server" Text="Search" 
-                        CssClass="flexible-button" OnClick="search_Click" />
-                    &nbsp;&nbsp;<asp:Button ID="Button4" runat="server" Text="Cart" CssClass="flexible-button" />
+                <td>&nbsp;&nbsp;<asp:Button ID="search" runat="server" Text="🔍Search" CssClass="flexible-button" OnClick="search_Click" />
+                    &nbsp;&nbsp;<asp:Button ID="Button4" runat="server" Text="🛒Cart" CssClass="flexible-button" OnClick="Button4_Click" />
                 </td>
             </tr>
         </table>
@@ -116,6 +116,21 @@
             }
         }
     }
+
+    function previewImage(event) {
+        var input = event.target;
+        var mainImage = document.getElementById('mainImage');
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                mainImage.src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
 </script>
             <div id="footer">
             สงวนลิขสิทธิ์ © บริษัทไทยเฮิร์บ (ประเทศไทย) จำกัด
