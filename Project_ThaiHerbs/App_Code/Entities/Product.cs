@@ -42,4 +42,11 @@ public class Product
         Pdetail = pdetail;
         Type = type;
     }
+    public Product(int id,string name, double price, string image)
+    {
+        Id = id;
+        Name = name;
+        Price = price;
+        Image = image;
+    }
 }

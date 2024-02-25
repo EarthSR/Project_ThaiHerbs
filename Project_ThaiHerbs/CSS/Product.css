@@ -90,3 +90,10 @@ a.product-card {
         text-decoration: none; /* Remove underline on hover */
         color: inherit; /* Inherit text color on hover */
     }
+
+.input-text qty text {
+    width: 50px; /* ปรับขนาด input ตามที่ต้องการ */
+    height: 24px;
+    margin: 0; /* ปรับการระบุขอบเขต (margin) เพื่อป้องกันการเกิดช่องว่าง */
+    padding: 0; /* ปรับการระบุพื้นที่ (padding) เพื่อป้องกันการเกิดช่องว่าง */
+}

@@ -48,7 +48,31 @@
     color: inherit;
     cursor: pointer;
     margin-right: 15px;
+    transition: background-color 0.3s ease;
+    position: relative;
 }
+
+
+    .hyperlike-common:hover {
+        font-size: 20px;
+        color: white;
+        background-color: darkslategray;
+        padding: 10px;
+        border-radius: 50px;
+    }
+
+    .hyperlike-common::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background-color: inherit;
+        filter: blur(50px);
+        z-index: -1;
+    }
+
 
 .textregister {
     position: relative;
