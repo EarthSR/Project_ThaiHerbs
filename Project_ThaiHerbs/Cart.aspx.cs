@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -18,14 +20,14 @@ public partial class Cart : System.Web.UI.Page
         {
             if (Session["userid"] != null)
             {
-                    int userid = (int)Session["userid"];
-                    FillPage(userid);
+                int userid = (int)Session["userid"];
+                FillPage(userid);
             }
         }
     }
     private void FillPage(int userid)
     {
-        ArrayList productList = ConnectionClass.GetProductsByUserId(userid);
+        List<Product> productList = ConnectionClass.GetProductsByUserId(userid);
 
         StringBuilder sb = new StringBuilder();
 
@@ -67,6 +69,7 @@ public partial class Cart : System.Web.UI.Page
         // Display the total price
         lbltotal.Text = "ราคารวม : " + totalPrice.ToString() + " บาท";
         lblbamount.Text = "จำนวนทั้งหมด : " + totalAmount.ToString() + " ชิ้น";
+
     }
 
 
@@ -79,28 +82,71 @@ public partial class Cart : System.Web.UI.Page
 
     protected void Unnamed2_Click(object sender, EventArgs e)
     {
-        // เช็คก่อนว่าผู้ใช้เข้าสู่ระบบหรือยัง
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
         if (Session["userid"] != null)
         {
             int userid = (int)Session["userid"];
+            List<Product> productList = ConnectionClass.GetProductsByUserId(userid);
 
-            // ดึงรายการสินค้าในตะกร้าของผู้ใช้
-            ArrayList productList = ConnectionClass.GetProductsByUserId(userid);
+            double totalPrice = 0;
+            int totalAmount = 0;
 
-            // วนลูปผ่านรายการสินค้าในตะกร้า
-            foreach (Product product in productList)
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                // ทำการลดจำนวนสินค้าในคลังตามจำนวนที่มีในตะกร้า
-                ConnectionClass.UpdateAvailableQuantity(product.Id, product.Amount);
-                ConnectionClass.Insertorderdetail(product.Id,product.Price,userid,product.Amount, "Waiting for payment");
+                connection.Open();
+
+                // เริ่มต้นด้วยการสร้าง transaction
+                SqlTransaction transaction = connection.BeginTransaction();
+
+                try
+                {
+                    foreach (Product product in productList)
+                    {
+                        totalPrice += (product.Price * product.Amount);
+                        totalAmount += product.Amount;
+                    }
+
+                    // เพิ่มข้อมูลรายการในตาราง orders และดึง order_id ที่เพิ่มล่าสุด
+                    string insertOrderQuery = @"INSERT INTO orders (userid_fk, ordersdate, totalamount, totalprice) 
+                                             OUTPUT INSERTED.orderid 
+                                             VALUES (@CustomerId, GETDATE(), @AmountOfPro, @TotalPrice);";
+
+                    SqlCommand insertOrderCommand = new SqlCommand(insertOrderQuery, connection, transaction);
+                    insertOrderCommand.Parameters.AddWithValue("@CustomerId", userid);
+                    insertOrderCommand.Parameters.AddWithValue("@AmountOfPro", totalAmount);
+                    insertOrderCommand.Parameters.AddWithValue("@TotalPrice", totalPrice);
+                    int orderId = (int)insertOrderCommand.ExecuteScalar();
+
+                    foreach (Product product in productList)
+                    {
+                        string insertOrderDetailQuery = @"INSERT INTO orderdetail (productid_fk, priceofproduct, userid, amount, status, orderid_fk) 
+                                                     VALUES (@ProductId, @Price, @UserId, @Quantity, @Status, @OrderId);";
+
+                        SqlCommand insertOrderDetailCommand = new SqlCommand(insertOrderDetailQuery, connection, transaction);
+                        insertOrderDetailCommand.Parameters.AddWithValue("@OrderId", orderId);
+                        insertOrderDetailCommand.Parameters.AddWithValue("@ProductId", product.Id);
+                        insertOrderDetailCommand.Parameters.AddWithValue("@UserId", userid);
+                        insertOrderDetailCommand.Parameters.AddWithValue("@Status", "Waiting for payment");
+                        insertOrderDetailCommand.Parameters.AddWithValue("@Quantity", product.Amount);
+                        insertOrderDetailCommand.Parameters.AddWithValue("@Price", product.Price);
+
+                        insertOrderDetailCommand.ExecuteNonQuery();
+                    }
+                    transaction.Commit();
+                    ConnectionClass.DeleteCartItem(userid);
+                    // โหลดข้อมูลใหม่และเรียกหน้า Payment.aspx
+                    Response.Redirect("~/Payment.aspx?orderId=" + orderId);
+                }
+                catch (Exception ex)
+                {
+                    // สามารถทำการ log หรือแจ้งเตือนเพิ่มเติมได้ตามความเหมาะสม
+                    lblresult.Text = "An error occurred: " + ex.Message;
+                }
+                finally
+                {
+                    connection.Close();
+                }
             }
-
-            // เมื่อตัดสินค้าออกจากคลังเรียบร้อยแล้ว สามารถลบรายการสินค้าในตะกร้าของผู้ใช้ทิ้งได้
-            ConnectionClass.ClearCart(userid);
-
-            // หลังจากนั้นเรียกใช้ฟังก์ชัน FillPage เพื่ออัปเดตข้อมูลที่แสดงใหม่บนหน้าเว็บ
-            FillPage(userid);
-            Response.Redirect("~/Payment.aspx");
         }
     }
 
@@ -108,3 +154,8 @@ public partial class Cart : System.Web.UI.Page
 
 
 }
+
+
+
+
+
