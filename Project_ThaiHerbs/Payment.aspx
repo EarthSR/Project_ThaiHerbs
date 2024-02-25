@@ -8,7 +8,7 @@
             <p>📍 ที่อยู่ในการจัดส่ง</p>
             <p><a>bobby01 : 0922222222</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a>ที่อยู่</a>
-            <a><asp:LinkButton ID="lbl1" runat="server" Text="เปลี่ยน"/></a>
+            <a><asp:LinkButton ID="lbl1" runat="server" Text="เปลี่ยน" OnClick="lbl1_Click1"/></a>
             </p>
         </div>
 

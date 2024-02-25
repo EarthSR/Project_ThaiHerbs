@@ -6,6 +6,10 @@ using System.Web;
 using System.Collections.Generic;
 using Microsoft.Win32;
 using System.ComponentModel;
+using System.Data;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 public class ConnectionClass
 {
@@ -621,5 +625,52 @@ public class ConnectionClass
 
         return list;
     }
+
+    public static string UpdateUserData(int userId, string firstname, string lastname, string address, string phone, string email, string password, string gender)
+    {
+        string resultMessage = "";
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+        using (SqlConnection conn = new SqlConnection(connectionString))
+        {
+            SqlCommand command = new SqlCommand(@"UPDATE users
+                                             SET
+                                                 firstname = @FirstName,
+                                                 lastname = @LastName,
+                                                 address = @Address,
+                                                 phone = @Phone,
+                                                 email = @Email,
+                                                 password = @Password,
+                                                 gender = @Gender
+                                             WHERE
+                                                 userid = @UserId", conn);
+
+            command.Parameters.AddWithValue("@FirstName", firstname);
+            command.Parameters.AddWithValue("@LastName", lastname);
+            command.Parameters.AddWithValue("@Address", address);
+            command.Parameters.AddWithValue("@Phone", phone);
+            command.Parameters.AddWithValue("@Email", email);
+            command.Parameters.AddWithValue("@Password", password);
+            command.Parameters.AddWithValue("@Gender", gender); 
+            command.Parameters.AddWithValue("@UserId", userId);
+
+            try
+            {
+                conn.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                resultMessage = "Rows affected: " + rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                resultMessage = "Error updating user data: " + ex.Message;
+            }
+        }
+        return resultMessage;
+    }
+
+
+
+
+
+
 
 }

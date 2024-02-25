@@ -37,6 +37,11 @@ public partial class MasterPageaccount : System.Web.UI.MasterPage
     {
         Response.Redirect("~/Home.aspx");
     }
+
+    protected void user_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/ProfileUser.aspx");
+    }
 }
 
 

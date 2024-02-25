@@ -56,8 +56,8 @@ public partial class Payment : System.Web.UI.Page
     }
 
 
-    protected void lbl1_Click(object sender, EventArgs e)
+    protected void lbl1_Click1(object sender, EventArgs e)
     {
-
+        Response.Redirect("~/ProfileUser.aspx");
     }
 }
