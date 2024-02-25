@@ -32,35 +32,39 @@
                       </div>
                         
 
-            <div class= "payment-price">
-                 <div class= "payment-boxdetail">
-                   <div class="payment-boxdetail2">
-                       <img id="mainImage" src="ImgHerb/ดอกสำมะงา.jpg" class="imgpayment" />
-                       <p></p>
-                   </div>
-                    <div class="payment-boxdetail2">
-                        <p>ดอกอะไรสักอย่างงงงงงงงงง</p>
+                    <div class= "payment-price">
+                         <div class= "payment-boxdetail">
+                           <div class="payment-boxdetail2">
+                               <img id="mainImage" src="ImgHerb/ดอกสำมะงา.jpg" class="imgpayment" />
+                               <p></p>
+                           </div>
+                            <div class="payment-boxdetail2">
+                                <p>ดอกอะไรสักอย่างงงงงงงงงง</p>
+                            </div>
+                            <div class="payment-boxdetail2">
+                                <p></p>
+                            </div>
+                           <div class="payment-boxdetail2">
+                               <p>10 <a>บาท</a></p>
+                           </div>
+                           <div class="payment-boxdetail2">
+                               <p>500 <a>กรัม</a></p>
+                           </div>
+
+                          </div>
+
+                         </div>
+
+
+
                     </div>
-                    <div class="payment-boxdetail2">
-                        <p></p>
+
                     </div>
-                   <div class="payment-boxdetail2">
-                       <p>10 <a>บาท</a></p>
-                   </div>
-                   <div class="payment-boxdetail2">
-                       <p>500 <a>กรัม</a></p>
-                   </div>
-
-                  </div>
-            </div>
-            </div>
-
-
 
 
                     <div class="payment-howto">
                 <p><a>วิธีการชำระเงิน</a></p>
-                <asp:DropDownList ID="DropDownList1" runat="server" CssClass="designdrop" Width="174px" onchange="showImage();playSound()">
+                <asp:DropDownList ID="DropDownList1" runat="server" CssClass="designdrop" Width="174px" onchange="showImage();playSound();playSound1()">
                     <asp:ListItem>เก็บเงินปลายทาง</asp:ListItem>
                     <asp:ListItem>QR Code</asp:ListItem>
                     <asp:ListItem>บิด</asp:ListItem>
@@ -70,13 +74,15 @@
                     <br />
                     <a>Qr Code จะแสดงหลังยืนยันคำสั่งซื้อ</a>
                 </div>
-
-
-
                         <audio id="audioPlayer" controls style="display: none;">
                         <source src="Mp3/มงอยากโดยกสดากใชไหม.mp4.mp3" type="audio/mpeg">
                         </audio>
 
+                        <audio id="audioPlayer1" controls style="display: none;">
+                        <source src= "Mp3/Cash Register Cha-Ching - Sound Effect(HD).mp3" type="audio/mpeg">
+                        </audio>
+
+
 
 
                         <br />
@@ -85,19 +91,14 @@
                         <br />
                         <br />
                         <br />
-                        <div class = "ButtonPayment1">
-                        <asp:Button ID="ButtonPayment" runat="server" Text="ยืนยันการสั่งซื้อสินค้า" CssClass="ButtonPayment" Height="55px" OnClientClick="playSound()" />
+                            <div class="ButtonPayment1">
+                                <asp:Button ID="ButtonPayment" runat="server" Text="ยืนยันการสั่งซื้อสินค้า" CssClass="ButtonPayment" Height="55px" OnClientClick="playSound2();" />
                             </div>
             </div>
             
 
 
-
-
-
-
-
-                <script>
+                <script type="text/javascript">
                     function showImage() {
                         var ddl = document.getElementById('<%= DropDownList1.ClientID %>');
                         var selectedOption = ddl.options[ddl.selectedIndex].text;
@@ -110,6 +111,32 @@
                             qrImageDiv.style.display = 'none';
                         }
                     }
+
+
+                    window.onload = function () {
+                        playSound2(); // เรียกใช้งานฟังก์ชันเพื่อเล่นเสียงหลังจากโหลดหน้าเว็บเสร็จสิ้น
+                    };
+
+                    function playSound2() {
+                        var audio = new Audio('Mp3/Cash Register Cha-Ching - Sound Effect(HD).mp3');
+                        audio.play();
+                    }
+                    
+
+                     function playSound1() {
+                        var selectedOption = document.getElementById("<%= DropDownList1.ClientID %>").value;
+                         var audioPlayer = document.getElementById("audioPlayer1");
+
+                                 if (selectedOption === "เก็บเงินปลายทาง") {
+                                     audioPlayer.play();
+                                 } else {
+                                     audioPlayer.pause();
+                                     audioPlayer.currentTime = 0; // เล่นตั้งแต่จุดเริ่มต้นหลังจากหยุด
+                                 }
+                             }
+
+
+
 
                             function playSound() {
                                 var selectedOption = document.getElementById("<%= DropDownList1.ClientID %>").value;
@@ -126,6 +153,8 @@
 
 
                 </script>
+
+
 
 
 </asp:Content>
