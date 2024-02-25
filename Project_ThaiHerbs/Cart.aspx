@@ -19,8 +19,10 @@
         <br />
         <br />
         <div class="cart-container">
-       <div class="btn">
-            <asp:Label ID="Label3" runat="server" Text="ราคารวม :" />
+       <div class="btn" >
+            <asp:Label ID="lbltotal" runat="server" Text="ราคารวม : " />
+           <br />
+           <asp:Label ID="lblbamount" runat="server" Text="จำนวนทั้งหมด : " />
             &nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Button runat="server" Text="สั่งซื้อ" CssClass="btncart" OnClick="Unnamed2_Click" />
        </div>
