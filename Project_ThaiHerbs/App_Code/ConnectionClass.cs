@@ -114,7 +114,7 @@ public class ConnectionClass
             int amountofusers = (int)command.ExecuteScalar();
             if (amountofusers > 0)
             {
-                return 0; 
+                return 0;
             }
             else
             {
@@ -141,7 +141,7 @@ public class ConnectionClass
                 query = "INSERT INTO users (typeofuser_fk, username, password, email, gender) VALUES (@typeofuser, @username, @password, @email, @gender)";
                 command.CommandText = query;
 
-                
+
                 command.Parameters.Clear();
                 command.Parameters.AddWithValue("@typeofuser", user.UserType);
                 command.Parameters.AddWithValue("@username", user.UserName);
@@ -203,7 +203,7 @@ public class ConnectionClass
         string query = "SELECT * FROM product WHERE productid = @ProductId";
 
         command.CommandText = query;
-        command.Parameters.Clear(); 
+        command.Parameters.Clear();
 
         command.Parameters.AddWithValue("@ProductId", id);
 
@@ -303,12 +303,12 @@ public class ConnectionClass
         return list;
     }
 
-    public static string InsertCart(int productId,double priceOfProduct, int userId,int amount)
+    public static string InsertCart(int productId, double priceOfProduct, int userId)
     {
         string resultMessage = null;
 
-        string query = "INSERT INTO cart (productid, price, userid,amount) " +
-                       "VALUES (@ProductId, @PriceOfProduct, @UserId,@amount)";
+        string query = "INSERT INTO cart (productid, price, userid) " +
+                       "VALUES (@ProductId, @PriceOfProduct, @UserId)";
 
         command.CommandText = query;
         command.Parameters.Clear();
@@ -316,7 +316,6 @@ public class ConnectionClass
         command.Parameters.AddWithValue("@ProductId", productId);
         command.Parameters.AddWithValue("@PriceOfProduct", priceOfProduct);
         command.Parameters.AddWithValue("@UserId", userId);
-        command.Parameters.AddWithValue("@amount", amount);
 
         try
         {
@@ -348,7 +347,7 @@ public class ConnectionClass
     public static bool CheckDuplicateProductInCart(int productId, int userId)
     {
         bool isDuplicate = false;
-        
+
         {
             string query = "SELECT COUNT(*) FROM cart WHERE productid = @ProductId AND userid = @UserId";
             command.CommandText = query;
@@ -359,7 +358,7 @@ public class ConnectionClass
                 try
                 {
                     conn.Open();
-                    int count = (int)command.ExecuteScalar(); 
+                    int count = (int)command.ExecuteScalar();
                     if (count > 0)
                     {
                         isDuplicate = true;
@@ -369,8 +368,8 @@ public class ConnectionClass
                 {
                     Console.WriteLine("SQL Error: " + ex.Message);
                 }
-                finally 
-                { 
+                finally
+                {
                     conn.Close();
                 }
             }
@@ -382,7 +381,7 @@ public class ConnectionClass
     public static ArrayList GetProductsByUserId(int userId)
     {
         ArrayList productList = new ArrayList();
-        string query = "SELECT p.productid,p.pname,p.pprice,p.pdetail,p.ptype,c.amount,p.pimage FROM product p " +
+        string query = "SELECT * FROM product p " +
                        "INNER JOIN cart c ON p.productid = c.productid " +
                        "WHERE c.userid = @UserId";
 
@@ -466,7 +465,6 @@ public class ConnectionClass
             while (reader.Read())
             {
                 int amount = reader.GetInt32(0);
-                proamount = amount; // กำหนดค่า proamount เมื่ออ่านข้อมูลสำเร็จ
             }
         }
         finally
@@ -474,7 +472,7 @@ public class ConnectionClass
             conn.Close();
         }
 
-        return proamount; // คืนค่า proamount ที่ถูกต้อง
+        return proamount;
     }
 
     public static void UpdateAvailableQuantity(int productId, int amount)
