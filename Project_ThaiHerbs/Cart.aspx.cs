@@ -94,6 +94,7 @@ public partial class Cart : System.Web.UI.Page
             {
                 // ทำการลดจำนวนสินค้าในคลังตามจำนวนที่มีในตะกร้า
                 ConnectionClass.UpdateAvailableQuantity(product.Id, product.Amount);
+                ConnectionClass.Insertorderdetail(product.Id,product.Price,userid,product.Amount, "Waiting for payment");
             }
 
             // เมื่อตัดสินค้าออกจากคลังเรียบร้อยแล้ว สามารถลบรายการสินค้าในตะกร้าของผู้ใช้ทิ้งได้
@@ -101,6 +102,7 @@ public partial class Cart : System.Web.UI.Page
 
             // หลังจากนั้นเรียกใช้ฟังก์ชัน FillPage เพื่ออัปเดตข้อมูลที่แสดงใหม่บนหน้าเว็บ
             FillPage(userid);
+            Response.Redirect("~/Payment.aspx");
         }
     }
 

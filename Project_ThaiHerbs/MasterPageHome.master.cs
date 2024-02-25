@@ -64,4 +64,12 @@ public partial class MasterPageHome : System.Web.UI.MasterPage
             Response.Redirect("~/Account/Login.aspx");
         }
     }
+
+    protected void user_Click(object sender, EventArgs e)
+    {
+        if (Session["Login"] != null)
+        {
+            Response.Redirect("~/ProfileUser.aspx");
+        }
+    }
 }

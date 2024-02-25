@@ -542,4 +542,84 @@ public class ConnectionClass
         }
     }
 
+    public static string Insertorderdetail(int productId, double priceOfProduct, int userId, int amount,string status)
+    {
+        string resultMessage = null;
+
+        string query = "insert into orderdetail (productid_fk,priceofproduct,userid,amount,status) values (@productid,@price,@userid,@amount,@status)";
+
+        command.CommandText = query;
+        command.Parameters.Clear();
+
+        command.Parameters.AddWithValue("@productid", productId);
+        command.Parameters.AddWithValue("@price", priceOfProduct);
+        command.Parameters.AddWithValue("@userid", userId);
+        command.Parameters.AddWithValue("@amount", amount);
+        command.Parameters.AddWithValue("@status", status);
+
+        try
+        {
+            conn.Open();
+            int rowsAffected = command.ExecuteNonQuery();
+
+            if (rowsAffected > 0)
+            {
+                resultMessage = "Orederd successfully.";
+            }
+            else
+            {
+                resultMessage = "Failed to insert.";
+            }
+        }
+        catch (Exception ex)
+        {
+            resultMessage = "Error: " + ex.Message;
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return resultMessage;
+    }
+
+    public static List<orderdetial> GetOrderDetailById(int userids)
+    {
+        List<orderdetial> list = new List<orderdetial>();
+        string query = "SELECT od.orderdetailid, od.productid_fk, od.priceofproduct, od.userid, od.amount, od.status, p.pimage, p.pname " +
+                       "FROM orderdetail od " +
+                       "JOIN product p ON od.productid_fk = p.productid " +
+                       "WHERE od.userid = @userid";
+
+        command.CommandText = query;
+        command.Parameters.Clear();
+        command.Parameters.AddWithValue("@userid", userids);
+
+        try
+        {
+            conn.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int orderdetailid = reader.GetInt32(0);
+                int productid = reader.GetInt32(1);
+                double price = reader.GetDouble(2);
+                int userid = reader.GetInt32(3);
+                int amount = reader.GetInt32(4);
+                string status = reader.GetString(5);
+                string image = reader.GetString(6);
+                string name = reader.GetString(7);
+                orderdetial orderdetail = new orderdetial(orderdetailid, productid, price, status, userid, image, amount, name);
+
+                list.Add(orderdetail);
+            }
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return list;
+    }
+
 }

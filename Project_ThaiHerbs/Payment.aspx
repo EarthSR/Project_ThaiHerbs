@@ -33,25 +33,8 @@
                         
 
             <div class= "payment-price">
-                 <div class= "payment-boxdetail">
-                   <div class="payment-boxdetail2">
-                       <img id="mainImage" src="ImgHerb/ดอกสำมะงา.jpg" class="imgpayment" />
-                       <p></p>
-                   </div>
-                    <div class="payment-boxdetail2">
-                        <p>ดอกอะไรสักอย่างงงงงงงงงง</p>
-                    </div>
-                    <div class="payment-boxdetail2">
-                        <p></p>
-                    </div>
-                   <div class="payment-boxdetail2">
-                       <p>10 <a>บาท</a></p>
-                   </div>
-                   <div class="payment-boxdetail2">
-                       <p>500 <a>กรัม</a></p>
-                   </div>
-
-                  </div>
+                     <asp:Label ID="lblshow" runat="server" ></asp:Label>
+                <br />
             </div>
             </div>
 
