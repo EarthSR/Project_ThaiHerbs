@@ -162,4 +162,3 @@ public partial class ProductDetail : System.Web.UI.Page
         }
     }
 }
-

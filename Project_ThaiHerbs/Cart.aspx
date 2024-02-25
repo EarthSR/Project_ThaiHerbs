@@ -7,8 +7,8 @@
         }
     </style>
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+
     <div class="cart-container">
         <div class="cart-top">
             <asp:Button runat="server" Text="Delete All Product in cart" CssClass="btnDeleteItem" OnClick="Unnamed1_Click"  />
@@ -26,6 +26,10 @@
             &nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Button runat="server" Text="สั่งซื้อ" CssClass="btncart" OnClick="Unnamed2_Click" />
        </div>
-        </div>
+   
+            </div>
+     </div>  
+          
     </div>
 </asp:Content>
+

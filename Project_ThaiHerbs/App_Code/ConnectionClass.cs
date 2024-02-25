@@ -114,7 +114,7 @@ public class ConnectionClass
             int amountofusers = (int)command.ExecuteScalar();
             if (amountofusers > 0)
             {
-                return 0; 
+                return 0;
             }
             else
             {
@@ -141,7 +141,7 @@ public class ConnectionClass
                 query = "INSERT INTO users (typeofuser_fk, username, password, email, gender) VALUES (@typeofuser, @username, @password, @email, @gender)";
                 command.CommandText = query;
 
-                
+
                 command.Parameters.Clear();
                 command.Parameters.AddWithValue("@typeofuser", user.UserType);
                 command.Parameters.AddWithValue("@username", user.UserName);
@@ -203,7 +203,7 @@ public class ConnectionClass
         string query = "SELECT * FROM product WHERE productid = @ProductId";
 
         command.CommandText = query;
-        command.Parameters.Clear(); 
+        command.Parameters.Clear();
 
         command.Parameters.AddWithValue("@ProductId", id);
 
@@ -303,7 +303,7 @@ public class ConnectionClass
         return list;
     }
 
-    public static string InsertCart(int productId,double priceOfProduct, int userId,int amount)
+    public static string InsertCart(int productId, double priceOfProduct, int userId, int amount)
     {
         string resultMessage = null;
 
@@ -348,7 +348,7 @@ public class ConnectionClass
     public static bool CheckDuplicateProductInCart(int productId, int userId)
     {
         bool isDuplicate = false;
-        
+
         {
             string query = "SELECT COUNT(*) FROM cart WHERE productid = @ProductId AND userid = @UserId";
             command.CommandText = query;
@@ -359,7 +359,7 @@ public class ConnectionClass
                 try
                 {
                     conn.Open();
-                    int count = (int)command.ExecuteScalar(); 
+                    int count = (int)command.ExecuteScalar();
                     if (count > 0)
                     {
                         isDuplicate = true;
@@ -369,8 +369,8 @@ public class ConnectionClass
                 {
                     Console.WriteLine("SQL Error: " + ex.Message);
                 }
-                finally 
-                { 
+                finally
+                {
                     conn.Close();
                 }
             }
@@ -504,8 +504,9 @@ public class ConnectionClass
         {
             Console.WriteLine("Error updating quantity: " + ex.Message);
         }
-        finally { 
-            conn.Close(); 
+        finally
+        {
+            conn.Close();
         }
     }
     public static void ClearCart(int userId)
@@ -542,6 +543,3 @@ public class ConnectionClass
     }
 
 }
-
-
-
