@@ -1,0 +1,116 @@
+﻿body {
+
+
+}
+
+.payment-address {
+    margin: 20px;
+    margin-left: 300px;
+    margin-right: 300px;
+    padding: 20px;
+    border: 5px solid #f4f4f4;
+}
+
+
+.payment-boxdetail0 {
+    margin: 20px;
+    padding: 20px;
+    margin-left: 300px;
+    margin-right: 300px;
+    border: 5px solid #f4f4f4;
+}
+
+.payment-boxdetail {
+    text-align: left;
+    display: flex;
+    padding :20px;
+    border-bottom : 5px dotted #f4f4f4;
+}
+
+.payment-boxdetail2 {
+    flex: 1;
+    padding: 5px;
+    text-align: left;
+    word-wrap: break-word;
+    text-align :center
+}
+
+    .payment-boxdetail2 p {
+        margin: 0;
+    }
+
+
+
+.imgpayment {
+    height :50px;
+    width : 50px;
+    margin-right: 10px;
+    border-radius :4px;
+}
+
+
+.payment-boxdetail2 {
+    display: flex;
+    align-items: center; /* จัดให้เนื้อหาอยู่กึ่งกลางตามแนวดิ่ง */
+}
+
+.content {
+    display: flex;
+    align-items: center; /* จัดให้เนื้อหาอยู่กึ่งกลางตามแนวดิ่ง */
+}
+
+
+.payment-howto {
+    margin: 20px;
+    padding: 20px;
+    margin-left: 300px;
+    margin-right: 300px;
+    border: 5px solid #f4f4f4;
+}
+
+
+.qrImage {
+    width :150px;
+    height : 150px;
+    padding :50px;
+}
+
+
+
+.ButtonPayment1 {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+.ButtonPayment {
+    transition: background-color 0.3s ease;
+    transition: border-radius 0.3s ease;
+    border: 5px;
+    font-size: 15px;
+}
+
+    .ButtonPayment:hover {
+        font-size: 15px;
+        background-color: darkslategrey;
+        border-radius: 20px;
+        color: white;
+    }
+
+
+.qrcode {
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+
+
+
+
+

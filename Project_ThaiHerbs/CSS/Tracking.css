@@ -2,37 +2,55 @@
 }
 
 
-
-
-
-.texttracking {
-    margin-left: 100px;
+.detail-tracking {
+    
 }
 
-.tracking-container {
-    height: 500px;
+.tracking-header {
+    background-color: #d9d9d9;
+    text-align: left;
+    display: flex;
+}
+
+.tracking-column {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ddd;
+    text-align: left;
+    word-wrap: break-word;
+
+}
+
+    .tracking-column p {
+        margin: 0; /* ลบ margin ที่เกิดขึ้นกับ <p> */
+    }
+
+
+
+.tracking {
+    display: flex;
+}
+
+.content {
+    
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 3px solid #f4f4f4;
+    padding: 30px;
+    word-wrap: break-word;
     width: 100%;
-    position: relative;
-}
-
-.tracking-box {
-    width: 85%;
-    height: 150px;
-    border: 1px solid red;
-    margin-left: 100px;
-    margin-right: 100px;
 }
 
 .imgtracking {
-    width: 120px;
-    height: 130px;
-    border-radius: 25px;
-    margin: 10px;
-    margin-left: 40px;
-    border-radius: 25px;
-    
+    margin-right: 20px;
+    width: 50px;
+    height: 50px;
 }
-> txttracking {
-    margin-top :0px;
 
+.textBesideImage {
+    margin-left: auto;
+}
+
+.space-track {
+    width :100px;
 }

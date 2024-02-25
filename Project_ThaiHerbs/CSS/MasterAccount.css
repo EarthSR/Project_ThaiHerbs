@@ -1,5 +1,7 @@
 ﻿body {
+    background-color: #D9D9D9;
 }
+
 
 #tophead {
     position: fixed;
@@ -13,14 +15,15 @@
     align-items: center;
     z-index: 1000;
 }
-
 #top {
     margin-top: 20px;
 }
 
 #footer {
+    color: black; 
     text-align: center;
 }
+
 
 .logo {
     margin-top: 70px;
@@ -28,6 +31,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+
 }
 
 
@@ -44,7 +48,10 @@
     color: inherit;
     cursor: pointer;
     margin-right: 15px;
+    transition: background-color 0.3s ease;
+    position: relative;
 }
+
 
     .hyperlike-common:hover {
         font-size: 20px;
@@ -66,48 +73,64 @@
         z-index: -1;
     }
 
+
 .textregister {
     position: relative;
-    margin-right: 95px;
+    margin-right: 210px;
 }
-
 .textregister2 {
     position: relative;
-    margin-right: 40px;
+    margin-right: 153px;
 }
 
 .textregister3 {
     position: relative;
-    margin-right: 125px;
+    margin-right: 240px;
 }
-
 .textregister4 {
     position: relative;
-    margin-right: 105px;
+    margin-right: 140px;
 }
 
 .designbox {
+    border: 5px ;
+}
+
+.ButtonSignIn {
+    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;
+    transition: border-radius 0.3s ease;
     border: 5px;
-    border-radius: 25px;
 }
+    .ButtonSignIn:hover {
+        background-color: darkslategrey;
+        border-radius: 20px;
+        color : white;
+    }
 
-.designdrop {
-    border: 40px;
-    border-radius: 25px;
-    padding: 5px 5px;
-}
 
+    .designdrop {
+        border: 40px;
+        padding: 5px 5px;
+    }
 .input {
     border: 5px;
     border-radius: 25px;
 }
 
+.box-login {
+    background-color: white;
+    margin-left: 250px;
+    margin-right: 250px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    padding :40px;
+}
 
-.register-box {
-    margin: 100px;
-    margin-left: 200px;
-    margin-right: 200px;
-    border-top: 1px solid #808080;
-    background-color: #F4f4f4;
-    border: 1px solid #808080;
+.designbox {
+    border: 1.5px solid black;
+}
+
+.login-text1 {
+    border-bottom: 1.5px solid #808080;
 }

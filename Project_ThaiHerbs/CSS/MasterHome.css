@@ -1,8 +1,9 @@
 ﻿body {
     background-color: white;
-    margin : 0px;
-    padding : 0px;
+    margin: 0px;
+    padding: 0px;
 }
+
 #tophead {
     position: fixed;
     top: 0;
@@ -15,14 +16,14 @@
     align-items: center;
     z-index: 1000;
 }
-#logo {
-    margin-top: 10px;
-    float: left;
-    margin-right: 20px;
-    width: 400px;
-    height: 200px;
-}
 
+#logo {
+        margin-top: 10px;
+        float: left;
+        margin-right: 20px;
+        width: 400px;
+        height: 200px;
+    }
 
 #searchBar {
     float: none;
@@ -30,20 +31,9 @@
 }
 
 #footer {
-    width: 100%;
-    padding: 10px 0; /* Adjust padding as needed */
-    background-color: #333; /* Dark background color */
-    color: #fff; /* White text color */
+    color : black;
     text-align: center;
-    position: fixed; /* Fix the footer to the bottom */
-    bottom: 0;
-    left: 0;
-    z-index: 999; /* Ensure footer stays above other content */
 }
-
-
-
-
 
 .logo-account {
     width: 444px;
@@ -82,31 +72,73 @@
     border-radius: 10px;
 }
 
+    .flexible-button:hover {
+        background-color: darkslategrey;
+        border-radius: 50px;
+        color: white;
+        font-size: 20px;
+    }
+
+
 .hyperlike-common {
     text-decoration: none;
     color: inherit;
     cursor: pointer;
     margin-right: 15px;
+    transition: background-color 0.3s ease;
+    position: relative; 
 }
+
+    .hyperlike-common:hover {
+        font-size: 20px;
+        color: white;
+        background-color: darkslategray;
+        padding: 10px;
+        border-radius: 50px;
+    }
+
+    .hyperlike-common::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background-color: inherit;
+        filter: blur(50px);
+        z-index: -1;
+    }
+
 
 .typeproduct {
     text-align: center;
     margin: 0px;
     padding: 10px;
     background-color: #F4F4F4;
-
 }
 
 .imgHome {
-    filter: blur(4px);
-    -webkit-filter: blur(4px);
+    display: flex;
+    justify-content: center; /* จัดภาพให้อยู่ตรงกลางในแนวนอน */
+    align-items: center;
+    height : 600px;
+    padding: 20px;
 }
+
+.logo1 {
+    max-width: 100%; /* ปรับขนาดภาพให้ไม่เกินขนาดของ div */
+    max-height: 100%; /* ปรับขนาดภาพให้ไม่เกินขนาดของ div */
+    height: auto; /* ปรับสัดส่วนของภาพ */
+    width: auto; /* ปรับสัดส่วนของภาพ */
+    filter: blur(1px);
+}
+
 
 .txtonimg {
     position: absolute;
     bottom: 8px;
     left: 20%;
-    color : white;
+    color: white;
     font-size: 85px;
 }
 
@@ -118,6 +150,7 @@
     font-size: 20px;
     height: 50px;
 }
+
 .txtonimg3 {
     position: absolute;
     bottom: -88px;
@@ -126,6 +159,7 @@
     font-size: 20px;
     height: 50px;
 }
+
 .txtonimg4 {
     position: absolute;
     bottom: -120px;
@@ -134,6 +168,7 @@
     font-size: 20px;
     height: 50px;
 }
+
 .designbox {
     position: absolute;
     bottom: -150px;
@@ -154,4 +189,33 @@
 
 .hyperlike-common.selected {
     border: none; /* Or any other styling to remove the box effect */
+}
+
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.slideInRight {
+    animation: slideInRight 0.3s forwards;
+}
+
+.slideOutLeft {
+    animation: slideOutLeft 0.3s forwards;
 }

@@ -22,44 +22,54 @@ public class ConnectionClass
     public static User LoginUser(string username, string password)
     {
         User user = null;
-        string query = "SELECT COUNT(*) FROM users WHERE username = @username AND [password] = @password";
-        command.CommandText = query;
-        command.Parameters.AddWithValue("@username", username);
-        command.Parameters.AddWithValue("@password", password);
-        try
-        {
-            conn.Open();
-            int amountOfUsers = (int)command.ExecuteScalar();
-            if (amountOfUsers == 1)
-            {
-                command.Parameters.Clear();
 
-                query = "SELECT userid, email, typeofuser_fk, birthday, phone, address, firstname, lastname, gender FROM users WHERE username = @username";
-                command.CommandText = query;
-                command.Parameters.AddWithValue("@username", username);
-                SqlDataReader reader = command.ExecuteReader();
-                if (reader.Read())
-                {
-                    int userId = reader.GetInt32(0);
-                    string email = reader.GetString(1);
-                    string typeofuser_fk = reader.GetString(2);
-                    DateTime? birthday = reader.IsDBNull(3) ? (DateTime?)null : reader.GetDateTime(3);
-                    string phone = reader.IsDBNull(4) ? null : reader.GetString(4);
-                    string address = reader.IsDBNull(5) ? null : reader.GetString(5);
-                    string firstName = reader.IsDBNull(6) ? null : reader.GetString(6);
-                    string lastName = reader.IsDBNull(7) ? null : reader.GetString(7);
-                    string gender = reader.IsDBNull(8) ? null : reader.GetString(8); 
-                    user = new User(userId, username, password, email, typeofuser_fk, birthday, phone, address, firstName, lastName, gender);
-                }
-                reader.Close();
-            }
-            return user;
-        }
-        finally
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+        using (SqlConnection conn = new SqlConnection(connectionString))
+        using (SqlCommand command = new SqlCommand())
         {
-            conn.Close();
+            string query = "SELECT COUNT(*) FROM users WHERE username = @username AND [password] = @password";
+            command.CommandText = query;
+            command.Parameters.AddWithValue("@username", username);
+            command.Parameters.AddWithValue("@password", password);
+            command.Connection = conn;
+
+            try
+            {
+                conn.Open();
+                int amountOfUsers = (int)command.ExecuteScalar();
+                if (amountOfUsers == 1)
+                {
+                    command.Parameters.Clear();
+
+                    query = "SELECT userid, email, typeofuser_fk, birthday, phone, address, firstname, lastname, gender FROM users WHERE username = @username";
+                    command.CommandText = query;
+                    command.Parameters.AddWithValue("@username", username);
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        int userId = reader.GetInt32(0);
+                        string email = reader.GetString(1);
+                        string typeofuser_fk = reader.GetString(2);
+                        DateTime? birthday = reader.IsDBNull(3) ? (DateTime?)null : reader.GetDateTime(3);
+                        string phone = reader.IsDBNull(4) ? null : reader.GetString(4);
+                        string address = reader.IsDBNull(5) ? null : reader.GetString(5);
+                        string firstName = reader.IsDBNull(6) ? null : reader.GetString(6);
+                        string lastName = reader.IsDBNull(7) ? null : reader.GetString(7);
+                        string gender = reader.IsDBNull(8) ? null : reader.GetString(8);
+                        user = new User(userId, username, password, email, typeofuser_fk, birthday, phone, address, firstName, lastName, gender);
+                    }
+                    reader.Close();
+                }
+                return user;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
+
+
 
 
 
@@ -68,6 +78,7 @@ public class ConnectionClass
         string result = "";
 
         string query = "SELECT tu.typeofuser FROM users u INNER JOIN typeofuser tu ON u.typeofuser_fk = tu.typeofuserid WHERE u.userid = @UserId;";
+        command.Parameters.Clear();
         command.CommandText = query;
         command.Parameters.AddWithValue("@UserId", userId);
 
@@ -409,12 +420,11 @@ public class ConnectionClass
     {
         string resultMessage = null;
 
-        string query = "DELETE FROM cart WHERE userid = @userid";
+        string query = "DELETE FROM cart WHERE userid = @userid ";
 
         command.CommandText = query;
         command.Parameters.Clear();
         command.Parameters.AddWithValue("@userid", userid);
-
         try
         {
             conn.Open();
@@ -467,16 +477,16 @@ public class ConnectionClass
         return proamount; // คืนค่า proamount ที่ถูกต้อง
     }
 
-    public static void UpdateAvailableQuantity(int productId, int newQuantity)
+    public static void UpdateAvailableQuantity(int productId, int amount)
     {
         try
         {
             {
                 conn.Open();
-                string updateQuery = "UPDATE product SET pamount = @NewQuantity WHERE productid = @ProductId";
+                string updateQuery = "UPDATE product SET pamount = pamount - @Amount WHERE productid = @ProductId";
                 command.CommandText = updateQuery;
                 {
-                    command.Parameters.AddWithValue("@NewQuantity", newQuantity);
+                    command.Parameters.AddWithValue("@Amount", amount);
                     command.Parameters.AddWithValue("@ProductId", productId);
                     int rowsAffected = command.ExecuteNonQuery();
                     if (rowsAffected == 0)
@@ -498,25 +508,40 @@ public class ConnectionClass
             conn.Close(); 
         }
     }
-
-    public class TestConnectionClass
+    public static void ClearCart(int userId)
     {
-        public static void TestUpdateAvailableQuantity()
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+
+        using (SqlConnection conn = new SqlConnection(connectionString))
         {
-            // Assuming productId and newQuantity are known values for testing
-            int productId = 1; // Replace 123 with an actual product ID
-            int newQuantity = 50; // Replace 50 with the new quantity value
+            string deleteQuery = "DELETE FROM cart WHERE userid = @UserId";
 
-            // Call the method to update the available quantity
-            ConnectionClass.UpdateAvailableQuantity(productId, newQuantity);
+            using (SqlCommand command = new SqlCommand(deleteQuery, conn))
+            {
+                command.Parameters.AddWithValue("@UserId", userId);
 
-            // Optionally, you can log or print a message to indicate success or failure
-            Console.WriteLine("Available quantity updated successfully.");
+                try
+                {
+                    conn.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        Console.WriteLine("Cart items deleted successfully.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No cart items found for the user.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error deleting cart items: " + ex.Message);
+                }
+            }
         }
     }
 
-
-
 }
+
 
 
