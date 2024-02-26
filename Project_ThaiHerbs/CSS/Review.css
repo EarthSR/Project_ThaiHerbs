@@ -5,24 +5,25 @@
 }
 
 
-
-input[type="radio"] {
+/* CSS */
+.radio-input {
     display: none;
 }
 
-label {
+.radio-label {
     cursor: pointer;
     font-size: 30px;
 }
 
-    label:before {
-        content: '☆';
+    .radio-label:before {
+        content: '★';
     }
 
-input[type="radio"]:checked ~ label:before {
-    content: '★';
+.radio-input:checked ~ .radio-label:before {
     color: yellow; /* สีของดาวที่เลือก */
 }
+
+
 
 .btnreview {
     float: right;

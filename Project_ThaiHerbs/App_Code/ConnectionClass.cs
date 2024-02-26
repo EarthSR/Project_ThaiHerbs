@@ -598,7 +598,7 @@ public class ConnectionClass
         string query = "SELECT od.orderdetailid, od.productid_fk, od.priceofproduct, od.userid, od.amount, od.status, p.pimage, p.pname " +
                        "FROM orderdetail od " +
                        "JOIN product p ON od.productid_fk = p.productid " +
-                       "WHERE od.userid = @userid";
+                       "WHERE od.userid = @userid AND od.status = 'Waiting for payment'";
 
         command.CommandText = query;
         command.Parameters.Clear();
@@ -791,4 +791,67 @@ public class ConnectionClass
         return resultMessage;
     }
 
+
+    public static string Updateaddress(int userId, string address)
+    {
+        string resultMessage = "";
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+        using (SqlConnection conn = new SqlConnection(connectionString))
+        {
+            SqlCommand command = new SqlCommand(@"UPDATE users
+                                             SET
+                                                 address = @Address
+                                             WHERE
+                                                 userid = @UserId", conn);
+
+            command.Parameters.AddWithValue("@Address", address);
+            command.Parameters.AddWithValue("@UserId", userId);
+
+            try
+            {
+                conn.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                resultMessage = "Rows affected: " + rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                resultMessage = "Error updating user data: " + ex.Message;
+            }
+        }
+        return resultMessage;
+    }
+
+    public static List<review> Getreview(int productid)
+    {
+        List<review> list = new List<review>();
+        string query = "SELECT review.*, users.username FROM review JOIN users ON review.userid_fk = users.userid WHERE review.productid_fk = @proid;";
+
+        command.CommandText = query;
+        command.Parameters.Clear();
+        command.Parameters.AddWithValue("@proid", productid);
+
+        try
+        {
+            conn.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int productid_fk = reader.GetInt32(1);
+                int userid_fk = reader.GetInt32(2);
+                DateTime date = reader.GetDateTime(3);
+                int score = reader.GetInt32(4);
+                string comment = reader.GetString(5);
+                string username = reader.GetString(6);
+                review review = new review(productid_fk,userid_fk,date,comment,score,username);
+
+                list.Add(review);
+            }
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return list;
+    }
 }

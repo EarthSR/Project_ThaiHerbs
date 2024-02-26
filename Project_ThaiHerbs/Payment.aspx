@@ -6,7 +6,14 @@
     <div class = "payment-container">
         <div class="payment-address">
             <asp:Label ID="lbltop" runat="server" ></asp:Label>
-            <a><asp:LinkButton ID="lbl1" runat="server" Text="เปลี่ยน" OnClick="lbl1_Click1"/></a>
+            <a><asp:LinkButton ID="lbl1" runat="server" Text="เปลี่ยน" OnClick="lbl1_Click1"/>
+            <asp:TextBox ID="txtaddress" runat="server" Height="46px" TextMode="MultiLine" 
+                Visible="False"></asp:TextBox>
+            <asp:Button ID="btnupdate" runat="server" Text="ยืนยันเปลี่ยนที่อยู่" 
+                OnClick="btnupdate_Click" Visible="False" />
+            <asp:Button ID="btncancel" runat="server" Text="ยกเลิก" 
+                OnClick="btncancel_Click" Visible="False" />
+            </a>
         </div>
 
         <div class = "payment-boxdetail0">
@@ -39,7 +46,7 @@
 
 
                     <div class="payment-howto">
-                <p><a>วิธีการชำระเงิน</a></p>
+                <p><a>วิธีการชำระเงิน</a> โปรดแนบสลิปก่อนทำการกดสั่งซื้อ</p>
                 <asp:DropDownList ID="DropDownList1" runat="server" CssClass="designdrop" Width="174px" onchange="showImage();playSound()">
                     <asp:ListItem>QR payment</asp:ListItem>
                     <asp:ListItem>บิด</asp:ListItem>
@@ -47,7 +54,6 @@
 
                 <div id="qrImage" style="display:none;">
                     <br />
-                    <a>Qr Code จะแสดงหลังยืนยันคำสั่งซื้อ</a>
                 </div>
 
 
@@ -59,11 +65,10 @@
 
                          <div class = "payment-container">
          <div class = "payment-boxdetail0">
-             <img src= "ImgHerb/ดอกสำมะงา.jpg" class ="qrcode">
-             <asp:Image ID="uploadedImage" runat="server" CssClass="qrcode" />
+             <img src= "../Image/QR.jpg" class ="qrcode">
              <div class = "qrcode">
-                     <a>รบกวนแนบใบเสร็จชำระเงินด้วยนะครับ</a>
                  </div>
+             <asp:Image ID="uploadedImage" runat="server" CssClass="qrcode" />
                <div>
                      <asp:FileUpload ID="FileUpload1" runat="server" />
                      <asp:Button ID="ButtonUpload" runat="server" Text="Upload" 
@@ -82,7 +87,7 @@
                         <div class = "ButtonPayment1">
                         <asp:Button ID="ButtonPayment" runat="server" Text="ยืนยันการสั่งซื้อสินค้า" 
                                 CssClass="ButtonPayment" Height="55px" OnClientClick="playSound()" 
-                                OnClick="ButtonPayment_Click" />
+                                OnClick="ButtonPayment_Click" Visible="False" />
                             </div>
             </div>
             

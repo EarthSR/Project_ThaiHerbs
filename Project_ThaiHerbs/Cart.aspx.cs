@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
@@ -18,9 +19,15 @@ public partial class Cart : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+
             if (Session["userid"] != null)
             {
                 int userid = (int)Session["userid"];
+                List<Product> productList = ConnectionClass.GetProductsByUserId(userid);
+                if (productList.Count != 0)
+                {
+                    btbcon.Visible = true;
+                }
                 FillPage(userid);
             }
         }
