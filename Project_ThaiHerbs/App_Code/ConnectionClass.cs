@@ -10,7 +10,6 @@ using System.Data;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
-using DocumentFormat.OpenXml.Office2010.ExcelAc;
 
 public class ConnectionClass
 {
@@ -60,7 +59,7 @@ public class ConnectionClass
                         string firstName = reader.IsDBNull(5) ? null : reader.GetString(5);
                         string lastName = reader.IsDBNull(6) ? null : reader.GetString(6);
                         string gender = reader.IsDBNull(7) ? null : reader.GetString(7);
-                        user = new User(userId, username, password, email, typeofuser_fk, phone, address, firstName, lastName, gender);
+                        
                     }
                     reader.Close();
                 }

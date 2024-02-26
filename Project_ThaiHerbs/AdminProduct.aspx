@@ -30,6 +30,7 @@
 
                         <div>
                          <p><h3><asp:Label ID="Label5" runat="server" Text = "เพิ่มรูปภาพ"></asp:Label></h3>
+                         <p><img src="../ImgHerb/กัญชา.jpg" width ="100px" height ="100px"/></p>
                          <asp:FileUpload ID="FileUpload1" runat="server" />
                          <asp:Button ID="ButtonUpload" runat="server" Text="เพิ่มรูปภาพ"/>
                         </div>
