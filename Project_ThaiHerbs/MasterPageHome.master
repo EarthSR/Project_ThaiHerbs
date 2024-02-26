@@ -34,7 +34,8 @@
             <asp:LinkButton ID="register" runat="server" Text="Register" CssClass="hyperlike-common" PostBackUrl="~/Account/Register.aspx" />
             <asp:LinkButton ID="login" runat="server" Text="Login" CssClass="hyperlike-common" PostBackUrl="~/Account/Login.aspx" />
             <asp:LinkButton ID="Logout" runat="server" Text="Logout" CssClass="hyperlike-common" Visible="False" OnClick="Logout_Click" />
-            <asp:LinkButton ID="user" runat="server" Text="" CssClass="hyperlike-common" Visible="False" />
+            <asp:LinkButton ID="user" runat="server" Text="" CssClass="hyperlike-common" 
+                Visible="False" OnClick="user_Click" />
         </div>
         <table class="auto-style3">
             <tr>

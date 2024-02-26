@@ -22,40 +22,55 @@ public class ConnectionClass
     public static User LoginUser(string username, string password)
     {
         User user = null;
-        string query = string.Format("SELECT COUNT(*) FROM users WHERE username = '{0}' AND [password] = '{1}'", username, password);
-        command.CommandText = query;
-        try
-        {
-            conn.Open();
-            int amountOfUsers = (int)command.ExecuteScalar();
-            if (amountOfUsers == 1)
-            {
-                command.Parameters.Clear();
 
-                query = string.Format("SELECT userid, email, typeofuser_fk, birthday, phone, address, firstname, lastname FROM users WHERE username = '{0}'", username);
-                command.CommandText = query;
-                SqlDataReader reader = command.ExecuteReader();
-                if (reader.Read())
-                {
-                    int userId = reader.GetInt32(0);
-                    string email = reader.GetString(1);
-                    string typeofuser_fk = reader.GetString(2);
-                    DateTime birthday = reader.GetDateTime(3);
-                    string phone = reader.IsDBNull(4) ? null : reader.GetString(4);
-                    string address = reader.IsDBNull(5) ? null : reader.GetString(5);
-                    string firstName = reader.IsDBNull(6) ? null : reader.GetString(6);
-                    string lastName = reader.IsDBNull(7) ? null : reader.GetString(7);
-                    
-                }
-                reader.Close();
-            }
-            return user;
-        }
-        finally
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+        using (SqlConnection conn = new SqlConnection(connectionString))
+        using (SqlCommand command = new SqlCommand())
         {
-            conn.Close();
+            string query = "SELECT COUNT(*) FROM users WHERE username = @username AND [password] = @password";
+            command.CommandText = query;
+            command.Parameters.AddWithValue("@username", username);
+            command.Parameters.AddWithValue("@password", password);
+            command.Connection = conn;
+
+            try
+            {
+                conn.Open();
+                int amountOfUsers = (int)command.ExecuteScalar();
+                if (amountOfUsers == 1)
+                {
+                    command.Parameters.Clear();
+
+                    query = "SELECT userid, email, typeofuser_fk, birthday, phone, address, firstname, lastname, gender FROM users WHERE username = @username";
+                    command.CommandText = query;
+                    command.Parameters.AddWithValue("@username", username);
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        int userId = reader.GetInt32(0);
+                        string email = reader.GetString(1);
+                        string typeofuser_fk = reader.GetString(2);
+                        DateTime? birthday = reader.IsDBNull(3) ? (DateTime?)null : reader.GetDateTime(3);
+                        string phone = reader.IsDBNull(4) ? null : reader.GetString(4);
+                        string address = reader.IsDBNull(5) ? null : reader.GetString(5);
+                        string firstName = reader.IsDBNull(6) ? null : reader.GetString(6);
+                        string lastName = reader.IsDBNull(7) ? null : reader.GetString(7);
+                        string gender = reader.IsDBNull(8) ? null : reader.GetString(8);
+                        user = new User(userId, username, password, email, typeofuser_fk, birthday, phone, address, firstName, lastName, gender);
+                    }
+                    reader.Close();
+                }
+                return user;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
+
+
+
 
 
     public static string CheckTypeOfUser(int userId)
@@ -63,6 +78,7 @@ public class ConnectionClass
         string result = "";
 
         string query = "SELECT tu.typeofuser FROM users u INNER JOIN typeofuser tu ON u.typeofuser_fk = tu.typeofuserid WHERE u.userid = @UserId;";
+        command.Parameters.Clear();
         command.CommandText = query;
         command.Parameters.AddWithValue("@UserId", userId);
 
@@ -287,12 +303,12 @@ public class ConnectionClass
         return list;
     }
 
-    public static string InsertCart(int productId, double priceOfProduct, int userId)
+    public static string InsertCart(int productId, double priceOfProduct, int userId, int amount)
     {
         string resultMessage = null;
 
-        string query = "INSERT INTO cart (productid, price, userid) " +
-                       "VALUES (@ProductId, @PriceOfProduct, @UserId)";
+        string query = "INSERT INTO cart (productid, price, userid,amount) " +
+                       "VALUES (@ProductId, @PriceOfProduct, @UserId,@amount)";
 
         command.CommandText = query;
         command.Parameters.Clear();
@@ -300,6 +316,7 @@ public class ConnectionClass
         command.Parameters.AddWithValue("@ProductId", productId);
         command.Parameters.AddWithValue("@PriceOfProduct", priceOfProduct);
         command.Parameters.AddWithValue("@UserId", userId);
+        command.Parameters.AddWithValue("@amount", amount);
 
         try
         {
@@ -365,7 +382,7 @@ public class ConnectionClass
     public static ArrayList GetProductsByUserId(int userId)
     {
         ArrayList productList = new ArrayList();
-        string query = "SELECT * FROM product p " +
+        string query = "SELECT p.productid,p.pname,p.pprice,p.pdetail,p.ptype,c.pamount,p.pimage FROM product p " +
                        "INNER JOIN cart c ON p.productid = c.productid " +
                        "WHERE c.userid = @UserId";
 
@@ -403,12 +420,11 @@ public class ConnectionClass
     {
         string resultMessage = null;
 
-        string query = "DELETE FROM cart WHERE userid = @userid";
+        string query = "DELETE FROM cart WHERE userid = @userid ";
 
         command.CommandText = query;
         command.Parameters.Clear();
         command.Parameters.AddWithValue("@userid", userid);
-
         try
         {
             conn.Open();
@@ -450,6 +466,7 @@ public class ConnectionClass
             while (reader.Read())
             {
                 int amount = reader.GetInt32(0);
+                proamount = amount; // กำหนดค่า proamount เมื่ออ่านข้อมูลสำเร็จ
             }
         }
         finally
@@ -457,7 +474,152 @@ public class ConnectionClass
             conn.Close();
         }
 
-        return proamount;
+        return proamount; // คืนค่า proamount ที่ถูกต้อง
+    }
+
+    public static void UpdateAvailableQuantity(int productId, int amount)
+    {
+        try
+        {
+            {
+                conn.Open();
+                string updateQuery = "UPDATE product SET pamount = pamount - @Amount WHERE productid = @ProductId";
+                command.CommandText = updateQuery;
+                {
+                    command.Parameters.AddWithValue("@Amount", amount);
+                    command.Parameters.AddWithValue("@ProductId", productId);
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected == 0)
+                    {
+                        throw new Exception("Product not found or quantity not updated.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Quantity updated successfully.");
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error updating quantity: " + ex.Message);
+        }
+        finally
+        {
+            conn.Close();
+        }
+    }
+    public static void ClearCart(int userId)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+
+        using (SqlConnection conn = new SqlConnection(connectionString))
+        {
+            string deleteQuery = "DELETE FROM cart WHERE userid = @UserId";
+
+            using (SqlCommand command = new SqlCommand(deleteQuery, conn))
+            {
+                command.Parameters.AddWithValue("@UserId", userId);
+
+                try
+                {
+                    conn.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        Console.WriteLine("Cart items deleted successfully.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No cart items found for the user.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error deleting cart items: " + ex.Message);
+                }
+            }
+        }
+    }
+
+    public static string Insertorderdetail(int productId, double priceOfProduct, int userId, int amount,string status)
+    {
+        string resultMessage = null;
+
+        string query = "insert into orderdetail (productid_fk,priceofproduct,userid,amount,status) values (@productid,@price,@userid,@amount,@status)";
+
+        command.CommandText = query;
+        command.Parameters.Clear();
+
+        command.Parameters.AddWithValue("@productid", productId);
+        command.Parameters.AddWithValue("@price", priceOfProduct);
+        command.Parameters.AddWithValue("@userid", userId);
+        command.Parameters.AddWithValue("@amount", amount);
+        command.Parameters.AddWithValue("@status", status);
+
+        try
+        {
+            conn.Open();
+            int rowsAffected = command.ExecuteNonQuery();
+
+            if (rowsAffected > 0)
+            {
+                resultMessage = "Orederd successfully.";
+            }
+            else
+            {
+                resultMessage = "Failed to insert.";
+            }
+        }
+        catch (Exception ex)
+        {
+            resultMessage = "Error: " + ex.Message;
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return resultMessage;
+    }
+
+    public static List<orderdetial> GetOrderDetailById(int userids)
+    {
+        List<orderdetial> list = new List<orderdetial>();
+        string query = "SELECT od.orderdetailid, od.productid_fk, od.priceofproduct, od.userid, od.amount, od.status, p.pimage, p.pname " +
+                       "FROM orderdetail od " +
+                       "JOIN product p ON od.productid_fk = p.productid " +
+                       "WHERE od.userid = @userid";
+
+        command.CommandText = query;
+        command.Parameters.Clear();
+        command.Parameters.AddWithValue("@userid", userids);
+
+        try
+        {
+            conn.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int orderdetailid = reader.GetInt32(0);
+                int productid = reader.GetInt32(1);
+                double price = reader.GetDouble(2);
+                int userid = reader.GetInt32(3);
+                int amount = reader.GetInt32(4);
+                string status = reader.GetString(5);
+                string image = reader.GetString(6);
+                string name = reader.GetString(7);
+                orderdetial orderdetail = new orderdetial(orderdetailid, productid, price, status, userid, image, amount, name);
+
+                list.Add(orderdetail);
+            }
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return list;
     }
 
 }

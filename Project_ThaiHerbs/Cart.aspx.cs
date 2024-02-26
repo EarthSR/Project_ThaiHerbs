@@ -1,6 +1,4 @@
-﻿using DocumentFormat.OpenXml.Math;
-using DocumentFormat.OpenXml.Wordprocessing;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +18,8 @@ public partial class Cart : System.Web.UI.Page
         {
             if (Session["userid"] != null)
             {
-                    int userid = (int)Session["userid"];
-                    FillPage(userid);
+                int userid = (int)Session["userid"];
+                FillPage(userid);
             }
         }
     }
@@ -40,20 +38,20 @@ public partial class Cart : System.Web.UI.Page
         foreach (Product product in productList)
         {
             sb.AppendFormat(@"
-<table style='width: 100%;'>
-    <tr>
+                    <table style='width: 100%;'>
+                        <tr>
         
-        <td class='cart-product-img'>
-            <img src='{1}' class='cart-product-img'/>
-        </td>
-        <td class='cart-nameproduct'>&nbsp;&nbsp;&nbsp;&nbsp;<a>{2}</a></td>
-        <td><a id='price{0}'>{3} บาท</a></td>
-        <td><a>จำนวน {4} ชิ้น</a></td>
-        <td>
-         <a></a>
-        </td>
-    </tr>
-</table>
+                            <td class='cart-product-img'>
+                                <img src='{1}' class='cart-product-img'/>
+                            </td>
+                            <td class='cart-nameproduct'>&nbsp;&nbsp;&nbsp;&nbsp;<a>{2}</a></td>
+                            <td><a id='price{0}'>{3} บาท</a></td>
+                            <td><a>จำนวน {4} ชิ้น</a></td>
+                            <td>
+                             <a></a>
+                            </td>
+                        </tr>
+                    </table>
 ", product.Id, product.Image, product.Name, product.Price, product.Amount);
 
             // Add the price of the current product to the total price
@@ -94,6 +92,7 @@ public partial class Cart : System.Web.UI.Page
             {
                 // ทำการลดจำนวนสินค้าในคลังตามจำนวนที่มีในตะกร้า
                 ConnectionClass.UpdateAvailableQuantity(product.Id, product.Amount);
+                ConnectionClass.Insertorderdetail(product.Id, product.Price, userid, product.Amount, "Waiting for payment");
             }
 
             // เมื่อตัดสินค้าออกจากคลังเรียบร้อยแล้ว สามารถลบรายการสินค้าในตะกร้าของผู้ใช้ทิ้งได้
@@ -101,6 +100,7 @@ public partial class Cart : System.Web.UI.Page
 
             // หลังจากนั้นเรียกใช้ฟังก์ชัน FillPage เพื่ออัปเดตข้อมูลที่แสดงใหม่บนหน้าเว็บ
             FillPage(userid);
+            Response.Redirect("~/Payment.aspx");
         }
     }
 

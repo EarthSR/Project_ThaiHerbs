@@ -6,30 +6,27 @@
     <style type="text/css">
     </style>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="detail-container">
-        
-           <div class="detail-image">
-                <asp:Image ID="logo" runat="server" ImageUrl="~/ImgHerb/กระเจี๊ยบแดง.jpg" CssClass="detail-img"/>
-           </div>
-            <div class="detail-image">
-                <h2><asp:Label ID="Label" runat="server" Text="กระเจี๊ยบแดง" /></h2>
-                <h2><asp:Label ID="lblprice" runat="server" Text="100000000000000000 บาท" /></h2>
-                <a><asp:Label ID="Label1" runat="server" Text="สรรพคุณ : ประโยชน์และสรรพคุณกระเจี๊ยบแดง แก้อาการขัดเบา แก้เสมหะ ช่วยขับน้ำดี ช่วยลดไข้ แก้ร้อนใน แก้ไอ ขับนิ่วในไต นิ่วในกระเพาะปัสสาวะ แก้อ่อนเพลีย บำรุงธาตุ บำรุงกำลัง บำรุงโลหิต แก้กระหายน้ำ รักษาไตพิการ ขับเมือกมันให้ลงสู่รูทวารหนัก ละลายไขมันในเลือด เป็นยาระบาย แก้ไตพิการ ลดอาการบวม แก้เลือดออกตามไรฟัน เป็นยาฆ่าพยาธิตัวจี๊ด รักษาแผลอักเสบ แผลติดเชื้อ แก้โรคเบาหวาน ช่วยรักษาแผลในกระเพาะอาหาร ช่วยป้องกันโรคต่อมลูกหมากโต ช่วยฆ่าเชื้อแบคทีเรีย ช่วยป้องกันการเกิดโรคมะเร็ง" /></a>
+        <asp:Label ID="lblshow" runat="server" ></asp:Label>
+        <br />
+        <div>
+        <asp:Button ID="minus" runat="server" Text="-" OnClick="minus_Click" />
+        <asp:TextBox ID="txtamount" runat="server" Width="49px" style="text-align: center">1</asp:TextBox>
+        <asp:Button ID="plus" runat="server" Text="+" OnClick="plus_Click" />
+        </div>
+        <br />
+        <asp:Label ID="lble" runat="server"></asp:Label>
+        <br />
+        <br />
+        <div class="bottons">
+            <asp:Button ID="btnadd" runat="server" Text="Add to Cart" 
+                CssClass="btn-adddetail" OnClick="btnadd_Click" />
+        </div>
                 <br />
-                <br />  
-                <div class="quantity buttons_added">
-                    <a><asp:Label ID="Label2" runat="server" Text="จำนวน : " /></a>
-	            <asp:Button ID="minusButton" runat="server" Text="-" CssClass="minus" OnClientClick="return decreaseQuantity();" style="width: 40px; height: 26px;" />
-                <asp:TextBox ID="quantityInput" runat="server" Text="1" CssClass="input-text qty text" Width="53px" Height="24px" pattern="\d*" inputmode="numeric" />
-                <asp:Button ID="plusButton" runat="server" Text="+" CssClass="plus" OnClientClick="return increaseQuantity();" style="width: 40px; height: 26px;" />
-                     </div>
                 <br />
-                <br />
-                <div class = "bottons">
-                <asp:Button runat="server" Text="Add to Cart" CssClass="btn-adddetail" />
-                <asp:Button runat="server" Text="Back to shop" CssClass="btn-adddetail" />
-                </div>
+
             </div>
 
         <div class="review">
