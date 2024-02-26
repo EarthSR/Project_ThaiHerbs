@@ -42,7 +42,8 @@
                 </p>
                 <br />
                 <br />
-                <asp:LinkButton ID="lbl1" runat="server" Text="Creat New Account"/>
+                <asp:LinkButton ID="lbl1" runat="server" Text="Creat New Account" 
+                    OnClick="lbl1_Click"/>
                 </div>
                 <br />
                 <br />

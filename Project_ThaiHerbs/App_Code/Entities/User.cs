@@ -20,14 +20,13 @@ public class User
     public string LastName { get; set; } 
     public string Gender { get; set; }
 
-    public User(int idUsers, string userName, string password, string email, string userType, DateTime? birthday, string phone, string address, string firstName, string lastName, string gender)
+    public User(int idUsers, string userName, string password, string email, string userType, string phone, string address, string firstName, string lastName, string gender)
     {
         IdUsers = idUsers;
         UserName = userName;
         Password = password;
         Email = email;
         UserType = userType;
-        Birthday = birthday ?? DateTime.MinValue; // Provide a default value if birthday is null
         Phone = phone;
         Address = address;
         FirstName = firstName;
@@ -36,13 +35,12 @@ public class User
     }
 
 
-    public User(string userName, string password, string email, string userType, DateTime birthday, string phone, string address, string firstName, string lastName,string gender)
+    public User(string userName, string password, string email, string userType, string phone, string address, string firstName, string lastName,string gender)
     {
         UserName = userName;
         Password = password;
         Email = email;
         UserType = userType;
-        Birthday = birthday;
         Phone = phone;
         Address = address;
         FirstName = firstName;

@@ -51,4 +51,9 @@ public partial class MasterPageSearch : System.Web.UI.MasterPage
             Response.Redirect("~/Account/Login.aspx");
         }
     }
+
+    protected void user_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/ProfileUser.aspx");
+    }
 }

@@ -21,19 +21,16 @@ public partial class _Default : System.Web.UI.Page
             Session["Login"] = user.UserName;
             string userType = ConnectionClass.CheckTypeOfUser(user.IdUsers);
             Session["usertype"] = userType;
-            Session["Password"] = user.Password;
-            Session["Email"] = user.Email;
-            Session["Phone"] = user.Phone;
-            Session["Birthday"] = user.Birthday;
-            Session["Firstname"] = user.FirstName;
-            Session["Lastname"] = user.LastName;
-            Session["Address"] = user.Address;
-            Session["gender"] = user.Gender;
             Response.Redirect("~/Home.aspx");
         }
         else
         {
             lblerror.Text = "Login failed!!!";
         }
+    }
+
+    protected void lbl1_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Account/Register.aspx");
     }
 }
