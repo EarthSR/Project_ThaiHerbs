@@ -56,7 +56,7 @@ public class ConnectionClass
                         string firstName = reader.IsDBNull(5) ? null : reader.GetString(5);
                         string lastName = reader.IsDBNull(6) ? null : reader.GetString(6);
                         string gender = reader.IsDBNull(7) ? null : reader.GetString(7);
-                        user = new User(userId, username, password, email, typeofuser_fk, phone, address, firstName, lastName, gender);
+                        
                     }
                     reader.Close();
                 }

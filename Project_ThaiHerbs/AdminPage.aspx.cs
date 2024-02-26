@@ -11,4 +11,17 @@ public partial class AdminPage : System.Web.UI.Page
     {
 
     }
+
+    protected void ButtonAdd(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Account/AdminProduct.aspx");
+    }
+    protected void ButtonEdit(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Account/AdminEdit.aspx");
+    }
+    protected void ButtonDelete(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Account/AdminDelete.aspx");
+    }
 }
