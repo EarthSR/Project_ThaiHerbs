@@ -41,15 +41,13 @@ public class Delivery
         TrackingID = trackingid;
         OrderStatus = status;
     }
-    public Delivery(string productname,string productimage,string trackingId,string status)
+    public Delivery(string productname,string productimage,string trackingId,string status,string deliveryName)
     {
         TrackingId = trackingId;
-        DeliveryDate = deliveryDate;
-        DeliveryName = deliveryName;
         ProductName = productname;
         ProductImage = productimage;
-        TrackingID = trackingid;
         OrderStatus = status;
+        DeliveryName =deliveryName;
     }
 
 }

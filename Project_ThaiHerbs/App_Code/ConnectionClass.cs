@@ -869,9 +869,6 @@ public class ConnectionClass
                 delivery.daliverryname AS DeliveryName, 
                 delivery.trackingid AS TrackingID,
                 orderdetail.status AS OrderStatus,
-                payment.paymentid AS PaymentId,
-                payment.paymentdate AS PaymentDate,
-                payment.typeofpayment AS TypeOfPayment
             FROM 
                 orders
             JOIN 
