@@ -10,19 +10,22 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    
-    <div class="user-product">
-            <div class="menu-user-product">
-                    <asp:LinkButton ID="LinkButtonEdit" runat="server" Text="แก้ไขข้อมูล" CssClass="category-link" />
-                    <asp:LinkButton ID="LinkButtonTrack" runat="server" Text="ติดตามการจัดส่ง" CssClass="category-link" OnClick="LinkButtonTrack_Click" />
-                    <asp:LinkButton ID="LinkButtonRate" runat="server" Text="ให้คะแนนสินค้า" CssClass="category-link" />
+                <div class="menu-user-product">
+                    <asp:LinkButton ID="LinkButtonEdit" runat="server" Text="แก้ไขข้อมูล" 
+                        CssClass="category-link" PostBackUrl="~/ProfileUser.aspx" />
+                    <asp:LinkButton ID="LinkButtonTrack" runat="server" Text="ติดตามการจัดส่ง" 
+                        CssClass="category-link"  
+                        PostBackUrl="~/Tracking.aspx" />
+                    <asp:LinkButton ID="LinkButtonRate" runat="server" Text="ให้คะแนนสินค้า" 
+                        CssClass="category-link" PostBackUrl="~/Review.aspx" />
                     <asp:LinkButton ID="LinkButtonHome" runat="server" Text="กลับหน้าหลัก" 
-                        CssClass="category-link" OnClick="LinkButtonHome_Click"/>
+                        CssClass="category-link"
+                        style="width: 192px" PostBackUrl="~/Home.aspx" />
                 </div>
+    <div class="user-product">
             <div class="detail-profile">
                     <a href="#" id="ImageLink" runat="server">
-                        <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="previewImage(event)">
-                        <img id="mainImage" src="ImgHerb/ดอกสำมะงา.jpg" class="imgprofile" onclick="document.getElementById('imageInput').click();" />
+                        <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="previewImage(event)">&nbsp;
                     </a>
                 <div class="detail-profile1">
                     <p><a>Username</a></p>
@@ -32,7 +35,6 @@
                     <p><a>Email</a></p>
                     <p><a>Phone</a></p>
                     <p><a>Gender</a></p>
-                     <p><a>NewGender</a></p>
                     <p><a>Address</a></p>
                 </div>
                 <div class="detail-profile2">
@@ -40,19 +42,13 @@
                         <p><asp:TextBox ID="password" runat="server" Text="" /></p>
                         <p><asp:TextBox ID="firstname" runat="server" Text="" /></p>
                         <p><asp:TextBox ID="Lastname" runat="server" Text="" /></p>
-                        <p><asp:TextBox ID="email" runat="server" Text="" /></p>
+                        <p><asp:TextBox ID="email" runat="server" Text="" />
+                        </p>
                         <p><asp:TextBox ID="phone" runat="server" Text="" /></p>
                     <p>
                         <asp:Label ID="gender" runat="server"></asp:Label></p>
                     <p>
-                        <asp:DropDownList ID="DropDownList1" runat="server" CssClass="designdrop" Width="174px">
-                            <asp:ListItem>Select Gender</asp:ListItem>
-                            <asp:ListItem>Female</asp:ListItem>
-                            <asp:ListItem>Male</asp:ListItem>
-                            <asp:ListItem>Other</asp:ListItem>
-                        </asp:DropDownList>
-
-                    </p>
+                        &nbsp;</p>
                             <div>
                     <p>
                         <asp:TextBox ID="address" runat="server" TextMode="MultiLine" Height="61px"></asp:TextBox>
@@ -64,8 +60,9 @@
                         <div class="auto-style2">
                     <asp:Label ID="lblresult" runat="server" Text=""></asp:Label>
      <asp:Button ID="ButtonSignIn" runat="server" CssClass="editinfo" Text="บันทึกข้อมูล" Height="43px" 
-                            Width="147px" OnClick="ButtonSignIn_Click"  />
+                            Width="147px" OnClick="ButtonSignIn_Click" ValidationGroup="edit"  />
                         </div>
+
 
 </asp:Content>
 

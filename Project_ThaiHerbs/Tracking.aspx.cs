@@ -9,6 +9,16 @@ public partial class Tracking : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!IsPostBack)
+        {
+            if (Session["userid"] != null)
+            {
+                int userid = Convert.ToInt32(Session["userid"]);
 
+            }
+
+        }
     }
+
+   
 }

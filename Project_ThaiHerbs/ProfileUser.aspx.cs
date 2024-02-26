@@ -26,24 +26,9 @@ public partial class ProfileUser : System.Web.UI.Page
 
 
 
-    protected void LinkButtonTrack_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("~/Tracking.aspx");
-
-    }
-
-
-    protected void LinkButtonHome_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("~/Home.aspx");
-    }
-
     protected void ButtonSignIn_Click(object sender, EventArgs e)
     {
         int userid = Convert.ToInt32(Session["userid"]);
-
-        string selectedGender = DropDownList1.SelectedItem.Text;
-        string gender = selectedGender != "Select Gender" ? selectedGender : (string)Session["gender"];
 
         string Password = password.Text; // Assuming 'password' is the ID of your password TextBox
         string Email = email.Text; // Assuming 'email' is the ID of your email TextBox
@@ -53,7 +38,7 @@ public partial class ProfileUser : System.Web.UI.Page
         string Address = address.Text; // Assuming 'address' is the ID of your address TextBox
 
         // Update user data
-        lblresult.Text = ConnectionClass.UpdateUserData(userid, FirstName, LastName, Address, Phone, Email, Password, gender);
+        lblresult.Text = ConnectionClass.UpdateUserData(userid, FirstName, LastName, Address, Phone, Email, Password);
 
         // Refresh session variables
         Session["Firstname"] = FirstName;

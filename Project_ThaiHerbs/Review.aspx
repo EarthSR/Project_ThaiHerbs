@@ -4,14 +4,20 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    
+           <div class="menu-user-product">
+                    <asp:LinkButton ID="LinkButtonEdit" runat="server" Text="แก้ไขข้อมูล" 
+                        CssClass="category-link" PostBackUrl="~/ProfileUser.aspx" />
+                    <asp:LinkButton ID="LinkButtonTrack" runat="server" Text="ติดตามการจัดส่ง" 
+                        CssClass="category-link" 
+                        PostBackUrl="~/Tracking.aspx" />
+                    <asp:LinkButton ID="LinkButtonRate" runat="server" Text="ให้คะแนนสินค้า" 
+                        CssClass="category-link" PostBackUrl="~/Review.aspx" />
+                    <asp:LinkButton ID="LinkButtonHome" runat="server" Text="กลับหน้าหลัก" 
+                        CssClass="category-link"
+                        style="width: 192px" PostBackUrl="~/Home.aspx" />
+        </div> 
     <div class="user-product">
-        <div class="menu-user-product">
-            <asp:HyperLink ID="HyperLinkEdit" runat="server" Text="แก้ไขข้อมูล" NavigateUrl="#" CssClass="category-link" />
-            <asp:HyperLink ID="HyperLinkTrack" runat="server" Text="ติดตามการจัดส่ง" NavigateUrl="#" CssClass="category-link" />
-            <asp:HyperLink ID="HyperLinkRate" runat="server" Text="ให้คะแนนสินค้า" NavigateUrl="#" CssClass="category-link" />
-            <asp:HyperLink ID="HyperLinkHome" runat="server" Text="กลับหน้าหลัก" NavigateUrl="~/Login.aspx" CssClass="category-link" />
-        </div>
+
               <div class="detail-tracking">
                     <div class="tracking-header">
                         <div class="tracking-column">
