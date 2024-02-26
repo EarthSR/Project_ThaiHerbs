@@ -12,24 +12,25 @@
 
                         <div>
                         <p><h3><asp:Label ID="Label1" runat="server" Text = "ชื่อสินค้า"></asp:Label></h3>
-                        <asp:TextBox ID="TextBox1" runat="server" Height="34px" Width="100%" CssClass= "manage-products-box"></asp:TextBox></p>
+                        <asp:TextBox ID="txtname" runat="server" Height="34px" Width="100%" CssClass= "manage-products-box"></asp:TextBox></p>
                         </div>
 
                         <div>
                         <p><h3><asp:Label ID="Label2" runat="server" Text = "ราคา"></asp:Label></h3>
-                        <asp:TextBox ID="TextBox2" runat="server" Height="38px" Width="100%" CssClass= "manage-products-box"></asp:TextBox></p>
+                        <asp:TextBox ID="txtprice" runat="server" Height="38px" Width="100%" CssClass= "manage-products-box"></asp:TextBox></p>
                         <h3><asp:Label ID="Label3" runat="server" Text = "จำนวน"></asp:Label></h3>
-                        <asp:TextBox ID="TextBox3" runat="server" Height="38px" Width="100%" CssClass= "manage-products-box"></asp:TextBox>
+                        <asp:TextBox ID="txtamount" runat="server" Height="38px" Width="100%" CssClass= "manage-products-box"></asp:TextBox>
                         </div>
 
                         <div>
                         <p><h3><asp:Label ID="Label4" runat="server" Text = "รายละเอียด"></asp:Label></h3>
-                        <asp:TextBox ID="TextBox4" runat="server" Height="100px" Width="100%" TextMode="MultiLine" CssClass= "manage-products-box"></asp:TextBox>
+                        <asp:TextBox ID="txtdetail" runat="server" Height="100px" Width="100%" TextMode="MultiLine" CssClass= "manage-products-box"></asp:TextBox>
                         </p>
                             </div>
 
                         <div>
                          <p><h3><asp:Label ID="Label5" runat="server" Text = "เพิ่มรูปภาพ"></asp:Label></h3>
+                         <p><img src="../ImgHerb/กัญชา.jpg" width ="100px" height ="100px"/></p>
                          <asp:FileUpload ID="FileUpload1" runat="server" />
                          <asp:Button ID="ButtonUpload" runat="server" Text="เพิ่มรูปภาพ"/>
                         </div>
@@ -37,7 +38,8 @@
                             <br />
                             <br />
                             <br />
-                         <asp:Button ID="ButtonSignIn" runat="server" Text="เพิ่มสินค้า" Height="30px" Width="100%" cssClass= "btn-manage-products"/>
+                         <asp:Button ID="ButtonSignIn" runat="server" Text="เพิ่มสินค้า" Height="30px" 
+                                Width="100%" cssClass= "btn-manage-products" OnClick="ButtonSignIn_Click"/>
                         </div>
                     </div>
                 </div>

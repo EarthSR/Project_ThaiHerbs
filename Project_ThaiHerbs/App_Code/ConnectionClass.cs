@@ -10,7 +10,6 @@ using System.Data;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
-using DocumentFormat.OpenXml.Office2010.ExcelAc;
 
 public class ConnectionClass
 {
@@ -596,10 +595,10 @@ public class ConnectionClass
     public static List<orderdetial> GetOrderDetailById(int userids)
     {
         List<orderdetial> list = new List<orderdetial>();
-        string query = "SELECT od.orderdetailid, od.productid_fk, od.priceofproduct, od.userid, od.amount, od.status, p.pimage, p.pname " +
-                       "FROM orderdetail od " +
-                       "JOIN product p ON od.productid_fk = p.productid " +
-                       "WHERE od.userid = @userid AND od.status = 'Waiting for payment'";
+        string query = "SELECT c.cartid, c.productid, c.price, c.userid, c.amount, p.pimage, p.pname " +
+                       "FROM cart c " +
+                       "JOIN product p ON c.productid = p.productid " +
+                       "WHERE c.userid = @userid ";
 
         command.CommandText = query;
         command.Parameters.Clear();
@@ -616,10 +615,9 @@ public class ConnectionClass
                 double price = reader.GetDouble(2);
                 int userid = reader.GetInt32(3);
                 int amount = reader.GetInt32(4);
-                string status = reader.GetString(5);
-                string image = reader.GetString(6);
-                string name = reader.GetString(7);
-                orderdetial orderdetail = new orderdetial(orderdetailid, productid, price, status, userid, image, amount, name);
+                string image = reader.GetString(5);
+                string name = reader.GetString(6);
+                orderdetial orderdetail = new orderdetial(orderdetailid, productid, price, userid, image, amount, name);
 
                 list.Add(orderdetail);
             }

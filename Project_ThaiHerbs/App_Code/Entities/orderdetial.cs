@@ -28,5 +28,15 @@ public class orderdetial
         Amount = amount;
         Name = name;
     }
+    public orderdetial(int orderdetailid, int productid, double priceofproduct, int userid, string image, int amount, string name)
+    {
+        Orderdetailid = orderdetailid;
+        Productid = productid;
+        Priceofproduct = priceofproduct;
+        Userid = userid;
+        Image = image;
+        Amount = amount;
+        Name = name;
+    }
 
 }
