@@ -35,46 +35,7 @@
                 </div>
 
 
-
-
-
-
-
-            <div class = "tracking">  
-                <div class="content">
-                <img id="mainImage" src="ImgHerb/ดอกสำมะงา.jpg" class="imgtracking" />
-                <p>ดอกไม้ชนิดหนึ่ง</p>
-                </div>
-            <div class="content">
-                <p>ดอกไม้ชนิดหนึ่ง</p>
-                </div>
-
-                 <div class="content">
-                     <p>ดอกไม้ชนิดหนึ่ง</p>
-                     </div>
-                    <div class="content">
-                     <p>ดอกไม้ชนิดหนึ่ง</p>
-                     </div>
-            </div>
-
-
-
-        <div class = "tracking">  
-    <div class="content">
-    <img id="mainImage" src="ImgHerb/ดอกสำมะงา.jpg" class="imgtracking" />
-    <p>ดอกไม้ชนิดหนึ่ง</p>
-    </div>
-<div class="content">
-    <p>ดอกไม้ชนิดหนึ่ง</p>
-    </div>
-
-     <div class="content">
-         <p>ดอกไม้ชนิดหนึ่ง</p>
-         </div>
-        <div class="content">
-         <p>ดอกไม้ชนิดหนึ่ง</p>
-         </div>
-</div>
+        <asp:Label ID="lblshow" runat="server" ></asp:Label>
 
                
         </div>

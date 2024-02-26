@@ -10,6 +10,7 @@ using System.Data;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
+using DocumentFormat.OpenXml.Office2010.ExcelAc;
 
 public class ConnectionClass
 {
@@ -863,25 +864,26 @@ public class ConnectionClass
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             string sqlQuery = @"
-            SELECT 
-                product.pname AS ProductName, 
-                product.pimage AS ProductImage,
-                delivery.daliverryname AS DeliveryName, 
-                delivery.trackingid AS TrackingID,
-                orderdetail.status AS OrderStatus,
-            FROM 
-                orders
-            JOIN 
-                orderdetail ON orders.orderid = orderdetail.orderid_fk
-            JOIN 
-                product ON orderdetail.productid_fk = product.productid
-            JOIN 
-                payment ON orders.orderid = payment.orderid_fk
-            JOIN 
-                delivery ON payment.paymentid = delivery.paymentid_fk
-            WHERE 
-                orders.userid_fk = @userid
-                AND orderdetail.status = 'To shipping';";
+    SELECT 
+        product.pname AS ProductName, 
+        product.pimage AS ProductImage,
+        delivery.daliverryname AS DeliveryName, 
+        delivery.trackingid AS TrackingID,
+        orderdetail.status AS OrderStatus
+    FROM 
+        orders
+    JOIN 
+        orderdetail ON orders.orderid = orderdetail.orderid_fk
+    JOIN 
+        product ON orderdetail.productid_fk = product.productid
+    JOIN 
+        payment ON orders.orderid = payment.orderid_fk
+    JOIN 
+        delivery ON payment.paymentid = delivery.paymentid_fk
+    WHERE 
+        orders.userid_fk = @userid
+        AND (orderdetail.status = 'To shipping' or orderdetail.status = 'Shipping complete')";
+
 
             using (SqlCommand command = new SqlCommand(sqlQuery, connection))
             {
@@ -891,14 +893,13 @@ public class ConnectionClass
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    Delivery delivery = new Delivery(
-                        // Pass required arguments here
-                        reader["ProductName"].ToString(),
-                        reader["ProductImage"].ToString(),
-                        reader["DeliveryName"].ToString(),
-                        reader["TrackingID"].ToString(),
-                        reader["OrderStatus"].ToString()
-                    );
+                    string pname = reader.GetString(0);
+                    string pimage = reader.GetString(1);
+                    string dname = reader.GetString(2);
+                    int trackingid = reader.GetInt32(3);
+                    string status = reader.GetString(4);
+                    Delivery delivery = new Delivery(pname,pimage,trackingid,status,dname);
+
                     deliveries.Add(delivery);
                 }
 
