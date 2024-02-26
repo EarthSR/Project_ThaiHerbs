@@ -10,14 +10,13 @@ using System.Web.UI.WebControls;
 
 public partial class ProfileUser : System.Web.UI.Page
 {
-    int userid = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
             if (Session["userid"] != null)
             {
-                userid = Convert.ToInt32(Session["userid"]);
+                int userid = Convert.ToInt32(Session["userid"]);
                 lblresult.Text = userid.ToString();
                 LoadUserData(userid); // Call the method to load user data
             }
@@ -41,7 +40,7 @@ public partial class ProfileUser : System.Web.UI.Page
 
     protected void ButtonSignIn_Click(object sender, EventArgs e)
     {
-       
+        int userid = Convert.ToInt32(Session["userid"]);
 
         string selectedGender = DropDownList1.SelectedItem.Text;
         string gender = selectedGender != "Select Gender" ? selectedGender : (string)Session["gender"];
