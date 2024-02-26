@@ -12,16 +12,16 @@ public partial class AdminPage : System.Web.UI.Page
 
     }
 
-    protected void ButtonAdd(object sender, EventArgs e)
+    protected void ButtonAdd_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/Account/AdminProduct.aspx");
+        Response.Redirect("~/AdminProduct.aspx");
     }
-    protected void ButtonEdit(object sender, EventArgs e)
+    protected void ButtonEdit_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/Account/AdminEdit.aspx");
+        Response.Redirect("~/AdminEdit.aspx");
     }
-    protected void ButtonDelete(object sender, EventArgs e)
+    protected void ButtonDelete_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/Account/AdminDelete.aspx");
+        Response.Redirect("~/AdminDelete.aspx");
     }
 }
