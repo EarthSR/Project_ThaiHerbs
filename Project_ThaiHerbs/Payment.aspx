@@ -83,7 +83,6 @@
                         <asp:Button ID="ButtonPayment" runat="server" Text="ยืนยันการสั่งซื้อสินค้า" 
                                 CssClass="ButtonPayment" Height="55px" OnClientClick="playSound()" 
                                 OnClick="ButtonPayment_Click" />
-                            <asp:Button ID="test" runat="server" Text="Button" OnClick="test_Click" />
                             </div>
             </div>
             
