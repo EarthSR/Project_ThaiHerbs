@@ -23,15 +23,6 @@ public partial class Payment : System.Web.UI.Page
         if (!IsPostBack)
         {
 
-            if (uploadedImage.ImageUrl != null)
-            {
-                ButtonPayment.Visible = true;
-            }
-            else
-            {
-                ButtonPayment.Visible = false;
-            }
-
             if (Session["userid"] != null)
             {
                 int userid = (int)Session["userid"];
@@ -86,7 +77,9 @@ public partial class Payment : System.Web.UI.Page
 
     protected void lbl1_Click1(object sender, EventArgs e)
     {
-        Response.Redirect("~/ProfileUser.aspx");
+        txtaddress.Visible = true;
+        btncancel.Visible = true;
+        btnupdate.Visible = true;
     }
 
 
@@ -141,13 +134,13 @@ public partial class Payment : System.Web.UI.Page
         ConnectionClass.Insertpayment(orderid, userid, DateTime.Now, "QR Code");
         lblt.Text = ConnectionClass.Updatestatus("Waiting to check",userid,orderid);
         lblt.Visible = true;
-        
+        FillPage(userid);
+        FillTopPage(userid);
     }
 
 
     protected void ButtonUpload_Click(object sender, EventArgs e)
     {
-
         if (FileUpload1.HasFile)
         {
             try
@@ -158,17 +151,38 @@ public partial class Payment : System.Web.UI.Page
                 FileUpload1.SaveAs(filePath);
 
                 // กำหนด src attribute ของ <img> tag เพื่อแสดงรูปภาพที่อัพโหลด
-                uploadedImage.ImageUrl = "~/Slippay/" +fileName;
+                uploadedImage.ImageUrl = "~/Slippay/" + fileName;
+
+                // เมื่อมีการอัพโหลดไฟล์ใหม่ให้เปิดปุ่ม ButtonPayment
+                ButtonPayment.Visible = true;
             }
             catch (Exception ex)
             {
                 // จัดการข้อผิดพลาดที่เกิดขึ้นในการอัพโหลด
                 Response.Write("Error: " + ex.Message);
             }
-
         }
     }
 
-   
+
+
+    protected void btnupdate_Click(object sender, EventArgs e)
+    {
+        int userid = (int)Session["userid"];
+        ConnectionClass.Updateaddress(userid,txtaddress.Text);
+        btncancel.Visible = false;
+        btnupdate.Visible = false;
+        txtaddress.Visible = false;
+        FillTopPage(userid);
+    }
+
+    protected void btncancel_Click(object sender, EventArgs e)
+    {
+        int userid = (int)Session["userid"];
+        btnupdate.Visible = false;
+        txtaddress.Visible = false;
+        btncancel.Visible = false;
+        FillTopPage(userid);
+    }
 }
 

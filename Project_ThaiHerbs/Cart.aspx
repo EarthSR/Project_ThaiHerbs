@@ -24,11 +24,14 @@
            <br />
            <asp:Label ID="lblbamount" runat="server" Text="จำนวนทั้งหมด : " />
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button runat="server" Text="สั่งซื้อ" CssClass="btncart" OnClick="Unnamed2_Click" />
+            <asp:Button ID="btbcon" runat="server" Text="สั่งซื้อ" CssClass="btncart" 
+                OnClick="Unnamed2_Click" Visible="False" />
             
        </div>
    
             </div>
      </div>  
+          
+    </div>
 </asp:Content>
 

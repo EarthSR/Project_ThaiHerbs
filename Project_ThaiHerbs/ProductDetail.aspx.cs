@@ -22,6 +22,7 @@ public partial class ProductDetail : System.Web.UI.Page
                 {
                     Session["ProductId"] = productId;
                     FillPage(productId);
+                    FillPagecomment(productId);
                 }
             }
         }
@@ -52,6 +53,37 @@ public partial class ProductDetail : System.Web.UI.Page
         }
 
         lblshow.Text = sb.ToString();
+    }
+
+    private void FillPagecomment(int productid)
+    {
+        List<review> reviews = ConnectionClass.Getreview(productid);
+
+        StringBuilder sb = new StringBuilder();
+        sb.Append("<link rel='stylesheet' type='text/css' href='CSS/Review.css'/>");
+        foreach (review review in reviews)
+        {
+            sb.Append(@" 
+<div class='star-rating'>");
+
+                sb.Append("<a>" + review.Score + @" Star</a>");
+
+            sb.Append(@"
+</div>");
+
+            sb.Append(@" 
+<div class='txtreview'>
+    <p>
+        <a>User: " + review.Username + @"</a><br />
+        <a>" + review.Date + @"</a><br />
+        <a>" + review.Comment + @"</a><br />
+    </p>
+</div>");
+
+
+        }
+
+        lblcom.Text = sb.ToString();
     }
 
 
