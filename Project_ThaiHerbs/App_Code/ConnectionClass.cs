@@ -56,7 +56,7 @@ public class ConnectionClass
                         string firstName = reader.IsDBNull(5) ? null : reader.GetString(5);
                         string lastName = reader.IsDBNull(6) ? null : reader.GetString(6);
                         string gender = reader.IsDBNull(7) ? null : reader.GetString(7);
-                        user = new User(userId, username, password, email, typeofuser_fk ,phone, address, firstName, lastName, gender);
+                        user = new User(userId, username, password, email, typeofuser_fk, phone, address, firstName, lastName, gender);
                     }
                     reader.Close();
                 }
@@ -548,7 +548,7 @@ public class ConnectionClass
         }
     }
 
-    public static string Insertorderdetail(int productId, double priceOfProduct, int userId, int amount,string status)
+    public static string Insertorderdetail(int productId, double priceOfProduct, int userId, int amount, string status)
     {
         string resultMessage = null;
 
@@ -628,7 +628,7 @@ public class ConnectionClass
         return list;
     }
 
-    public static string UpdateUserData(int userId, string firstname, string lastname, string address, string phone, string email, string password, string gender)
+    public static string UpdateUserData(int userId, string firstname, string lastname, string address, string phone, string email, string password)
     {
         string resultMessage = "";
         string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
@@ -641,8 +641,7 @@ public class ConnectionClass
                                                  address = @Address,
                                                  phone = @Phone,
                                                  email = @Email,
-                                                 password = @Password,
-                                                 gender = @Gender
+                                                 password = @Password
                                              WHERE
                                                  userid = @UserId", conn);
 
@@ -652,7 +651,6 @@ public class ConnectionClass
             command.Parameters.AddWithValue("@Phone", phone);
             command.Parameters.AddWithValue("@Email", email);
             command.Parameters.AddWithValue("@Password", password);
-            command.Parameters.AddWithValue("@Gender", gender); 
             command.Parameters.AddWithValue("@UserId", userId);
 
             try
@@ -671,7 +669,7 @@ public class ConnectionClass
 
 
 
-    public static void InsertOrder(int userId, int orderdetailid,double totalPrice, int totalAmount)
+    public static void InsertOrder(int userId, int orderdetailid, double totalPrice, int totalAmount)
     {
         string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
         string query = "INSERT INTO orders (userid_fk, orderdetailid_fk ,totalprice, totalamount, ordersdate) VALUES (@UserId, @orderdetailid,@TotalPrice, @TotalAmount, GETDATE())";
@@ -759,7 +757,7 @@ public class ConnectionClass
     }
 
 
-    public static string Updatestatus(string status,int userid,int orderid)
+    public static string Updatestatus(string status, int userid, int orderid)
     {
         string resultMessage = "";
         string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
@@ -839,7 +837,7 @@ public class ConnectionClass
                 int score = reader.GetInt32(4);
                 string comment = reader.GetString(5);
                 string username = reader.GetString(6);
-                review review = new review(productid_fk,userid_fk,date,comment,score,username);
+                review review = new review(productid_fk, userid_fk, date, comment, score, username);
 
                 list.Add(review);
             }
@@ -851,4 +849,64 @@ public class ConnectionClass
 
         return list;
     }
+
+    public static List<Delivery> GetDeliveries(int userid)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+
+        List<Delivery> deliveries = new List<Delivery>();
+
+        // Query data and add to the list
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            string sqlQuery = @"
+            SELECT 
+                product.pname AS ProductName, 
+                product.pimage AS ProductImage,
+                delivery.daliverryname AS DeliveryName, 
+                delivery.trackingid AS TrackingID,
+                orderdetail.status AS OrderStatus,
+                payment.paymentid AS PaymentId,
+                payment.paymentdate AS PaymentDate,
+                payment.typeofpayment AS TypeOfPayment
+            FROM 
+                orders
+            JOIN 
+                orderdetail ON orders.orderid = orderdetail.orderid_fk
+            JOIN 
+                product ON orderdetail.productid_fk = product.productid
+            JOIN 
+                payment ON orders.orderid = payment.orderid_fk
+            JOIN 
+                delivery ON payment.paymentid = delivery.paymentid_fk
+            WHERE 
+                orders.userid_fk = @userid
+                AND orderdetail.status = 'To shipping';";
+
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                command.Parameters.AddWithValue("@userid", userid);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Delivery delivery = new Delivery(
+                        // Pass required arguments here
+                        reader["ProductName"].ToString(),
+                        reader["ProductImage"].ToString(),
+                        reader["DeliveryName"].ToString(),
+                        reader["TrackingID"].ToString(),
+                        reader["OrderStatus"].ToString()
+                    );
+                    deliveries.Add(delivery);
+                }
+
+            }
+        }
+
+        return deliveries;
+    }
+
+
 }

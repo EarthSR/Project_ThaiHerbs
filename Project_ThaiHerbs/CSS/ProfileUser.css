@@ -14,7 +14,7 @@
 }
 
 .menu-user-product {
-    position: absolute;
+    float: left;
     left: 150px;
     top: 320px;
 }
