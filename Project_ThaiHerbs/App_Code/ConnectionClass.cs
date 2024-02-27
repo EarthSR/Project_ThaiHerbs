@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using Microsoft.Win32;
 using System.ComponentModel;
 using System.Data;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 public class ConnectionClass
 {
@@ -56,7 +59,7 @@ public class ConnectionClass
                         string firstName = reader.IsDBNull(5) ? null : reader.GetString(5);
                         string lastName = reader.IsDBNull(6) ? null : reader.GetString(6);
                         string gender = reader.IsDBNull(7) ? null : reader.GetString(7);
-                        
+                        user = new User(userId, username, password, email, typeofuser_fk, phone, address, firstName, lastName, gender);
                     }
                     reader.Close();
                 }
@@ -592,10 +595,10 @@ public class ConnectionClass
     public static List<orderdetial> GetOrderDetailById(int userids)
     {
         List<orderdetial> list = new List<orderdetial>();
-        string query = "SELECT od.orderdetailid, od.productid_fk, od.priceofproduct, od.userid, od.amount, od.status, p.pimage, p.pname " +
-                       "FROM orderdetail od " +
-                       "JOIN product p ON od.productid_fk = p.productid " +
-                       "WHERE od.userid = @userid AND od.status = 'Waiting for payment'";
+        string query = "SELECT c.cartid, c.productid, c.price, c.userid, c.amount, p.pimage, p.pname " +
+                       "FROM cart c " +
+                       "JOIN product p ON c.productid = p.productid " +
+                       "WHERE c.userid = @userid ";
 
         command.CommandText = query;
         command.Parameters.Clear();
@@ -612,10 +615,9 @@ public class ConnectionClass
                 double price = reader.GetDouble(2);
                 int userid = reader.GetInt32(3);
                 int amount = reader.GetInt32(4);
-                string status = reader.GetString(5);
-                string image = reader.GetString(6);
-                string name = reader.GetString(7);
-                orderdetial orderdetail = new orderdetial(orderdetailid, productid, price, status, userid, image, amount, name);
+                string image = reader.GetString(5);
+                string name = reader.GetString(6);
+                orderdetial orderdetail = new orderdetial(orderdetailid, productid, price, userid, image, amount, name);
 
                 list.Add(orderdetail);
             }
@@ -860,25 +862,26 @@ public class ConnectionClass
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             string sqlQuery = @"
-            SELECT 
-                product.pname AS ProductName, 
-                product.pimage AS ProductImage,
-                delivery.daliverryname AS DeliveryName, 
-                delivery.trackingid AS TrackingID,
-                orderdetail.status AS OrderStatus,
-            FROM 
-                orders
-            JOIN 
-                orderdetail ON orders.orderid = orderdetail.orderid_fk
-            JOIN 
-                product ON orderdetail.productid_fk = product.productid
-            JOIN 
-                payment ON orders.orderid = payment.orderid_fk
-            JOIN 
-                delivery ON payment.paymentid = delivery.paymentid_fk
-            WHERE 
-                orders.userid_fk = @userid
-                AND orderdetail.status = 'To shipping';";
+    SELECT 
+        product.pname AS ProductName, 
+        product.pimage AS ProductImage,
+        delivery.daliverryname AS DeliveryName, 
+        delivery.trackingid AS TrackingID,
+        orderdetail.status AS OrderStatus
+    FROM 
+        orders
+    JOIN 
+        orderdetail ON orders.orderid = orderdetail.orderid_fk
+    JOIN 
+        product ON orderdetail.productid_fk = product.productid
+    JOIN 
+        payment ON orders.orderid = payment.orderid_fk
+    JOIN 
+        delivery ON payment.paymentid = delivery.paymentid_fk
+    WHERE 
+        orders.userid_fk = @userid
+        AND (orderdetail.status = 'To shipping' or orderdetail.status = 'Shipping complete')";
+
 
             using (SqlCommand command = new SqlCommand(sqlQuery, connection))
             {
@@ -888,14 +891,13 @@ public class ConnectionClass
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    Delivery delivery = new Delivery(
-                        // Pass required arguments here
-                        reader["ProductName"].ToString(),
-                        reader["ProductImage"].ToString(),
-                        reader["DeliveryName"].ToString(),
-                        reader["TrackingID"].ToString(),
-                        reader["OrderStatus"].ToString()
-                    );
+                    string pname = reader.GetString(0);
+                    string pimage = reader.GetString(1);
+                    string dname = reader.GetString(2);
+                    int trackingid = reader.GetInt32(3);
+                    string status = reader.GetString(4);
+                    Delivery delivery = new Delivery(pname,pimage,trackingid,status,dname);
+
                     deliveries.Add(delivery);
                 }
 

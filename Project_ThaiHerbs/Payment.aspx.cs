@@ -25,14 +25,6 @@ public partial class Payment : System.Web.UI.Page
                 int userid = (int)Session["userid"];
                 FillPage(userid);
                 FillTopPage(userid);
-                if (Request.QueryString["orderId"] != null)
-                {
-                    // Retrieve the orderId from the query string
-                    int orderid = Convert.ToInt32(Request.QueryString["orderId"]);
-
-
-
-                }
             }
         }
     }
@@ -125,7 +117,72 @@ public partial class Payment : System.Web.UI.Page
 
     protected void ButtonPayment_Click(object sender, EventArgs e)
     {
-        int orderid = Convert.ToInt32(Request.QueryString["orderId"]);
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+        if (Session["userid"] != null)
+        {
+            int userids = (int)Session["userid"];
+            List<Product> productList = ConnectionClass.GetProductsByUserId(userids);
+
+            double totalPrice = 0;
+            int totalAmount = 0;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                // เริ่มต้นด้วยการสร้าง transaction
+                SqlTransaction transaction = connection.BeginTransaction();
+
+                try
+                {
+                    foreach (Product product in productList)
+                    {
+                        totalPrice += (product.Price * product.Amount);
+                        totalAmount += product.Amount;
+                    }
+
+                    // เพิ่มข้อมูลรายการในตาราง orders และดึง order_id ที่เพิ่มล่าสุด
+                    string insertOrderQuery = @"INSERT INTO orders (userid_fk, ordersdate, totalamount, totalprice) 
+                                             OUTPUT INSERTED.orderid 
+                                             VALUES (@CustomerId, GETDATE(), @AmountOfPro, @TotalPrice);";
+
+                    SqlCommand insertOrderCommand = new SqlCommand(insertOrderQuery, connection, transaction);
+                    insertOrderCommand.Parameters.AddWithValue("@CustomerId", userids);
+                    insertOrderCommand.Parameters.AddWithValue("@AmountOfPro", totalAmount);
+                    insertOrderCommand.Parameters.AddWithValue("@TotalPrice", totalPrice);
+                    int orderId = (int)insertOrderCommand.ExecuteScalar();
+
+                    foreach (Product product in productList)
+                    {
+                        string insertOrderDetailQuery = @"INSERT INTO orderdetail (productid_fk, priceofproduct, userid, amount, status, orderid_fk) 
+                                                     VALUES (@ProductId, @Price, @UserId, @Quantity, @Status, @OrderId);";
+
+                        SqlCommand insertOrderDetailCommand = new SqlCommand(insertOrderDetailQuery, connection, transaction);
+                        insertOrderDetailCommand.Parameters.AddWithValue("@OrderId", orderId);
+                        insertOrderDetailCommand.Parameters.AddWithValue("@ProductId", product.Id);
+                        insertOrderDetailCommand.Parameters.AddWithValue("@UserId", userids);
+                        insertOrderDetailCommand.Parameters.AddWithValue("@Status", "Waiting for payment");
+                        insertOrderDetailCommand.Parameters.AddWithValue("@Quantity", product.Amount);
+                        insertOrderDetailCommand.Parameters.AddWithValue("@Price", product.Price);
+
+                        insertOrderDetailCommand.ExecuteNonQuery();
+                    }
+                    transaction.Commit();
+                    Session["orderid"] = orderId;
+                    ConnectionClass.DeleteCartItem(userids);
+                    
+                }
+                catch (Exception ex)
+                {
+                    
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+        int orderid = (int)Session["orderid"];
         int userid = (int)Session["userid"];
         string selectedValue = DropDownList1.SelectedValue;
         ConnectionClass.Insertpayment(orderid, userid, DateTime.Now, "QR Code");

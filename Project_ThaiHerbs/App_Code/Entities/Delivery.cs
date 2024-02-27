@@ -10,7 +10,7 @@ public class Delivery
 {
     public int DeliveryId { get; set; }
     public int PaymentId { get; set; }
-    public string TrackingId { get; set; }
+    public int TrackingId { get; set; }
     public DateTime DeliveryDate { get; set; }
     public string DeliveryName { get; set; }
     public string ProductName { get; set; }
@@ -18,7 +18,7 @@ public class Delivery
     public string TrackingID { get; set; }
     public string OrderStatus { get; set; }
 
-    public Delivery(int deliveryId, int paymentId, string trackingId, DateTime deliveryDate, string deliveryName,string productname,string productimage,string trackingid,string status)
+    public Delivery(int deliveryId, int paymentId, int trackingId, DateTime deliveryDate, string deliveryName,string productname,string productimage,string trackingid,string status)
     {
         DeliveryId = deliveryId;
         PaymentId = paymentId;
@@ -31,7 +31,7 @@ public class Delivery
         OrderStatus = status;
 
     }
-    public Delivery(string trackingId, DateTime deliveryDate,string productname, string productimage, string trackingid, string status,string deliveryName)
+    public Delivery(int trackingId, DateTime deliveryDate,string productname, string productimage, string trackingid, string status,string deliveryName)
     {
         TrackingId = trackingId;
         DeliveryDate = deliveryDate;
@@ -41,13 +41,13 @@ public class Delivery
         TrackingID = trackingid;
         OrderStatus = status;
     }
-    public Delivery(string productname,string productimage,string trackingId,string status,string deliveryName)
+    public Delivery(string productname,string productimage,int trackingId,string status,string deliveryName)
     {
         TrackingId = trackingId;
         ProductName = productname;
         ProductImage = productimage;
         OrderStatus = status;
-        DeliveryName =deliveryName;
+        DeliveryName = deliveryName;
     }
 
 }
