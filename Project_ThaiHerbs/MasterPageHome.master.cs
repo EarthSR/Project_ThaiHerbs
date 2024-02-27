@@ -67,9 +67,17 @@ public partial class MasterPageHome : System.Web.UI.MasterPage
 
     protected void user_Click(object sender, EventArgs e)
     {
+        string type = Session["usertype"].ToString();
         if (Session["Login"] != null)
         {
-            Response.Redirect("~/ProfileUser.aspx");
+            if (type == "admin")
+            {
+                Response.Redirect("~/AdminPage.aspx");
+            }
+            else
+            {
+                Response.Redirect("~/ProfileUser.aspx");
+            }
         }
     }
 }
