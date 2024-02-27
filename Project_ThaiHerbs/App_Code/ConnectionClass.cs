@@ -7,9 +7,6 @@ using System.Collections.Generic;
 using Microsoft.Win32;
 using System.ComponentModel;
 using System.Data;
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
-using DocumentFormat.OpenXml.Spreadsheet;
-using DocumentFormat.OpenXml.Wordprocessing;
 
 public class ConnectionClass
 {

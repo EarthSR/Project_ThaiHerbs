@@ -33,28 +33,23 @@
                        <div class="payment-boxdetail2">
                            <p>จำนวน</p>
                        </div>
-                      </div>
+                        </div>            
+
+
+
+                        <asp:Label ID="lblshow" runat="server"></asp:Label>
+
+
+                    </div>
                         
 
-            <div class= "payment-price">
-                     <asp:Label ID="lblshow" runat="server" ></asp:Label>
-                <br />
-            </div>
-            </div>
-
-
-
-
                     <div class="payment-howto">
-                <p><a>วิธีการชำระเงิน</a> โปรดแนบสลิปก่อนทำการกดสั่งซื้อ</p>
-                <asp:DropDownList ID="DropDownList1" runat="server" CssClass="designdrop" Width="174px" onchange="showImage();playSound()">
-                    <asp:ListItem>QR payment</asp:ListItem>
-                    <asp:ListItem>บิด</asp:ListItem>
-                </asp:DropDownList>
-
-                <div id="qrImage" style="display:none;">
-                    <br />
-                </div>
+                        <p><a>ช่องทางชำระเงิน</a></p>
+                        <asp:DropDownList ID="DropDownList1" runat="server" CssClass="designdrop" Width="174px" onchange="showImage();playSound()">
+                            <asp:ListItem>เลือกช่องทางชำระเงิน</asp:ListItem>
+                            <asp:ListItem>QR payment</asp:ListItem>
+                            <asp:ListItem>บิด</asp:ListItem>
+                        </asp:DropDownList>
 
 
 
@@ -63,20 +58,17 @@
                         </audio>
 
 
-                         <div class = "payment-container">
-         <div class = "payment-boxdetail0">
-             <img src= "../Image/QR.jpg" class ="qrcode">
-             <div class = "qrcode">
-                 </div>
-             <asp:Image ID="uploadedImage" runat="server" CssClass="qrcode" />
-               <div>
-                     <asp:FileUpload ID="FileUpload1" runat="server" />
-                     <asp:Button ID="ButtonUpload" runat="server" Text="Upload" 
-                         OnClick="ButtonUpload_Click" />
-                 </div>
-
-         </div>
-      </div>
+                        <div id="qrImage" style="display: none;">
+                            <p><a>วิธีการชำระเงิน</a> โปรดแนบสลิปก่อนทำการกดสั่งซื้อ</p>
+                            <img src= "../Image/QR.jpg" class ="qrcode">
+                            <asp:Image ID="uploadedImage" runat="server" CssClass="qrcode" />
+                              <div>
+                                    <asp:FileUpload ID="FileUpload1" runat="server" />
+                                    <asp:Button ID="ButtonUpload" runat="server" Text="Upload" OnClick="ButtonUpload_Click" />
+                                </div>
+                        </div>
+                         </div>
+                      </div>
                         <br />
                         <br />
                         <br />
@@ -103,9 +95,8 @@
                         var ddl = document.getElementById('<%= DropDownList1.ClientID %>');
                         var selectedOption = ddl.options[ddl.selectedIndex].text;
                         var qrImageDiv = document.getElementById('qrImage');
-                        var qrImage = document.getElementById('qrCodeImage');
 
-                        if (selectedOption === 'QR Code') {
+                        if (selectedOption === 'QR payment') {
                             qrImageDiv.style.display = 'block';
                         } else {
                             qrImageDiv.style.display = 'none';
