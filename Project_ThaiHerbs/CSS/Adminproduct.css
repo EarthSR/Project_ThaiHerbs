@@ -33,3 +33,10 @@
         color: white;
         font-size: 20px;
     }
+
+
+
+.btnOrdercon{
+    border-bottom : 2px solid black;
+    padding-bottom : 30px;
+}

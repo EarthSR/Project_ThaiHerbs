@@ -24,4 +24,11 @@ public partial class AdminPage : System.Web.UI.Page
     {
         Response.Redirect("~/AdminDelete.aspx");
     }
+
+
+    protected void ButtonDelivery_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/AdminSellList.aspx");
+    }
+    
 }
