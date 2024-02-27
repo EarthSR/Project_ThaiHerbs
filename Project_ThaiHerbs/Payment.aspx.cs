@@ -166,11 +166,12 @@ public partial class Payment : System.Web.UI.Page
                         insertOrderDetailCommand.Parameters.AddWithValue("@Status", "Waiting for payment");
                         insertOrderDetailCommand.Parameters.AddWithValue("@Quantity", product.Amount);
                         insertOrderDetailCommand.Parameters.AddWithValue("@Price", product.Price);
-
+                        ConnectionClass.UpdateAvailableQuantity(product.Id,product.Amount);
                         insertOrderDetailCommand.ExecuteNonQuery();
                     }
                     transaction.Commit();
                     Session["orderid"] = orderId;
+
                     ConnectionClass.DeleteCartItem(userids);
                     
                 }
@@ -187,7 +188,8 @@ public partial class Payment : System.Web.UI.Page
         int orderid = (int)Session["orderid"];
         int userid = (int)Session["userid"];
         string selectedValue = DropDownList1.SelectedValue;
-        ConnectionClass.Insertpayment(orderid, userid, DateTime.Now, selectedValue);
+        string img = uploadedImage.ImageUrl;
+        ConnectionClass.Insertpayment(orderid, userid, DateTime.Now, selectedValue,img);
         lblt.Text = ConnectionClass.Updatestatus("Waiting to check",userid,orderid);
         lblt.Visible = true;
         FillPage(userid);

@@ -712,10 +712,10 @@ public class ConnectionClass
     }
 
 
-    public static void Insertpayment(int orderid, int userid, DateTime paymentdate, string typeofpayment)
+    public static void Insertpayment(int orderid, int userid, DateTime paymentdate, string typeofpayment,string slip)
     {
         string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
-        string query = "INSERT INTO payment (orderid_fk, userid_fk, paymentdate, typeofpayment) VALUES (@order, @userid, @paydate, @paytype)";
+        string query = "INSERT INTO payment (orderid_fk, userid_fk, paymentdate, typeofpayment,slip) VALUES (@order, @userid, @paydate, @paytype,@slip)";
 
         try
         {
@@ -728,7 +728,7 @@ public class ConnectionClass
                     command.Parameters.AddWithValue("@order", orderid);
                     command.Parameters.AddWithValue("@paydate", paymentdate);
                     command.Parameters.AddWithValue("@paytype", typeofpayment);
-
+                    command.Parameters.AddWithValue("@slip", slip);
                     // Open connection
                     connection.Open();
 
@@ -848,7 +848,47 @@ public class ConnectionClass
 
         return list;
     }
+    public static string InsertProduct(string pname, double pprice, string pdetail, string ptype, int pamount, string pimage)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+        string resultMessage = "";
+        string query = "INSERT INTO product (pname, pprice, pdetail, ptype, pamount, pimage)" +
+                       "VALUES (@pname, @pprice, @pdetail, @ptype, @pamount, @pimage)";
 
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                // Add parameters to the query to prevent SQL injection
+                command.Parameters.AddWithValue("@pname", pname);
+                command.Parameters.AddWithValue("@pprice", pprice);
+                command.Parameters.AddWithValue("@pdetail", pdetail);
+                command.Parameters.AddWithValue("@ptype", ptype);
+                command.Parameters.AddWithValue("@pamount", pamount);
+                command.Parameters.AddWithValue("@pimage", pimage);
+
+                try
+                {
+                    connection.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        resultMessage = "Product inserted successfully!";
+                    }
+                    else
+                    {
+                        resultMessage = "Failed to insert product!";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    resultMessage = "Error: " + ex.Message;
+                }
+            }
+        }
+
+        return resultMessage;
+    }
     public static List<Delivery> GetDeliveries(int userid)
     {
         string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
@@ -904,46 +944,74 @@ public class ConnectionClass
         return deliveries;
     }
 
-    public string InsertProduct(string pname, double pprice, string pdetail, string ptype, int pamount, string pimage)
+    public static List<Product> Getproduct(string proidorname)
     {
+        List<Product> productList = new List<Product>();
         string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
-        string resultMessage = "";
-        // SQL query to insert a new product
-        string query = "INSERT INTO product pname, pprice, pdetail, ptype, pamount, pimage " +
-                       "VALUES (@pname, @pprice, @pdetail, @ptype, @pamount, @pimage)";
-
+        string query = "SELECT * FROM product WHERE productid LIKE @ProductType";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             using (SqlCommand command = new SqlCommand(query, connection))
             {
-                // Add parameters to the query to prevent SQL injection
-                command.Parameters.AddWithValue("@pname", pname);
-                command.Parameters.AddWithValue("@pprice", pprice);
-                command.Parameters.AddWithValue("@pdetail", pdetail);
-                command.Parameters.AddWithValue("@ptype", ptype);
-                command.Parameters.AddWithValue("@pamount", pamount);
-                command.Parameters.AddWithValue("@pimage", pimage);
+                command.Parameters.AddWithValue("@ProductType", "%" + proidorname + "%");
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int id = reader.GetInt32(0);
+                        string name = reader.GetString(1);
+                        double price = reader.GetDouble(2);
+                        string detail = reader.GetString(3);
+                        string type = reader.GetString(4);
+                        int amount = reader.GetInt32(5);
+                        string image = reader.GetString(6);
 
-                try
-                {
-                    connection.Open();
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                    {
-                        resultMessage = "Product inserted successfully!";
+                        Product product = new Product(id, name, price, detail, type, amount, image);
+                        productList.Add(product);
                     }
-                    else
-                    {
-                        resultMessage = "Failed to insert product!";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    resultMessage = "Error: " + ex.Message;
                 }
             }
         }
-
-        return resultMessage;
+        return productList;
     }
+    public static string Updateproduct(int productId, string newName, double newPrice, string newDetail, string newType, int newAmount, string newImage)
+    {
+        string result = "";
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string updateQuery = "UPDATE product SET pname = @NewName, pprice = @NewPrice, pdetail = @NewDetail, ptype = @NewType, pamount = @NewAmount, pimage = @NewImage WHERE productid = @ProductId";
+                using (SqlCommand command = new SqlCommand(updateQuery, conn))
+                {
+                    command.Parameters.AddWithValue("@NewName", newName);
+                    command.Parameters.AddWithValue("@NewPrice", newPrice);
+                    command.Parameters.AddWithValue("@NewDetail", newDetail);
+                    command.Parameters.AddWithValue("@NewType", newType);
+                    command.Parameters.AddWithValue("@NewAmount", newAmount);
+                    command.Parameters.AddWithValue("@NewImage", newImage);
+                    command.Parameters.AddWithValue("@ProductId", productId);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected == 0)
+                    {
+                        result ="Product not found or not updated.";
+                    }
+                    else
+                    {
+                        result = "Product updated successfully.";
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+           result = "Error updating product: " + ex.Message;
+        }
+        return result;
+    }
+
 }
