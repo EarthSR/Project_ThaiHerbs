@@ -2,7 +2,6 @@
 
 }
 .cart-container {
-
     width : 100%;
 }
 .cart-top {
@@ -16,7 +15,6 @@
 .cart-product {
     margin-top: 20px;
     margin-left: 200px;
-    height: 100px;
    
 }
 
@@ -42,6 +40,7 @@
 
 .btn {
     float: right;
+    padding : 40px;
     border-radius : 20px;
 }
 
@@ -54,7 +53,6 @@
     transition: background-color 1.5s ease;
     margin-right: 200px;
     width : 250px;
-    height: 40px;
     border-radius: 50px;
 }
     .btncart:hover {

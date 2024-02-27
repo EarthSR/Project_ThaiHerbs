@@ -49,17 +49,6 @@
 }
 
 
-.payment-boxdetail2 {
-    display: flex;
-    align-items: center; /* จัดให้เนื้อหาอยู่กึ่งกลางตามแนวดิ่ง */
-}
-
-.content {
-    display: flex;
-    align-items: center; /* จัดให้เนื้อหาอยู่กึ่งกลางตามแนวดิ่ง */
-}
-
-
 .payment-howto {
     margin: 20px;
     padding: 20px;
@@ -108,9 +97,6 @@
     margin: 0 auto;
     border-radius: 10px;
 }
-
-
-
 
 
 

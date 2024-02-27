@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web;
+using System.Web.DynamicData;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -19,7 +20,7 @@ public partial class Payment : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-
+            qrImage.Visible = false;
             if (Session["userid"] != null)
             {
                 int userid = (int)Session["userid"];
@@ -35,9 +36,10 @@ public partial class Payment : System.Web.UI.Page
         List<orderdetial> ordertetailList = ConnectionClass.GetOrderDetailById(userid);
 
         StringBuilder sb = new StringBuilder();
-        sb.Append("<div class='payment-boxdetail'>");
+        
         foreach (orderdetial orderdetail in ordertetailList)
         {
+            sb.Append("<div class='payment-boxdetail'>");
             sb.Append("<div class='payment-boxdetail2'>");
             sb.AppendFormat("<img src='{0}' class='imgpayment' />", orderdetail.Image);
             sb.Append("</div>");
@@ -55,13 +57,13 @@ public partial class Payment : System.Web.UI.Page
             sb.Append("<div class='payment-boxdetail2'>");
             sb.AppendFormat("<p class='product-price'>{0}<a>ชิ้น</a></p>", orderdetail.Amount);
             sb.Append("</div>");
+            sb.Append("</div>");
         }
-        sb.Append("</div>");
+       
 
-        sb.Append("</div>");
+        
         lblshow.Text = sb.ToString();
     }
-
 
 
     protected void lbl1_Click1(object sender, EventArgs e)
@@ -185,7 +187,7 @@ public partial class Payment : System.Web.UI.Page
         int orderid = (int)Session["orderid"];
         int userid = (int)Session["userid"];
         string selectedValue = DropDownList1.SelectedValue;
-        ConnectionClass.Insertpayment(orderid, userid, DateTime.Now, "QR Code");
+        ConnectionClass.Insertpayment(orderid, userid, DateTime.Now, selectedValue);
         lblt.Text = ConnectionClass.Updatestatus("Waiting to check",userid,orderid);
         lblt.Visible = true;
         FillPage(userid);
@@ -195,6 +197,7 @@ public partial class Payment : System.Web.UI.Page
 
     protected void ButtonUpload_Click(object sender, EventArgs e)
     {
+        
         if (FileUpload1.HasFile)
         {
             try
@@ -208,7 +211,8 @@ public partial class Payment : System.Web.UI.Page
                 uploadedImage.ImageUrl = "~/Slippay/" + fileName;
 
                 // เมื่อมีการอัพโหลดไฟล์ใหม่ให้เปิดปุ่ม ButtonPayment
-                ButtonPayment.Visible = true;
+                Button2.Visible = true;
+
             }
             catch (Exception ex)
             {
@@ -227,6 +231,7 @@ public partial class Payment : System.Web.UI.Page
         btncancel.Visible = false;
         btnupdate.Visible = false;
         txtaddress.Visible = false;
+        FillPage(userid);
         FillTopPage(userid);
     }
 
@@ -236,7 +241,24 @@ public partial class Payment : System.Web.UI.Page
         btnupdate.Visible = false;
         txtaddress.Visible = false;
         btncancel.Visible = false;
+        FillPage(userid);
         FillTopPage(userid);
+    }
+
+
+
+
+    protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        string select = DropDownList1.SelectedValue;
+        if (select == "QR payment")
+        {
+            qrImage.Visible = true;
+        }
+        else
+        {
+            qrImage.Visible = false;
+        }
     }
 }
 

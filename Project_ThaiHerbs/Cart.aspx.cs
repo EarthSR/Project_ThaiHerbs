@@ -47,21 +47,21 @@ public partial class Cart : System.Web.UI.Page
         foreach (Product product in productList)
         {
             sb.AppendFormat(@"
-<table style='width: 100%;'>
-    <tr>
+                <p><table style='width: 100%;'>
+                    <tr>
         
-        <td class='cart-product-img'>
-            <img src='{1}' class='cart-product-img'/>
-        </td>
-        <td class='cart-nameproduct'>&nbsp;&nbsp;&nbsp;&nbsp;<a>{2}</a></td>
-        <td><a id='price{0}'>{3} บาท</a></td>
-        <td><a>จำนวน {4} ชิ้น</a></td>
-        <td>
-         <a></a>
-        </td>
-    </tr>
-</table>
-", product.Id, product.Image, product.Name, product.Price, product.Amount);
+                        <td class='cart-product-img'>
+                            <img src='{1}' class='cart-product-img'/>
+                        </td>
+                        <td class='cart-nameproduct'>&nbsp;&nbsp;&nbsp;&nbsp;<a>{2}</a></td>
+                        <td><a id='price{0}'>{3} บาท</a></td>
+                        <td><a>จำนวน {4} ชิ้น</a></td>
+                        <td>
+                         <a></a>
+                        </td>
+                    </tr>
+                </table></p>
+            ", product.Id, product.Image, product.Name, product.Price, product.Amount);
 
             // Add the price of the current product to the total price
             totalPrice += (product.Price * product.Amount);

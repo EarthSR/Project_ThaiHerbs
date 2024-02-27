@@ -14,8 +14,9 @@
             <asp:Button runat="server" Text="Delete All Product in cart" CssClass="btnDeleteItem" OnClick="Unnamed1_Click"  />
             <asp:Label ID="lblresult" runat="server"></asp:Label>
         </div> 
-        
+        <div>
         <asp:Label ID="lblshow" runat="server"></asp:Label>
+            </div>
         <br />
         <br />
         <div class="cart-container">
@@ -24,14 +25,12 @@
            <br />
            <asp:Label ID="lblbamount" runat="server" Text="จำนวนทั้งหมด : " />
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button ID="btbcon" runat="server" Text="สั่งซื้อ" CssClass="btncart" 
-                OnClick="Unnamed2_Click" Visible="False" />
-            
-       </div>
+            <asp:Button ID="btbcon" runat="server" Text="สั่งซื้อ" CssClass="btncart" OnClick="Unnamed2_Click" Visible="False" />
+            <br />
+            <br />
+                   </div>
    
-            </div>
-     </div>  
-          
-    </div>
+                        </div>
+                 </div>  
 </asp:Content>
 
