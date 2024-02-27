@@ -11,12 +11,9 @@
                             <p> <asp:Button ID="ButtonAdd" runat="server" Text="เพิ่มสินค้า" Height="30px" 
                                     Width="100%" cssClass= "btn-manage-products"  
                                     PostBackUrl="~/Admin/AdminProduct.aspx"/></p>
-                            <p><asp:Button ID="ButtonEdit" runat="server" Text="แก้ไขข้อมูลสินค้า" 
+                            <p><asp:Button ID="ButtonEdit" runat="server" Text="แก้ไขและลบข้อมูลสินค้า" 
                                     Height="30px" Width="100%" cssClass= "btn-manage-products" 
-                                   PostBackUrl="~/Admin/AdminEdit.aspx"/></p>
-                            <p> <asp:Button ID="ButtonDelete" runat="server" Text="ลบสินค้า" Height="30px" 
-                                    Width="100%" cssClass= "btn-manage-products"  
-                                    PostBackUrl="~/Admin/AdminDelete.aspx"/></p>
+                                   PostBackUrl="~/Admin/AdminEditandDelete.aspx"/></p>
                             <p> <asp:Button ID="Button4" runat="server" Text="สินค้าในคลัง" Height="30px" 
                                     Width="100%" cssClass= "btn-manage-products" 
                                     PostBackUrl="~/Admin/AdminProductAll.aspx" /></p>

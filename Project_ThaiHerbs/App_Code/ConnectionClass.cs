@@ -1014,4 +1014,54 @@ public class ConnectionClass
         return result;
     }
 
+    public static string deleteproduct(int productId)
+    {
+        string result = ""; // ประกาศตัวแปร result เพื่อเก็บข้อความผลลัพธ์
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString(); // เรียกใช้ connection string จาก configuration
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString)) // เปิดการเชื่อมต่อกับฐานข้อมูล
+            {
+                conn.Open(); // เปิดการใช้งานการเชื่อมต่อ
+
+                // Temporarily disable foreign key constraint
+                string disableForeignKeyQuery = "ALTER TABLE orderdetail NOCHECK CONSTRAINT ALL";
+                using (SqlCommand disableForeignKeyCommand = new SqlCommand(disableForeignKeyQuery, conn)) // สร้าง SqlCommand เพื่อประมวลผลคำสั่ง SQL เพื่อปิดการใช้งาน constraint ที่เกี่ยวข้อง
+                {
+                    disableForeignKeyCommand.ExecuteNonQuery(); // ประมวลผลคำสั่ง SQL
+                }
+
+                // Delete the product
+                string deleteQuery = "DELETE FROM product WHERE productid = @ProductId"; // สร้างคำสั่ง SQL เพื่อลบข้อมูลสินค้าที่มี productid เท่ากับค่าที่รับเข้ามา
+                using (SqlCommand command = new SqlCommand(deleteQuery, conn)) // สร้าง SqlCommand เพื่อประมวลผลคำสั่ง SQL ในการลบสินค้า
+                {
+                    command.Parameters.AddWithValue("@ProductId", productId); // กำหนดค่าพารามิเตอร์ของคำสั่ง SQL
+
+                    int rowsAffected = command.ExecuteNonQuery(); // ประมวลผลคำสั่ง SQL และเก็บจำนวนแถวที่ได้รับผลกระทำกลับมา
+                    if (rowsAffected == 0) // ตรวจสอบว่าไม่มีสินค้าที่ต้องการลบในฐานข้อมูล
+                    {
+                        result = "Product not found"; // กำหนดข้อความผลลัพธ์
+                    }
+                    else // สินค้าถูกลบออกจากฐานข้อมูลสำเร็จ
+                    {
+                        result = "Product deleted successfully."; // กำหนดข้อความผลลัพธ์
+                    }
+                }
+
+                // Re-enable foreign key constraint
+                string enableForeignKeyQuery = "ALTER TABLE orderdetail WITH CHECK CHECK CONSTRAINT ALL";
+                using (SqlCommand enableForeignKeyCommand = new SqlCommand(enableForeignKeyQuery, conn)) // สร้าง SqlCommand เพื่อประมวลผลคำสั่ง SQL เพื่อเปิดการใช้งาน constraint ที่เกี่ยวข้อง
+                {
+                    enableForeignKeyCommand.ExecuteNonQuery(); // ประมวลผลคำสั่ง SQL
+                }
+            }
+        }
+        catch (Exception ex) // จัดการข้อผิดพลาดในกรณีที่เกิดข้อผิดพลาดระหว่างการทำงาน
+        {
+            result = "Error deleting product: " + ex.Message; // กำหนดข้อความผลลัพธ์
+        }
+        return result; // ส่งค่าผลลัพธ์กลับ
+    }
+
+
 }

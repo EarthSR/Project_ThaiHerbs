@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPageaccount.master" AutoEventWireup="true"
-    CodeFile="AdminEdit.aspx.cs" Inherits="AdminEdit" %>
+    CodeFile="AdminEditandDelete.aspx.cs" Inherits="AdminEdit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -34,6 +34,7 @@
                         <asp:ListItem>สมุนไพรเกี่ยวกับเส้นผม</asp:ListItem>
                         <asp:ListItem>สมุนไพรเกี่ยวกับใบหน้า</asp:ListItem>
                         <asp:ListItem>อาหารเสริม</asp:ListItem>
+                         <asp:ListItem>สมุนไพรขัดผิว</asp:ListItem>
                 </asp:DropDownList>
                     <br />
             </div>
@@ -72,7 +73,13 @@
                 <asp:Label ID="lbleror" runat="server" Text=""></asp:Label>
                 <br />
                 <asp:Button ID="ButtonSignIn" runat="server" Text="แก้ไขข้อมูลสืนค้า" Height="30px"
-                    Width="100%" CssClass="btn-manage-products" OnClick="ButtonSignIn_Click" />
+                    Width="100%" CssClass="btn-manage-products" OnClick="ButtonSignIn_Click" 
+                    Enabled="False" />
+                <br />
+                <br />
+                <asp:Button ID="ButtonSignIn0" runat="server" cssClass="btn-manage-products" 
+                    Enabled="False" Height="30px" OnClick="ButtonSignIn0_Click" Text="ลบสินค้า" 
+                    Width="100%" />
             </div>
         </div>
     </div>

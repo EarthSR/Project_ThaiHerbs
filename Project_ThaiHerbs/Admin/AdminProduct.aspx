@@ -31,6 +31,7 @@
                         <asp:ListItem>สมุนไพรเกี่ยวกับเส้นผม</asp:ListItem>
                         <asp:ListItem>สมุนไพรเกี่ยวกับใบหน้า</asp:ListItem>
                         <asp:ListItem>อาหารเสริม</asp:ListItem>
+                         <asp:ListItem>สมุนไพรขัดผิว</asp:ListItem>
                 </asp:DropDownList>
                     <br />
             </div>

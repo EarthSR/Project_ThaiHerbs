@@ -41,6 +41,8 @@ public partial class AdminEdit : System.Web.UI.Page
             txtdetail.Enabled = true;
             DropDownList1.Enabled = true;
             FileUpload1.Enabled = true;
+            ButtonSignIn.Enabled = true;
+            ButtonSignIn0.Enabled = true;
         }
         else
         {
@@ -50,6 +52,8 @@ public partial class AdminEdit : System.Web.UI.Page
             txtprice.Text = "";
             txtdetail.Text = "";
             DropDownList1.SelectedIndex = 0;
+            uploaded1.ImageUrl = ""; 
+
 
             txtname.Enabled = false;
             txtamount.Enabled = false;
@@ -57,6 +61,8 @@ public partial class AdminEdit : System.Web.UI.Page
             txtdetail.Enabled = false;
             DropDownList1.Enabled = false;
             FileUpload1.Enabled = false;
+            ButtonSignIn.Enabled = false;
+            ButtonSignIn0.Enabled = false;
         }
     }
     protected void ButtonUpload_Click(object sender, EventArgs e)
@@ -88,5 +94,11 @@ public partial class AdminEdit : System.Web.UI.Page
         string img = uploaded1.ImageUrl;
         string select = DropDownList1.SelectedValue.ToString();
         lbleror.Text = ConnectionClass.Updateproduct(id, txtname.Text, Convert.ToDouble(txtprice.Text), txtdetail.Text, select, Convert.ToInt32(txtamount.Text), img);
+    }
+
+    protected void ButtonSignIn0_Click(object sender, EventArgs e)
+    {
+        int id = Convert.ToInt32(txtserch.Text);
+        lbleror.Text = ConnectionClass.deleteproduct(id);
     }
 }
