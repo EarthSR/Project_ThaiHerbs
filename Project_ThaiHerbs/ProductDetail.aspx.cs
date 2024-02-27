@@ -132,6 +132,11 @@ public partial class ProductDetail : System.Web.UI.Page
 
     protected void btnadd_Click(object sender, EventArgs e)
     {
+        string type = Session["usertype"].ToString();
+        if (type == "admin")
+        {
+            Response.Redirect("~/Home.aspx");
+        }
         int productId;
         if (int.TryParse(Request.QueryString["productId"], out productId))
         {

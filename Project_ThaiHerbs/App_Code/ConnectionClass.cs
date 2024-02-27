@@ -904,5 +904,46 @@ public class ConnectionClass
         return deliveries;
     }
 
+    public string InsertProduct(string pname, double pprice, string pdetail, string ptype, int pamount, string pimage)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+        string resultMessage = "";
+        // SQL query to insert a new product
+        string query = "INSERT INTO product pname, pprice, pdetail, ptype, pamount, pimage " +
+                       "VALUES (@pname, @pprice, @pdetail, @ptype, @pamount, @pimage)";
 
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                // Add parameters to the query to prevent SQL injection
+                command.Parameters.AddWithValue("@pname", pname);
+                command.Parameters.AddWithValue("@pprice", pprice);
+                command.Parameters.AddWithValue("@pdetail", pdetail);
+                command.Parameters.AddWithValue("@ptype", ptype);
+                command.Parameters.AddWithValue("@pamount", pamount);
+                command.Parameters.AddWithValue("@pimage", pimage);
+
+                try
+                {
+                    connection.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        resultMessage = "Product inserted successfully!";
+                    }
+                    else
+                    {
+                        resultMessage = "Failed to insert product!";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    resultMessage = "Error: " + ex.Message;
+                }
+            }
+        }
+
+        return resultMessage;
+    }
 }
