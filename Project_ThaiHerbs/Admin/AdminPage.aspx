@@ -23,6 +23,9 @@
                             <p> <asp:Button ID="Button3" runat="server" Text="ที่ต้องจัดส่ง" Height="30px" 
                                     Width="100%" cssClass= "btn-manage-products" 
                                     PostBackUrl="~/Admin/AdminShipping.aspx" /></p>
+                            <p> <asp:Button ID="Button5" runat="server" Text="อัพเดตจัดส่ง" Height="30px" 
+                                    Width="100%" cssClass= "btn-manage-products" 
+                                    PostBackUrl="~/Admin/Adminupdateship.aspx" /></p>
                             <p> <asp:Button ID="Button2" runat="server" Text="ออเดอร์ที่สำเร็จ" Height="30px" Width="100%" cssClass= "btn-manage-products"/></p>
                             
                         </div>
