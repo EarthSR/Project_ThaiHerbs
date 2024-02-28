@@ -24,7 +24,9 @@ public partial class AdminProduct : System.Web.UI.Page
     {
         string select = DropDownList1.SelectedValue;
         string imagePath = uploaded.ImageUrl; // Get the image file path
-        lblerror.Text = ConnectionClass.InsertProduct(txtname.Text, Convert.ToDouble(txtprice.Text),txtdetail.Text,select, Convert.ToInt32(txtamount.Text), imagePath);
+        string img = uploaded.ImageUrl.Substring(1);
+        string imgdb = ".." + img;
+        lblerror.Text = ConnectionClass.InsertProduct(txtname.Text, Convert.ToDouble(txtprice.Text),txtdetail.Text,select, Convert.ToInt32(txtamount.Text), imgdb);
         // Handle the result if necessary
     }
 
