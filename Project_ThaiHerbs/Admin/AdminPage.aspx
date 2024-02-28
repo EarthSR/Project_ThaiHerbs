@@ -18,8 +18,11 @@
                                     Width="100%" cssClass= "btn-manage-products" 
                                     PostBackUrl="~/Admin/AdminProductAll.aspx" /></p>
                             <p> <asp:Button ID="Button1" runat="server" Text="ยืนยันออเดอร์" Height="30px" 
-                                    Width="100%" cssClass= "btn-manage-products" /></p>
-                            <p> <asp:Button ID="Button3" runat="server" Text="ที่ต้องจัดส่ง" Height="30px" Width="100%" cssClass= "btn-manage-products" /></p>
+                                    Width="100%" cssClass= "btn-manage-products" 
+                                    PostBackUrl="~/Admin/AdminSellList.aspx" /></p>
+                            <p> <asp:Button ID="Button3" runat="server" Text="ที่ต้องจัดส่ง" Height="30px" 
+                                    Width="100%" cssClass= "btn-manage-products" 
+                                    PostBackUrl="~/Admin/AdminShipping.aspx" /></p>
                             <p> <asp:Button ID="Button2" runat="server" Text="ออเดอร์ที่สำเร็จ" Height="30px" Width="100%" cssClass= "btn-manage-products"/></p>
                             
                         </div>

@@ -67,11 +67,11 @@ public partial class Tracking : System.Web.UI.Page
                     // สามารถอัปเดตสถานะสำเร็จ
                     // ทำการรีโหลดหน้าหรือปรับปรุงส่วนแสดงผลตามที่ต้องการ
                     FillPage(userid); // โหลดข้อมูลใหม่หลังจากการอัปเดต
-                    lblerror.Text = result + delivery.Orderdetailid;
+                    lblerror.Text = "Compleate!!!";
                 }
                 else
                 {
-                    lblerror.Text = result;
+                    lblerror.Text = "Something Wrong";
                     // เกิดข้อผิดพลาดในการอัปเดตสถานะ
                     // จัดการกับข้อผิดพลาดตามที่ต้องการ
                     // เช่น lblMessage.Text = "Update failed: " + result;

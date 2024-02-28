@@ -38,6 +38,7 @@
         <br />
         <br />
         <asp:Button ID="btbr" runat="server" Text="กดรับของ" OnClick="btbr_Click" />
+        <br />
         <asp:Label ID="lblerror" runat="server" Text=""></asp:Label>
     </div>
 </asp:Content>
