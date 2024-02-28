@@ -9,7 +9,7 @@
                     <asp:LinkButton ID="LinkButtonTrack" runat="server" Text="ติดตามการจัดส่ง" 
                         CssClass="category-link"  
                         PostBackUrl="~/Tracking.aspx" />
-                    <asp:LinkButton ID="LinkButtonRate" runat="server" Text="ให้คะแนนสินค้า" 
+                    <asp:LinkButton ID="LinkButtonRate" runat="server" Text="ออเดอร์ทั้งหมด" 
                         CssClass="category-link" PostBackUrl="~/Review.aspx" />
                     <asp:LinkButton ID="LinkButtonHome" runat="server" Text="กลับหน้าหลัก" 
                         CssClass="category-link"

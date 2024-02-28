@@ -26,10 +26,11 @@ public partial class Tracking : System.Web.UI.Page
         List<Delivery> deliveries = ConnectionClass.GetDeliveries(userid);
         StringBuilder sb = new StringBuilder();
         sb.Append("<link rel='stylesheet' type='text/css' href='CSS/Tracking.css'>");
-        sb.Append("<div class='tracking'>");
+        
 
         foreach (Delivery delivery in deliveries)
         {
+            sb.Append("<div class='tracking'>");
             sb.Append("<div class='content'>");
             sb.Append("<img id='mainImage' src='" + delivery.ProductImage + "' class='imgtracking' />");
             sb.Append("<p>" + delivery.ProductName + "</p>");
@@ -43,10 +44,11 @@ public partial class Tracking : System.Web.UI.Page
             sb.Append("<div class='content'>");
             sb.Append("<p>" + delivery.OrderStatus + "</p>");
             sb.Append("</div>");
+            sb.Append("</div>");
 
         }
 
-        sb.Append("</div>");
+        
         lblshow.Text = sb.ToString();
     }
 

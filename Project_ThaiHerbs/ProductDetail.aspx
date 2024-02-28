@@ -29,16 +29,15 @@
 
             </div>
 
-        <div class="review">
-            <h2>
-                <asp:Label ID="Label3" runat="server" Text="คะแนนสินค้า" />
-            </h2>
+        <div>
+                       <br />
             <br />
-           
-            <p class="align">
-                <asp:Label ID="lblcom" runat="server" Text=""></asp:Label>
-            </p>
-        </div>
+                        <br />
+            <br />
+                        <br />
+            <br />
+                        <br />
+            <br />
     </div>
 
 </asp:Content>
