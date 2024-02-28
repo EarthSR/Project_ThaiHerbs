@@ -30,31 +30,54 @@ public partial class Tracking : System.Web.UI.Page
 
         foreach (Delivery delivery in deliveries)
         {
-            sb.Append(string.Format(@" 
-            <div class='content'>
-                <img id='mainImage' src='{0}' class='imgtracking' />
-                <p>{1}</p>
-            </div>
-            <div class='content'>
-                <p>{2}</p>
-            </div>
-            <div class='content'>
-                <p>{3}</p>
-            </div>
-            <div class='content'>
-                <p>{4}</p>
-            </div>",
-                delivery.ProductImage,
-                delivery.ProductName,
-                delivery.DeliveryName,
-                delivery.TrackingID,
-                delivery.OrderStatus
-            ));
+            sb.Append("<div class='content'>");
+            sb.Append("<img id='mainImage' src='" + delivery.ProductImage + "' class='imgtracking' />");
+            sb.Append("<p>" + delivery.ProductName + "</p>");
+            sb.Append("</div>");
+            sb.Append("<div class='content'>");
+            sb.Append("<p>" + delivery.DeliveryName + "</p>");
+            sb.Append("</div>");
+            sb.Append("<div class='content'>");
+            sb.Append("<p>" + delivery.TrackingId + "</p>");
+            sb.Append("</div>");
+            sb.Append("<div class='content'>");
+            sb.Append("<p>" + delivery.OrderStatus + "</p>");
+            sb.Append("</div>");
+
         }
 
         sb.Append("</div>");
         lblshow.Text = sb.ToString();
     }
 
+    protected void btbr_Click(object sender, EventArgs e)
+    {
+        int userid = Convert.ToInt32(Session["userid"]);
+        List<Delivery> deliveries = ConnectionClass.GetDeliveries(userid);
+
+        foreach (Delivery delivery in deliveries)
+        {
+            if (delivery.OrderStatus == "Successful delivery")
+            {
+                // เรียกใช้เมทอด UpdateStatus เพื่ออัปเดตสถานะ
+                string result = ConnectionClass.UpdateStatus(delivery.Orderdetailid, "Successful delivery", "review");
+                // ตรวจสอบผลลัพธ์จากการอัปเดต
+                if (result.StartsWith("Rows affected"))
+                {
+                    // สามารถอัปเดตสถานะสำเร็จ
+                    // ทำการรีโหลดหน้าหรือปรับปรุงส่วนแสดงผลตามที่ต้องการ
+                    FillPage(userid); // โหลดข้อมูลใหม่หลังจากการอัปเดต
+                    lblerror.Text = result + delivery.Orderdetailid;
+                }
+                else
+                {
+                    lblerror.Text = result;
+                    // เกิดข้อผิดพลาดในการอัปเดตสถานะ
+                    // จัดการกับข้อผิดพลาดตามที่ต้องการ
+                    // เช่น lblMessage.Text = "Update failed: " + result;
+                }
+            }
+        }
+    }
 
 }
