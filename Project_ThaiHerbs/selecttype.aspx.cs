@@ -37,7 +37,7 @@ public partial class selecttype : System.Web.UI.Page
                     </div>
                     <div class='product-details'>
                         <h2>{2}</h2>
-                        <div class='price'>${3}</div>
+                        <div class='price'>{3} บาท</div>
                     </div>
                 </a>
             </div>",

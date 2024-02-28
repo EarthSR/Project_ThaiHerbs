@@ -17,7 +17,6 @@ public partial class ProfileUser : System.Web.UI.Page
             if (Session["userid"] != null)
             {
                 int userid = Convert.ToInt32(Session["userid"]);
-                lblresult.Text = userid.ToString();
                 LoadUserData(userid); // Call the method to load user data
             }
             // Other code for populating controls goes here
@@ -38,7 +37,8 @@ public partial class ProfileUser : System.Web.UI.Page
         string Address = address.Text; // Assuming 'address' is the ID of your address TextBox
 
         // Update user data
-        lblresult.Text = ConnectionClass.UpdateUserData(userid, FirstName, LastName, Address, Phone, Email, Password);
+        ConnectionClass.UpdateUserData(userid, FirstName, LastName, Address, Phone, Email, Password);
+
 
         // Refresh session variables
         Session["Firstname"] = FirstName;
@@ -76,8 +76,7 @@ public partial class ProfileUser : System.Web.UI.Page
             }
             catch (Exception ex)
             {
-                // Handle any exceptions
-                lblresult.Text = "Error loading user data: " + ex.Message;
+                
             }
         }
     }

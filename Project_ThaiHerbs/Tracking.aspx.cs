@@ -16,6 +16,15 @@ public partial class Tracking : System.Web.UI.Page
             {
                 int userid = Convert.ToInt32(Session["userid"]);
                 FillPage(userid);
+                List<Delivery> deliveries = ConnectionClass.GetDeliveries(userid);
+                foreach (Delivery delivery in deliveries)
+                {
+                    if (delivery.OrderStatus == "Successful delivery")
+                    {
+                        btbr.Visible = true;
+                        FillPage(userid);
+                    }
+                }
             }
 
         }
@@ -26,10 +35,10 @@ public partial class Tracking : System.Web.UI.Page
         List<Delivery> deliveries = ConnectionClass.GetDeliveries(userid);
         StringBuilder sb = new StringBuilder();
         sb.Append("<link rel='stylesheet' type='text/css' href='CSS/Tracking.css'>");
-        sb.Append("<div class='tracking'>");
 
-        foreach (Delivery delivery in deliveries)
+            foreach (Delivery delivery in deliveries)
         {
+            sb.Append("<div class='tracking'>");
             sb.Append("<div class='content'>");
             sb.Append("<img id='mainImage' src='" + delivery.ProductImage + "' class='imgtracking' />");
             sb.Append("<p>" + delivery.ProductName + "</p>");
@@ -43,10 +52,11 @@ public partial class Tracking : System.Web.UI.Page
             sb.Append("<div class='content'>");
             sb.Append("<p>" + delivery.OrderStatus + "</p>");
             sb.Append("</div>");
+            sb.Append("</div>");
 
         }
 
-        sb.Append("</div>");
+        
         lblshow.Text = sb.ToString();
     }
 
@@ -74,7 +84,6 @@ public partial class Tracking : System.Web.UI.Page
                     lblerror.Text = "Something Wrong";
                     // เกิดข้อผิดพลาดในการอัปเดตสถานะ
                     // จัดการกับข้อผิดพลาดตามที่ต้องการ
-                    // เช่น lblMessage.Text = "Update failed: " + result;
                 }
             }
         }

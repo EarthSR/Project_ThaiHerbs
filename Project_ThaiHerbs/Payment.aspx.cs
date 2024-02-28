@@ -195,6 +195,7 @@ public partial class Payment : System.Web.UI.Page
         lblt.Visible = true;
         FillPage(userid);
         FillTopPage(userid);
+        Response.Redirect("~/Tracking.aspx");
     }
 
 

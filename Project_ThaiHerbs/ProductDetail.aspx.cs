@@ -83,7 +83,7 @@ public partial class ProductDetail : System.Web.UI.Page
 
         }
 
-        lblcom.Text = sb.ToString();
+        //lblcom.Text = sb.ToString();
     }
 
 
