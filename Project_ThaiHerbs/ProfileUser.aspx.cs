@@ -77,7 +77,7 @@ public partial class ProfileUser : System.Web.UI.Page
             catch (Exception ex)
             {
                 // Handle any exceptions
-                lblresult.Text = "Error loading user data: " + ex.Message;
+                //lblresult.Text = "Error loading user data: " + ex.Message;
             }
         }
     }

@@ -17,9 +17,6 @@
                 </div>
                     <div class="user-product">
                             <div class="detail-profile">
-                                    <a href="#" id="ImageLink" runat="server">
-                                        <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="previewImage(event)">&nbsp;
-                                    </a>
                                 <div class="detail-profile1">
                                     <p><a>Username</a></p>
                                     <p><a>Password</a></p>
@@ -41,19 +38,15 @@
                                     <p>
                                         <asp:Label ID="gender" runat="server"></asp:Label></p>
                                     <p>
-                                        &nbsp;</p>
-                                            <div>
-                                    <p>
                                         <asp:TextBox ID="address" runat="server" TextMode="MultiLine" Height="61px"></asp:TextBox>
                                     </p>
 
                
 
                         </div>
-                                        <div class="auto-style2">
+                                    <div class="auto-style2">
                                     <asp:Label ID="lblresult" runat="server" Text=""></asp:Label>
-                                    <asp:Button ID="ButtonSignIn" runat="server" CssClass="editinfo" Text="บันทึกข้อมูล" Height="43px" 
-                                            Width="147px" OnClick="ButtonSignIn_Click" ValidationGroup="edit"  />
+                                    <asp:Button ID="ButtonSignIn" runat="server" CssClass="editinfo" Text="บันทึกข้อมูล" Height="43px" Width="147px" OnClick="ButtonSignIn_Click" ValidationGroup="edit"  />
                                         </div>
 
 
