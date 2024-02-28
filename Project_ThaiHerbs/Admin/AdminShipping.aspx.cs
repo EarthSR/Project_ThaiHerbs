@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class AdminSellList : System.Web.UI.Page
+public partial class AdminSell : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -22,11 +24,10 @@ public partial class AdminSellList : System.Web.UI.Page
         string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
 
         // Query to fetch data from orders table with specific condition
-        string query = @"SELECT o.orderid, o.userid_fk, o.totalprice, o.totalamount, od.status, payment.slip
+        string query = @"SELECT o.orderid, o.userid_fk, o.totalprice, o.totalamount, od.status
                      FROM orders o
                      INNER JOIN orderdetail od ON o.orderid = od.orderid_fk
-					 join payment on payment.orderid_fk = o.orderid
-                     WHERE od.status = 'Waiting to check'"; // Make sure to handle Unicode characters properly
+                     WHERE od.status = 'Waiting for packing'"; // Make sure to handle Unicode characters properly
 
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
@@ -46,7 +47,6 @@ public partial class AdminSellList : System.Web.UI.Page
                         <td>Total Price</td>
                         <td>Total Amount</td>
                         <td>Status</td>
-                        <td>Img</td>
                     </tr>");
 
                 // Append table rows dynamically based on data retrieved from the database
@@ -58,7 +58,6 @@ public partial class AdminSellList : System.Web.UI.Page
                     sb.Append("<td>").Append(reader["totalprice"]).Append("</td>");
                     sb.Append("<td>").Append(reader["totalamount"]).Append("</td>");
                     sb.Append("<td>").Append(reader["status"]).Append("</td>");
-                    sb.Append("<td><a href='").Append(reader["slip"]).Append("' target='_blank'><img src='").Append(reader["slip"]).Append("' style='width: 100px;' /></a></td>");
                     sb.Append("</tr>");
                 }
 
@@ -76,16 +75,29 @@ public partial class AdminSellList : System.Web.UI.Page
         lblshow.Text = sb.ToString();
     }
 
+    private static readonly ThreadLocal<Random> random =
+        new ThreadLocal<Random>(() => new Random(Guid.NewGuid().GetHashCode()));
 
-    protected void btbone_Click(object sender, EventArgs e)
+    protected void ButtonSignIn_Click(object sender, EventArgs e)
     {
-        ConnectionClass.UpdateStatus(Convert.ToInt32(txtid.Text), "Waiting to check", "Waiting for packing");
-        FillPage();
+        // Generate a random tracking ID
+        int trackingId = random.Value.Next();
+
+        // Update status
+        lblerror.Text = ConnectionClass.UpdateStatus(Convert.ToInt32(txtid.Text), "Waiting for packing", "Waiting to receive the product");
+
+        // Insert delivery
+        if (!string.IsNullOrEmpty(txtid.Text) && !string.IsNullOrEmpty(DropDownList1.SelectedValue))
+        {
+            int orderId = Convert.ToInt32(txtid.Text);
+            int paymentId = ConnectionClass.GetPaymentId(orderId);
+            DateTime deliveryDate = DateTime.Now;
+            string deliveryName = DropDownList1.SelectedValue;
+
+            string insertionResult = ConnectionClass.InsertDelivery(paymentId, trackingId, deliveryDate, deliveryName);
+            // Handle insertion result if needed
+        }
     }
 
-    protected void btbdelete_Click(object sender, EventArgs e)
-    {
-        ConnectionClass.UpdateStatus(Convert.ToInt32(txtid.Text), "Waiting to check", "Cancle");
-        FillPage();
-    }
+
 }

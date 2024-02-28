@@ -188,8 +188,9 @@ public partial class Payment : System.Web.UI.Page
         int orderid = (int)Session["orderid"];
         int userid = (int)Session["userid"];
         string selectedValue = DropDownList1.SelectedValue;
-        string img = uploadedImage.ImageUrl;
-        ConnectionClass.Insertpayment(orderid, userid, DateTime.Now, selectedValue,img);
+        string img = uploadedImage.ImageUrl.Substring(1);
+        string imgdb = ".." + img;
+        ConnectionClass.Insertpayment(orderid, userid, DateTime.Now, selectedValue,imgdb);
         lblt.Text = ConnectionClass.Updatestatus("Waiting to check",userid,orderid);
         lblt.Visible = true;
         FillPage(userid);

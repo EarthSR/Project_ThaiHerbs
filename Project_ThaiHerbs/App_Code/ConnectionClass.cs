@@ -899,26 +899,26 @@ public class ConnectionClass
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             string sqlQuery = @"
-    SELECT 
-        product.pname AS ProductName, 
-        product.pimage AS ProductImage,
-        delivery.daliverryname AS DeliveryName, 
-        delivery.trackingid AS TrackingID,
-        orderdetail.status AS OrderStatus
-    FROM 
-        orders
-    JOIN 
-        orderdetail ON orders.orderid = orderdetail.orderid_fk
-    JOIN 
-        product ON orderdetail.productid_fk = product.productid
-    JOIN 
-        payment ON orders.orderid = payment.orderid_fk
-    JOIN 
-        delivery ON payment.paymentid = delivery.paymentid_fk
-    WHERE 
-        orders.userid_fk = @userid
-        AND (orderdetail.status = 'To shipping' or orderdetail.status = 'Shipping complete')";
-
+            SELECT 
+     product.pname AS ProductName, 
+     product.pimage AS ProductImage,
+     delivery.daliverryname AS DeliveryName, 
+     delivery.trackingid ,
+     orderdetail.status AS OrderStatus,
+     orderdetail.orderid_fk
+ FROM 
+     orders
+ JOIN 
+     orderdetail ON orders.orderid = orderdetail.orderid_fk
+ JOIN 
+     product ON orderdetail.productid_fk = product.productid
+ JOIN 
+     payment ON orders.orderid = payment.orderid_fk
+ JOIN 
+     delivery ON payment.paymentid = delivery.paymentid_fk
+ WHERE 
+     orders.userid_fk = @userid AND orderdetail.status <> 'review'
+    ";
 
             using (SqlCommand command = new SqlCommand(sqlQuery, connection))
             {
@@ -928,21 +928,23 @@ public class ConnectionClass
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
+
                     string pname = reader.GetString(0);
                     string pimage = reader.GetString(1);
                     string dname = reader.GetString(2);
-                    int trackingid = reader.GetInt32(3);
+                    int trackingid = reader.GetInt32(3); // Corrected this line
                     string status = reader.GetString(4);
-                    Delivery delivery = new Delivery(pname,pimage,trackingid,status,dname);
+                    int paymentid = reader.GetInt32(5);
+                    Delivery delivery = new Delivery(pname, pimage, trackingid, status, dname,paymentid);
 
                     deliveries.Add(delivery);
                 }
-
             }
         }
 
         return deliveries;
     }
+
 
     public static List<Product> Getproduct(string proidorname)
     {
@@ -1064,4 +1066,102 @@ public class ConnectionClass
     }
 
 
+    public static string UpdateStatus(int orderid, string oldStatus, string newStatus)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+        // Query to update the status of orders for a specific orderid
+        string updateQuery = @"
+            UPDATE orderdetail
+            SET status = @NewStatus
+            WHERE status = @OldStatus
+            AND orderid_fk = @OrderID";
+
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            SqlCommand command = new SqlCommand(updateQuery, connection);
+            command.Parameters.AddWithValue("@OldStatus", oldStatus);
+            command.Parameters.AddWithValue("@NewStatus", newStatus);
+            command.Parameters.AddWithValue("@OrderID", orderid);
+
+            try
+            {
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                return "Rows affected: "+rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                return ex.Message;
+            }
+        }
+    }
+
+    public static string InsertDelivery(int paymentId, int trackingId, DateTime deliveryDate, string deliveryName)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+        string insertQuery = @"
+            INSERT INTO delivery (paymentid_fk, trackingid, deliverydate, daliverryname)
+            VALUES (@PaymentId, @TrackingId, @DeliveryDate, @DeliveryName)";
+
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            SqlCommand command = new SqlCommand(insertQuery, connection);
+            command.Parameters.AddWithValue("@PaymentId", paymentId);
+            command.Parameters.AddWithValue("@TrackingId", trackingId);
+            command.Parameters.AddWithValue("@DeliveryDate", deliveryDate);
+            command.Parameters.AddWithValue("@DeliveryName", deliveryName);
+
+            try
+            {
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                return "Rows affected "+rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                return ex.Message;
+            }
+        }
+    }
+
+    public static int GetPaymentId(int orderId)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+        string selectQuery = @"
+            SELECT payment.paymentid 
+            FROM payment 
+            JOIN orders ON payment.orderid_fk = orders.orderid
+            WHERE orders.orderid = @OrderId";
+
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            SqlCommand command = new SqlCommand(selectQuery, connection);
+            command.Parameters.AddWithValue("@OrderId", orderId);
+
+            try
+            {
+                connection.Open();
+                object result = command.ExecuteScalar();
+                if (result != null && result != DBNull.Value)
+                {
+                    return Convert.ToInt32(result);
+                }
+                else
+                {
+                    // Handle case when no payment id is found for the order id
+                    return -1; // Or whatever value indicates absence of payment id
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                Console.WriteLine(ex.Message);
+                return -1; // Or whatever value indicates error
+            }
+        }
+    }
+
+        
 }
