@@ -22,6 +22,11 @@ public partial class Cart : System.Web.UI.Page
 
             if (Session["userid"] != null)
             {
+                string type = Session["usertype"].ToString();
+                if (type == "admin")
+                {
+                    Response.Redirect("~/Home.aspx");
+                }
                 int userid = (int)Session["userid"];
                 List<Product> productList = ConnectionClass.GetProductsByUserId(userid);
                 if (productList.Count != 0)

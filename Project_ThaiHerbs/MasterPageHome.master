@@ -54,7 +54,7 @@
             <table class="auto-style1">
                 <tr>
                     <td>
-                        <asp:LinkButton ID="lbl1" runat="server" Text="สมุนไพรเเห้ง" 
+                        <asp:LinkButton ID="lbl1" runat="server" Text="สมุนไพรแห้ง" 
                             CssClass="hyperlike-common" OnClick="LinkButton_Click" />
                     </td>
                     <td>

@@ -13,10 +13,7 @@ public partial class selecttype : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            // Retrieve the selected type from the query string
             string type = (string)Session["selectedtype"];
-
-            // Fill the page with products based on the selected type
             FillPage(type);
         }
     }
@@ -34,7 +31,7 @@ public partial class selecttype : System.Web.UI.Page
         {
             sb.Append(string.Format(@"
             <div class='box'>
-                <a href='ProductDetail.aspx?productId={0}' target='_blank' class='product-card'> <!-- Modified to open in new page -->
+                <a href='ProductDetail.aspx?productId={0}' target='_blank' class='product-card'> 
                     <div class='product-image'>
                         <img src='{1}'/>
                     </div>

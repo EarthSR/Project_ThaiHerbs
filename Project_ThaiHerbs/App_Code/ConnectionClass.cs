@@ -712,10 +712,10 @@ public class ConnectionClass
     }
 
 
-    public static void Insertpayment(int orderid, int userid, DateTime paymentdate, string typeofpayment)
+    public static void Insertpayment(int orderid, int userid, DateTime paymentdate, string typeofpayment,string slip)
     {
         string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
-        string query = "INSERT INTO payment (orderid_fk, userid_fk, paymentdate, typeofpayment) VALUES (@order, @userid, @paydate, @paytype)";
+        string query = "INSERT INTO payment (orderid_fk, userid_fk, paymentdate, typeofpayment,slip) VALUES (@order, @userid, @paydate, @paytype,@slip)";
 
         try
         {
@@ -728,7 +728,7 @@ public class ConnectionClass
                     command.Parameters.AddWithValue("@order", orderid);
                     command.Parameters.AddWithValue("@paydate", paymentdate);
                     command.Parameters.AddWithValue("@paytype", typeofpayment);
-
+                    command.Parameters.AddWithValue("@slip", slip);
                     // Open connection
                     connection.Open();
 
@@ -848,7 +848,47 @@ public class ConnectionClass
 
         return list;
     }
+    public static string InsertProduct(string pname, double pprice, string pdetail, string ptype, int pamount, string pimage)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+        string resultMessage = "";
+        string query = "INSERT INTO product (pname, pprice, pdetail, ptype, pamount, pimage)" +
+                       "VALUES (@pname, @pprice, @pdetail, @ptype, @pamount, @pimage)";
 
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                // Add parameters to the query to prevent SQL injection
+                command.Parameters.AddWithValue("@pname", pname);
+                command.Parameters.AddWithValue("@pprice", pprice);
+                command.Parameters.AddWithValue("@pdetail", pdetail);
+                command.Parameters.AddWithValue("@ptype", ptype);
+                command.Parameters.AddWithValue("@pamount", pamount);
+                command.Parameters.AddWithValue("@pimage", pimage);
+
+                try
+                {
+                    connection.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        resultMessage = "Product inserted successfully!";
+                    }
+                    else
+                    {
+                        resultMessage = "Failed to insert product!";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    resultMessage = "Error: " + ex.Message;
+                }
+            }
+        }
+
+        return resultMessage;
+    }
     public static List<Delivery> GetDeliveries(int userid)
     {
         string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
@@ -902,6 +942,125 @@ public class ConnectionClass
         }
 
         return deliveries;
+    }
+
+    public static List<Product> Getproduct(string proidorname)
+    {
+        List<Product> productList = new List<Product>();
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+        string query = "SELECT * FROM product WHERE productid LIKE @ProductType";
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@ProductType", "%" + proidorname + "%");
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int id = reader.GetInt32(0);
+                        string name = reader.GetString(1);
+                        double price = reader.GetDouble(2);
+                        string detail = reader.GetString(3);
+                        string type = reader.GetString(4);
+                        int amount = reader.GetInt32(5);
+                        string image = reader.GetString(6);
+
+                        Product product = new Product(id, name, price, detail, type, amount, image);
+                        productList.Add(product);
+                    }
+                }
+            }
+        }
+        return productList;
+    }
+    public static string Updateproduct(int productId, string newName, double newPrice, string newDetail, string newType, int newAmount, string newImage)
+    {
+        string result = "";
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string updateQuery = "UPDATE product SET pname = @NewName, pprice = @NewPrice, pdetail = @NewDetail, ptype = @NewType, pamount = @NewAmount, pimage = @NewImage WHERE productid = @ProductId";
+                using (SqlCommand command = new SqlCommand(updateQuery, conn))
+                {
+                    command.Parameters.AddWithValue("@NewName", newName);
+                    command.Parameters.AddWithValue("@NewPrice", newPrice);
+                    command.Parameters.AddWithValue("@NewDetail", newDetail);
+                    command.Parameters.AddWithValue("@NewType", newType);
+                    command.Parameters.AddWithValue("@NewAmount", newAmount);
+                    command.Parameters.AddWithValue("@NewImage", newImage);
+                    command.Parameters.AddWithValue("@ProductId", productId);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected == 0)
+                    {
+                        result ="Product not found or not updated.";
+                    }
+                    else
+                    {
+                        result = "Product updated successfully.";
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+           result = "Error updating product: " + ex.Message;
+        }
+        return result;
+    }
+
+    public static string deleteproduct(int productId)
+    {
+        string result = ""; // ประกาศตัวแปร result เพื่อเก็บข้อความผลลัพธ์
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString(); // เรียกใช้ connection string จาก configuration
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString)) // เปิดการเชื่อมต่อกับฐานข้อมูล
+            {
+                conn.Open(); // เปิดการใช้งานการเชื่อมต่อ
+
+                // Temporarily disable foreign key constraint
+                string disableForeignKeyQuery = "ALTER TABLE orderdetail NOCHECK CONSTRAINT ALL";
+                using (SqlCommand disableForeignKeyCommand = new SqlCommand(disableForeignKeyQuery, conn)) // สร้าง SqlCommand เพื่อประมวลผลคำสั่ง SQL เพื่อปิดการใช้งาน constraint ที่เกี่ยวข้อง
+                {
+                    disableForeignKeyCommand.ExecuteNonQuery(); // ประมวลผลคำสั่ง SQL
+                }
+
+                // Delete the product
+                string deleteQuery = "DELETE FROM product WHERE productid = @ProductId"; // สร้างคำสั่ง SQL เพื่อลบข้อมูลสินค้าที่มี productid เท่ากับค่าที่รับเข้ามา
+                using (SqlCommand command = new SqlCommand(deleteQuery, conn)) // สร้าง SqlCommand เพื่อประมวลผลคำสั่ง SQL ในการลบสินค้า
+                {
+                    command.Parameters.AddWithValue("@ProductId", productId); // กำหนดค่าพารามิเตอร์ของคำสั่ง SQL
+
+                    int rowsAffected = command.ExecuteNonQuery(); // ประมวลผลคำสั่ง SQL และเก็บจำนวนแถวที่ได้รับผลกระทำกลับมา
+                    if (rowsAffected == 0) // ตรวจสอบว่าไม่มีสินค้าที่ต้องการลบในฐานข้อมูล
+                    {
+                        result = "Product not found"; // กำหนดข้อความผลลัพธ์
+                    }
+                    else // สินค้าถูกลบออกจากฐานข้อมูลสำเร็จ
+                    {
+                        result = "Product deleted successfully."; // กำหนดข้อความผลลัพธ์
+                    }
+                }
+
+                // Re-enable foreign key constraint
+                string enableForeignKeyQuery = "ALTER TABLE orderdetail WITH CHECK CHECK CONSTRAINT ALL";
+                using (SqlCommand enableForeignKeyCommand = new SqlCommand(enableForeignKeyQuery, conn)) // สร้าง SqlCommand เพื่อประมวลผลคำสั่ง SQL เพื่อเปิดการใช้งาน constraint ที่เกี่ยวข้อง
+                {
+                    enableForeignKeyCommand.ExecuteNonQuery(); // ประมวลผลคำสั่ง SQL
+                }
+            }
+        }
+        catch (Exception ex) // จัดการข้อผิดพลาดในกรณีที่เกิดข้อผิดพลาดระหว่างการทำงาน
+        {
+            result = "Error deleting product: " + ex.Message; // กำหนดข้อความผลลัพธ์
+        }
+        return result; // ส่งค่าผลลัพธ์กลับ
     }
 
 
