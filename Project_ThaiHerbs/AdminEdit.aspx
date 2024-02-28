@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-            <div class = "addminproduct-container"> 
+    <div class = "addminproduct-container"> 
             <div class = "manage-products">
                 <div class = "txt-addminproduct">
                  <h1><asp:Label ID="lblresult" runat="server" Text = "จัดการแก้ไขสินค้า" CssClass = "manage-products-title"></asp:Label></h1>
@@ -38,10 +38,13 @@
                     <br />
                     <br />
                     <br />
-                    <p><asp:Button ID="Button1" runat="server" Text="ลบสินค้า" Height="30px" Width="100%" cssClass= "btn-manage-products"/></p>
-                    <p><asp:Button ID="Button2" runat="server" Text="แก้ไขข้อมูลสินค้า" Height="30px" Width="100%" cssClass= "btn-manage-products"/></p>
+                 <p><asp:Button ID="ButtonSignIn" runat="server" Text="แก้ไขข้อมูลสินค้า" Height="30px" Width="100%" cssClass= "btn-manage-products"/></p>
+
+
+                 <p><asp:Button ID="Button1" runat="server" Text="ลบข้อมูลสินค้า" Height="30px" Width="100%" cssClass= "btn-manage-products"/></p>
                 </div>
             </div>
         </div>
+
 </asp:Content>
 

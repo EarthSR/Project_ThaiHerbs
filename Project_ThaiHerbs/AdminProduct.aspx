@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPageaccount.master" AutoEventWireup="true" CodeFile="AdminProduct.aspx.cs" Inherits="AdminProduct" %>
 
-            <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-            </asp:Content>
-            <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-                <div class = "addminproduct-container"> 
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+        <div class = "addminproduct-container"> 
                     <div class = "manage-products">
                         <div class = "txt-addminproduct">
                          <h1><asp:Label ID="lblresult" runat="server" Text = "จัดการเพิ่มสินค้า" CssClass = "manage-products-title"></asp:Label></h1>
@@ -38,9 +38,10 @@
                             <br />
                             <br />
                             <br />
-                            <p><asp:Button ID="ButtonSignIn" runat="server" Text="เพิ่มสินค้า" Height="30px" Width="100%" cssClass= "btn-manage-products" OnClick="ButtonSignIn_Click"/></p>
+                            <p><asp:Button ID="ButtonSignIn" runat="server" Text="เพิ่มสินค้า" Height="30px" Width="100%" cssClass= "btn-manage-products"/></p>
                         </div>
                     </div>
                 </div>
-            </asp:Content>
+
+</asp:Content>
 
