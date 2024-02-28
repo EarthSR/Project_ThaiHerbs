@@ -17,6 +17,9 @@ public class Delivery
     public string ProductImage { get; set; }
     public string OrderStatus { get; set; }
     public int Orderdetailid { get; set; }
+    public int Amount { get; set; }
+    public double Price { get; set; }
+    public DateTime Daterecevied{ get; set; }
 
     public Delivery(int deliveryId, int paymentId, int trackingId, DateTime deliveryDate, string deliveryName,string productname,string productimage,int trackingid,string status)
     {
@@ -49,6 +52,16 @@ public class Delivery
         ProductImage = productimage;
         OrderStatus = status;
         DeliveryName = deliveryName;
+    }
+
+    public Delivery(string productname, string productimage, int amount,double price,DateTime date)
+    {
+        Daterecevied = date;
+        ProductName = productname;
+        ProductImage = productimage;
+        Amount = amount;
+        Price = price;
+
     }
 
 }

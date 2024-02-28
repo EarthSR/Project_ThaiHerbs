@@ -71,13 +71,16 @@ public partial class Tracking : System.Web.UI.Page
             {
                 // เรียกใช้เมทอด UpdateStatus เพื่ออัปเดตสถานะ
                 string result = ConnectionClass.UpdateStatus(delivery.Orderdetailid, "Successful delivery", "review");
+                ConnectionClass.Updatereceivedtime(delivery.TrackingId, DateTime.Now);
+
                 // ตรวจสอบผลลัพธ์จากการอัปเดต
                 if (result.StartsWith("Rows affected"))
                 {
                     // สามารถอัปเดตสถานะสำเร็จ
                     // ทำการรีโหลดหน้าหรือปรับปรุงส่วนแสดงผลตามที่ต้องการ
-                    FillPage(userid); // โหลดข้อมูลใหม่หลังจากการอัปเดต
+                   // โหลดข้อมูลใหม่หลังจากการอัปเดต
                     lblerror.Text = "Compleate!!!";
+                    FillPage(userid);
                 }
                 else
                 {

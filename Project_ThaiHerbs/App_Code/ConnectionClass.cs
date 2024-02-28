@@ -1163,5 +1163,87 @@ public class ConnectionClass
         }
     }
 
-        
+    public static List<Delivery> Getorderhistory(int userid)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+
+        List<Delivery> deliveries = new List<Delivery>();
+
+        // Query data and add to the list
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            string sqlQuery = @"
+            SELECT 
+     product.pname AS ProductName, 
+     product.pimage AS ProductImage,
+     orderdetail.amount,
+     orderdetail.priceofproduct,
+     delivery.receiveddate
+ FROM 
+     orders
+ JOIN 
+     orderdetail ON orders.orderid = orderdetail.orderid_fk
+ JOIN 
+     product ON orderdetail.productid_fk = product.productid
+ JOIN 
+     payment ON orders.orderid = payment.orderid_fk
+ JOIN 
+     delivery ON payment.paymentid = delivery.paymentid_fk
+ WHERE 
+     orders.userid_fk = @userid AND orderdetail.status = 'review'
+    ";
+
+            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+            {
+                command.Parameters.AddWithValue("@userid", userid);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+
+                    string pname = reader.GetString(0);
+                    string pimage = reader.GetString(1);
+                    int amount = reader.GetInt32(2);
+                    double price = reader.GetDouble(3); 
+                    DateTime date = reader.GetDateTime(4);
+                    Delivery delivery = new Delivery(pname, pimage,amount,price,date);
+
+                    deliveries.Add(delivery);
+                }
+            }
+        }
+
+        return deliveries;
+    }
+
+    public static string Updatereceivedtime(int trackingid, DateTime time)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
+        // Query to update the status of orders for a specific orderid
+        string updateQuery = @"
+            UPDATE delivery
+            SET receiveddate = @time
+            WHERE trackingid = @tracking
+                ";
+
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            SqlCommand command = new SqlCommand(updateQuery, connection);
+            command.Parameters.AddWithValue("@tracking", trackingid);
+            command.Parameters.AddWithValue("@time", time);
+
+            try
+            {
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                return "Rows affected: " + rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                return ex.Message;
+            }
+        }
+    }
 }
