@@ -19,20 +19,32 @@
 
 
 
-
-
-
-
-
         <script>
             var images = [
-                "/ImgHerb/กัญชา.jpg",
-                "/ImgHerb/กระวาน.jpg",
+                "/ImgHerb/lime.jpg",
                 "/ImgHerb/กระเจี๊ยบแดง.jpg",
                 "/ImgHerb/กระชายดำ.jpg",
+                "/ImgHerb/กระวาน.jpg",
                 "/ImgHerb/กะเพรา.jpg",
+                "/ImgHerb/กัญชา.jpg",
                 "/ImgHerb/กานพลู.jpg",
-                "/ImgHerb/เห็ดเทศ.jpg"
+                "/ImgHerb/ขมิ้นชัน.jpg",
+                "/ImgHerb/ดอกสำมะงา.jpg",
+                "/ImgHerb/ทองพันชั่ง.jpg",
+                "/ImgHerb/บอระเพ็ด.jpg",
+                "/ImgHerb/บัวบก.jpg",
+                "/ImgHerb/ฟ้าทะลายโจร.jpg",
+                "/ImgHerb/มะกรูด.jpg",
+                "/ImgHerb/มะขามป้อม.jpg",
+                "/ImgHerb/มะรุม.jpg",
+                "/ImgHerb/มะแว้ง.jpg",
+                "/ImgHerb/ย่านาง.jpg",
+                "/ImgHerb/รางจืด.jpg",
+                "/ImgHerb/ว่านชักมดลูก.jpg",
+                "/ImgHerb/ว่านหางจระเข้.jpg",
+                "/ImgHerb/เสลดพังพอน.jpg",
+                "/ImgHerb/หญ้าหนวดแมว.jpg",
+                "/ImgHerb/เห็ดเทศ.jpg",
             ];
 
             var currentIndex = -1;
@@ -55,6 +67,7 @@
                     img.classList.add('slideInRight');
                 }, 250);
             }
-                        </script>
+            setInterval(nextImage, 4000);
+            </script>
 </asp:Content>
 

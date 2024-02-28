@@ -125,11 +125,16 @@
     padding: 20px;
 }
 
+
+
+
+
+
 .logo1 {
-    max-width: 100%; /* ปรับขนาดภาพให้ไม่เกินขนาดของ div */
-    max-height: 100%; /* ปรับขนาดภาพให้ไม่เกินขนาดของ div */
-    height: auto; /* ปรับสัดส่วนของภาพ */
-    width: auto; /* ปรับสัดส่วนของภาพ */
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    width: auto;
     filter: blur(1px);
 }
 
@@ -213,9 +218,9 @@
 }
 
 .slideInRight {
-    animation: slideInRight 0.3s forwards;
+    animation: slideInRight 0.2s forwards;
 }
 
 .slideOutLeft {
-    animation: slideOutLeft 0.3s forwards;
+    animation: slideOutLeft 0.2s forwards;
 }
