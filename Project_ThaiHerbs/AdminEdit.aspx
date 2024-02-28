@@ -38,7 +38,8 @@
                     <br />
                     <br />
                     <br />
-                 <asp:Button ID="ButtonSignIn" runat="server" Text="แก้ไขข้อมูลสืนค้า" Height="30px" Width="100%" cssClass= "btn-manage-products"/>
+                    <p><asp:Button ID="Button1" runat="server" Text="ลบสินค้า" Height="30px" Width="100%" cssClass= "btn-manage-products"/></p>
+                    <p><asp:Button ID="Button2" runat="server" Text="แก้ไขข้อมูลสินค้า" Height="30px" Width="100%" cssClass= "btn-manage-products"/></p>
                 </div>
             </div>
         </div>

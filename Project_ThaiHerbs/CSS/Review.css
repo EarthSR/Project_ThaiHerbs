@@ -38,3 +38,33 @@
         border-radius: 20px;
         color: white;
     }
+
+.editinfo2 {
+    white-space: pre-wrap;
+    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;
+    transition: border-radius 0.3s ease;
+    border: 5px;
+}
+
+    .editinfo2:hover {
+        background-color: darkslategrey;
+        border-radius: 20px;
+        color: white;
+    }
+
+
+.editinfo2 {
+    margin-right : 160px;
+    white-space: pre-wrap;
+    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;
+    transition: border-radius 0.3s ease;
+    border: 5px;
+}
+
+    .editinfo2:hover {
+        background-color: darkslategrey;
+        border-radius: 20px;
+        color: white;
+    }

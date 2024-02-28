@@ -9,8 +9,6 @@
                         <h2><asp:Label ID="lblresult" runat="server" Text = "สินค้าที่ต้องยืนยันการสั่งซื้อ" CssClass = "manage-products-title"></asp:Label></h2>
                         <br />
                         <p><h3>รายการที่ <a>1</a></h3>
-                        
-                            
                         <div>
                         <p><h3><asp:Label ID="Label1" runat="server" Text = "ชื่อสินค้า"></asp:Label></h3>
                         <asp:TextBox ID="TextBox1" runat="server" Height="34px" Width="100%" CssClass= "manage-products-box"></asp:TextBox></p>

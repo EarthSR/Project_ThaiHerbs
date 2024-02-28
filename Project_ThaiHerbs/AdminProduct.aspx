@@ -38,8 +38,7 @@
                             <br />
                             <br />
                             <br />
-                         <asp:Button ID="ButtonSignIn" runat="server" Text="เพิ่มสินค้า" Height="30px" 
-                                Width="100%" cssClass= "btn-manage-products" OnClick="ButtonSignIn_Click"/>
+                            <p><asp:Button ID="ButtonSignIn" runat="server" Text="เพิ่มสินค้า" Height="30px" Width="100%" cssClass= "btn-manage-products" OnClick="ButtonSignIn_Click"/></p>
                         </div>
                     </div>
                 </div>
