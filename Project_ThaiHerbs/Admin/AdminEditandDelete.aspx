@@ -72,7 +72,7 @@
                 <br />
                 <asp:Label ID="lbleror" runat="server" Text=""></asp:Label>
                 <br />
-                <asp:Button ID="ButtonSignIn" runat="server" Text="แก้ไขข้อมูลสืนค้า" Height="30px"
+                <asp:Button ID="ButtonSignIn" runat="server" Text="แก้ไขข้อมูลสินค้า" Height="30px"
                     Width="100%" CssClass="btn-manage-products" OnClick="ButtonSignIn_Click" 
                     Enabled="False" />
                 <br />

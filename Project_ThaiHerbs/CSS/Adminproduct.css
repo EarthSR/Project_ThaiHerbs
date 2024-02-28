@@ -40,3 +40,11 @@
     border-bottom : 2px solid black;
     padding-bottom : 30px;
 }
+
+.manage-products2{
+    background-color: white;
+    text-align: left;
+    margin-left: 200px;
+    margin-right: 200px;
+    padding: 40px;
+}
