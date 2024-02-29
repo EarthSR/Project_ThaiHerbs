@@ -19,7 +19,7 @@
         <br />
         <asp:Label ID="lble" runat="server"></asp:Label>
         <br />
-        <br />
+        <br />  
         <div class="bottons">
             <asp:Button ID="btnadd" runat="server" Text="Add to Cart" 
                 CssClass="btn-adddetail" OnClick="btnadd_Click" />

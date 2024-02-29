@@ -45,7 +45,7 @@ public partial class MasterPageaccount : System.Web.UI.MasterPage
         {
             if (type == "admin")
             {
-                Response.Redirect("~/AdminPage.aspx");
+                Response.Redirect("~/Admin/AdminPage.aspx");
             }
             else
             {

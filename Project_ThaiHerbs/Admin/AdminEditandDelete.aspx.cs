@@ -91,9 +91,10 @@ public partial class AdminEdit : System.Web.UI.Page
     protected void ButtonSignIn_Click(object sender, EventArgs e)
     {
         int id = Convert.ToInt32(txtserch.Text);
-        string img = uploaded1.ImageUrl;
+        string img = uploaded1.ImageUrl.Substring(1);
+        string imgdb = "../" + img;
         string select = DropDownList1.SelectedValue.ToString();
-        lbleror.Text = ConnectionClass.Updateproduct(id, txtname.Text, Convert.ToDouble(txtprice.Text), txtdetail.Text, select, Convert.ToInt32(txtamount.Text), img);
+        lbleror.Text = ConnectionClass.Updateproduct(id, txtname.Text, Convert.ToDouble(txtprice.Text), txtdetail.Text, select, Convert.ToInt32(txtamount.Text), imgdb);
     }
 
     protected void ButtonSignIn0_Click(object sender, EventArgs e)
