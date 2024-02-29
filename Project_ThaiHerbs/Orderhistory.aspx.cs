@@ -27,7 +27,7 @@ public partial class Review : System.Web.UI.Page
         List<Delivery> deliveries = ConnectionClass.Getorderhistory(userid);
         StringBuilder sb = new StringBuilder();
         sb.Append("<link rel='stylesheet' type='text/css' href='CSS/Tracking.css'>");
-
+        
         foreach (Delivery delivery in deliveries)
         {
             sb.Append("<div class='tracking'>");
@@ -45,12 +45,11 @@ public partial class Review : System.Web.UI.Page
             sb.Append("<p>" + delivery.Price + "</p>");
             sb.Append("</div>");
             sb.Append("<div class='content'>");
-            sb.Append("<p>" + delivery.Daterecevied + "</p>");
+            sb.Append("<p>" + delivery.Daterecevied.ToString("dd/MM/yyyy") + "</p>");
             sb.Append("</div>");
             sb.Append("</div>");
 
         }
-
 
         lblshow.Text = sb.ToString();
     }

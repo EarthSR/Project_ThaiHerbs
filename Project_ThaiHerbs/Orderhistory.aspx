@@ -22,6 +22,7 @@
                                         <div class="tracking-column">
                                             <p>รายการสั่งซื้อ</p>
                                         </div>
+
                                         <div class="tracking-column">
                                             <p>จำนวน</p>
                                         </div>
@@ -32,12 +33,10 @@
                                             <p>วันที่สั่งซื้อ</p>
                                         </div>
                                     </div>
+
                                 </div>
 
-
-                                <div class="tracking">  
                                     <asp:Label id="lblshow" runat="server" Text=""></asp:Label>
-                                </div>  
                                     </div>
 </asp:Content>
 

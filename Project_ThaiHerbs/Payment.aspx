@@ -67,6 +67,8 @@
             </audio>
 
             <div class="ButtonPayment1">
+                <asp:Label ID="lbltotal" runat="server" Text=""></asp:Label>
+                <br />
                 <asp:Button ID="Button2" runat="server" CssClass="ButtonPayment" Height="55px"
                     OnClick="ButtonPayment_Click" OnClientClick="playSound()"
                     Text="ยืนยันการสั่งซื้อสินค้า" Visible="False" />

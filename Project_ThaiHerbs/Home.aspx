@@ -8,9 +8,9 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-
                     <div class="imgHome">
                             <img id="Image1" src="/ImgHerb/ขมิ้นชัน.jpg" class="logo1" onclick="nextImage()" />
+                            
                         </div>
                 <asp:Label ID="lblshow" runat="server" Text=""></asp:Label>
 

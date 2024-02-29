@@ -8,21 +8,22 @@
 
 .tracking-header {
     background-color: #d9d9d9;
-    text-align: left;
+    text-align: center;
     display: flex;
 }
 
+
 .tracking-column {
+    text-align :center;
     flex: 1;
     padding: 5px;
     border: 1px solid #ddd;
-    text-align: left;
     word-wrap: break-word;
 
 }
 
     .tracking-column p {
-        margin: 0; /* ลบ margin ที่เกิดขึ้นกับ <p> */
+        margin: 0; 
     }
 
 

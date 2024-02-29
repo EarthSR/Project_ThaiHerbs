@@ -32,7 +32,7 @@ public partial class Payment : System.Web.UI.Page
 
     private void FillPage(int userid)
     {
-
+        double total = 0.0;
         List<orderdetial> ordertetailList = ConnectionClass.GetOrderDetailById(userid);
 
         StringBuilder sb = new StringBuilder();
@@ -58,10 +58,12 @@ public partial class Payment : System.Web.UI.Page
             sb.AppendFormat("<p class='product-price'>{0}<a>ชิ้น</a></p>", orderdetail.Amount);
             sb.Append("</div>");
             sb.Append("</div>");
+
+            total += orderdetail.Priceofproduct;
         }
        
 
-        
+        lbltotal.Text = "ยอดเงินรวม: "+total.ToString();
         lblshow.Text = sb.ToString();
     }
 
