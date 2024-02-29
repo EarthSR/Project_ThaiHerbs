@@ -1,0 +1,50 @@
+﻿body {
+
+}
+
+.addminproduct-container {
+    margin :20px;
+    padding : 20px;
+}
+
+.manage-products {
+    background-color: white;
+    text-align: left;
+    margin-left: 500px;
+    margin-right: 500px;
+    padding: 40px;
+}
+.manage-products-title {
+    text-align : center;
+}
+
+.manage-products-box {
+    border : 1px solid black;
+    border-radius : 2px;
+}
+
+.btn-manage-products {
+    transition: border-radius 1s;
+}
+
+    .btn-manage-products:hover {
+        background-color: darkslategray;
+        border-radius: 20px;
+        color: white;
+        font-size: 20px;
+    }
+
+
+
+.btnOrdercon{
+    border-bottom : 2px solid black;
+    padding-bottom : 30px;
+}
+
+.manage-products2{
+    background-color: white;
+    text-align: left;
+    margin-left: 200px;
+    margin-right: 200px;
+    padding: 40px;
+}

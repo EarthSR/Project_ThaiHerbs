@@ -1,0 +1,99 @@
+﻿body {
+}
+
+.box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.product-card {
+    width: 250px;
+    border: 1px solid #F4F4F4;
+    border: 1px solid #F4F4F4;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-image {
+    text-align: center;
+    border-radius: 25px;
+}
+
+    .product-image img {
+        max-width: 100%;
+        max-height: 200px;
+        
+    }
+
+.product-details {
+    margin-top: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+    .product-details h2 {
+        font-size: 1.2em;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .product-details p {
+        font-size: 1em;
+        color: #666;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+.price {
+    font-size: 1.2em;
+    margin-top: 5px;
+}
+
+.buttons {
+    align-self: flex-end;
+    
+}
+
+.btn-add-to-cart {
+    background-color: gray;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 5px;
+    width: 100%;
+}
+
+    .btn-add-to-cart:hover {
+        
+        color: black;
+        background-color: #F4F4F4;
+    }
+
+#product-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* CSS/Product.css */
+a.product-card {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color */
+}
+
+    a.product-card:hover {
+        text-decoration: none; /* Remove underline on hover */
+        color: inherit; /* Inherit text color on hover */
+    }
+
+.input-text qty text {
+    width: 50px; /* ปรับขนาด input ตามที่ต้องการ */
+    height: 24px;
+    margin: 0; /* ปรับการระบุขอบเขต (margin) เพื่อป้องกันการเกิดช่องว่าง */
+    padding: 0; /* ปรับการระบุพื้นที่ (padding) เพื่อป้องกันการเกิดช่องว่าง */
+}

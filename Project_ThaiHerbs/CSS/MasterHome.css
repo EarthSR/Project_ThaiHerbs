@@ -1,0 +1,226 @@
+﻿body {
+    background-color: white;
+    margin: 0px;
+    padding: 0px;
+}
+
+#tophead {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background-color: #F4F4F4;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    z-index: 1000;
+}
+
+#logo {
+        margin-top: 10px;
+        float: left;
+        margin-right: 20px;
+        width: 400px;
+        height: 200px;
+    }
+
+#searchBar {
+    float: none;
+    margin-top: 100px;
+}
+
+#footer {
+    color : black;
+    text-align: center;
+}
+
+.logo-account {
+    width: 444px;
+    height: 248px;
+    margin-top: 10px;
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.search-bar {
+    overflow: hidden;
+}
+
+.search-input {
+    width: 700px;
+    height: 35px;
+    padding: 5px;
+    border: none;
+    background-color: #F4F4F4;
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+}
+
+.flexible-button {
+    padding: 15px 15px;
+    background-color: #F4F4F4;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 10px;
+}
+
+    .flexible-button:hover {
+        background-color: darkslategrey;
+        border-radius: 50px;
+        color: white;
+        font-size: 20px;
+    }
+
+
+.hyperlike-common {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: background-color 0.3s ease;
+    position: relative; 
+}
+
+    .hyperlike-common:hover {
+        font-size: 20px;
+        color: white;
+        background-color: darkslategray;
+        padding: 10px;
+        border-radius: 50px;
+    }
+
+    .hyperlike-common::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background-color: inherit;
+        filter: blur(50px);
+        z-index: -1;
+    }
+
+
+.typeproduct {
+    text-align: center;
+    margin: 0px;
+    padding: 10px;
+    background-color: #F4F4F4;
+}
+
+.imgHome {
+    display: flex;
+    justify-content: center; /* จัดภาพให้อยู่ตรงกลางในแนวนอน */
+    align-items: center;
+    height : 600px;
+    padding: 20px;
+}
+
+
+
+
+
+
+.logo1 {
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    width: auto;
+    filter: blur(1px);
+}
+
+
+.txtonimg {
+    position: absolute;
+    bottom: 8px;
+    left: 20%;
+    color: white;
+    font-size: 85px;
+}
+
+.txtonimg2 {
+    position: absolute;
+    bottom: -55px;
+    left: 20%;
+    color: white;
+    font-size: 20px;
+    height: 50px;
+}
+
+.txtonimg3 {
+    position: absolute;
+    bottom: -88px;
+    left: 20%;
+    color: white;
+    font-size: 20px;
+    height: 50px;
+}
+
+.txtonimg4 {
+    position: absolute;
+    bottom: -120px;
+    left: 20%;
+    color: white;
+    font-size: 20px;
+    height: 50px;
+}
+
+.designbox {
+    position: absolute;
+    bottom: -150px;
+    left: 20%;
+    color: black;
+    font-size: 20px;
+    height: 50px;
+    border: 5px;
+    border-radius: 25px;
+}
+
+.hyperlike-common1 {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.hyperlike-common.selected {
+    border: none; /* Or any other styling to remove the box effect */
+}
+
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.slideInRight {
+    animation: slideInRight 0.2s forwards;
+}
+
+.slideOutLeft {
+    animation: slideOutLeft 0.2s forwards;
+}

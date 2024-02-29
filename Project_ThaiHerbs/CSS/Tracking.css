@@ -1,0 +1,56 @@
+﻿body {
+}
+
+
+.detail-tracking {
+    
+}
+
+.tracking-header {
+    background-color: #d9d9d9;
+    text-align: center;
+    display: flex;
+}
+
+
+.tracking-column {
+    text-align :center;
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ddd;
+    word-wrap: break-word;
+
+}
+
+    .tracking-column p {
+        margin: 0; 
+    }
+
+
+
+.tracking {
+    display: flex;
+}
+
+.content {
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 3px solid #f4f4f4;
+    padding: 30px;
+    word-wrap: break-word;
+    width: 100%;
+}
+
+.imgtracking {
+    margin-right: 20px;
+    width: 50px;
+    height: 50px;
+}
+
+.textBesideImage {
+    margin-left: auto;
+}
+
+.space-track {
+    width :100px;
+}

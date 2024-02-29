@@ -1,0 +1,203 @@
+﻿body {
+
+}
+
+.detail-container {
+    text-align: center;
+    word-wrap: break-word;
+    background-color:white;
+}
+
+.detail-image {
+    display: inline-block;
+    padding: 1rem 1rem;
+    vertical-align: middle;
+    width: 25%;
+    vertical-align: text-top;
+    text-align : left;
+    padding-top : 80px;
+}
+
+.detail-img {
+    width: 330px;
+    height: 330px;
+    border-radius: 40px;
+    margin : 20px;
+}
+
+
+.bottons {
+    align-self: flex-end;
+}
+
+.btn-adddetail {
+    background-color: #f4f4f4;
+    color: black;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 5px;
+    width: 40%;
+}
+    .btn-adddetail:hover {
+        color: white;
+        background-color: darkslategrey;
+    }
+
+
+.quantity {
+    display: inline-block;
+}
+
+    .quantity .input-text.qty {
+        width: 35px;
+        height: 40px;
+        padding: 0 5px;
+        text-align: center;
+        background-color: transparent;
+        border: 1px solid #efefef;
+    }
+
+    .quantity.buttons_added {
+        text-align: left;
+        position: relative;
+        white-space: nowrap;
+        vertical-align: top;
+    }
+
+        .quantity.buttons_added input {
+            display: inline-block;
+            margin: 0;
+            vertical-align: top;
+            box-shadow: none;
+        }
+
+        .quantity.buttons_added .minus,
+        .quantity.buttons_added .plus {
+            padding: 7px 10px 8px;
+            height: 41px;
+            background-color: #f4f4f4;
+            border: 1px solid #efefef;
+            cursor: pointer;
+        }
+
+        .quantity.buttons_added .minus {
+            border-right: 0;
+        }
+
+        .quantity.buttons_added .plus {
+            border-left: 0;
+        }
+
+            .quantity.buttons_added .minus:hover,
+            .quantity.buttons_added .plus:hover {
+                background: darkslategrey;
+            }
+
+    .quantity input::-webkit-outer-spin-button,
+    .quantity input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        margin: 0;
+    }
+
+    .quantity.buttons_added .minus:focus,
+    .quantity.buttons_added .plus:focus {
+        outline: none;
+    }
+
+.review-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}
+.txtreview {
+    margin-left: 200;
+    margin-right: 600px;
+    word-wrap: break-word;
+    text-align: left;
+}
+.review {
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top : 40px;
+    padding: 20px;
+    border : 2px solid #f4f4f4;
+    text-align :left;
+}
+.align {
+    border-top: 1px solid #808080;
+    width : 100%;
+}
+
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.radio-input {
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.radio-label {
+    cursor: pointer;
+    font-size: 0;
+    color: rgba(0,0,0,0.2);
+    transition: color 0.1s ease-in-out;
+}
+
+    .radio-label:before {
+        content: "★";
+        display: inline-block;
+        font-size: 32px;
+    }
+
+.radio-input:checked ~ .radio-label {
+    color: #ffc700;
+    color: gold;
+}
+
+.radio-label:hover,
+.radio-label:hover ~ .radio-label {
+    color: goldenrod;
+}
+
+    .radio-input:checked + .radio-label:hover,
+    .radio-input:checked + .radio-label:hover ~ .radio-label,
+    .radio-input:checked ~ .radio-label:hover,
+    .radio-input:checked ~ .radio-label:hover ~ .radio-label,
+    .radio-label:hover ~ .radio-input:checked ~ .radio-label {
+        color: darkgoldenrod;
+    }
+
+
+.average-rating {
+    position: relative;
+    appearance: none;
+    color: transparent;
+    width: auto;
+    display: inline-block;
+    vertical-align: baseline;
+    font-size: 25px;
+}
+
+    .average-rating::before {
+        --percent: calc(4.3/5*100%);
+        content: '★★★★★';
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: rgba(0,0,0,0.2);
+        background: linear-gradient(90deg, gold var(--percent), rgba(0,0,0,0.2) var(--percent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+form {
+    margin: 0 0 50px;
+}
+

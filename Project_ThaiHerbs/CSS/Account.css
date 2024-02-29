@@ -1,0 +1,113 @@
+﻿body {
+}
+
+#tophead {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background-color: #F4F4F4;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    z-index: 1000;
+}
+
+#top {
+    margin-top: 20px;
+}
+
+#footer {
+    text-align: center;
+}
+
+.logo {
+    margin-top: 70px;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.login {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    font-family: Arial;
+}
+
+
+.hyperlike-common {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+    .hyperlike-common:hover {
+        font-size: 20px;
+        color: white;
+        background-color: darkslategray;
+        padding: 10px;
+        border-radius: 50px;
+    }
+
+    .hyperlike-common::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background-color: inherit;
+        filter: blur(50px);
+        z-index: -1;
+    }
+
+.textregister {
+    position: relative;
+    margin-right: 95px;
+}
+
+.textregister2 {
+    position: relative;
+    margin-right: 40px;
+}
+
+.textregister3 {
+    position: relative;
+    margin-right: 125px;
+}
+
+.textregister4 {
+    position: relative;
+    margin-right: 105px;
+}
+
+.designbox {
+    border: 5px;
+    border-radius: 25px;
+}
+
+.designdrop {
+    border: 40px;
+    border-radius: 25px;
+    padding: 5px 5px;
+}
+
+.input {
+    border: 5px;
+    border-radius: 25px;
+}
+
+
+.register-box {
+    margin: 100px;
+    margin-left: 200px;
+    margin-right: 200px;
+    border-top: 1px solid #808080;
+    background-color: #F4f4f4;
+    border: 1px solid #808080;
+}

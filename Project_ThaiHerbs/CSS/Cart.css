@@ -1,0 +1,125 @@
+﻿body {
+
+}
+.cart-container {
+    width : 100%;
+}
+.cart-top {
+    height : 50px;
+    background-color : #d9d9d9;
+}
+.cart-name {
+    height: 50px;
+    background-color: #F4F4F4;
+}
+.cart-product {
+    margin-top: 20px;
+    margin-left: 200px;
+   
+}
+
+.cart-nameproduct {
+    word-wrap: break-word;
+    width: 500px;
+    max-width : 500px;
+}
+
+.chkbox {
+   padding : 13px;
+   margin-left : 100px;
+}
+
+.cart-product-img{
+    width : 80px;
+    border-radius : 200px;
+}
+
+.cart-product-txt{
+}
+
+
+.btn {
+    float: right;
+    padding : 40px;
+    border-radius : 20px;
+}
+
+.btncart {
+    background-color: #f4f4f4;
+    color: black;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background-color 1.5s ease;
+    margin-right: 200px;
+    width : 250px;
+    border-radius: 50px;
+}
+    .btncart:hover {
+        color: white;
+        background-color: darkslategrey;
+    }
+
+
+.material-checkbox {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: black;
+    cursor: pointer;
+}
+
+    .material-checkbox input[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+.checkmark {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    border: 2px solid black;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.material-checkbox input[type="checkbox"]:checked ~ .checkmark {
+    background-color: darkslategrey;
+    border-color: black;
+}
+
+    .material-checkbox input[type="checkbox"]:checked ~ .checkmark:after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 6px;
+        width: 4px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+
+.material-checkbox input[type="checkbox"]:disabled ~ .checkmark {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+
+.btnDelete {
+    background-color: #f4f4f4;
+    margin-left: 40px;
+    width: 250px;
+    height :20px;
+    margin-top: 10px;
+    border : 0px;
+}
+    .btnDeletehover {
+        color: white;
+        background-color: darkslategrey;
+    }

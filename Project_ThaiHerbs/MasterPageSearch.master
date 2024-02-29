@@ -1,0 +1,50 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPageSearch.master.cs" Inherits="MasterPageSearch" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>ThaiHerb</title>
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/MasterHome.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/Cart.css" />
+    <link rel="stylesheet" type="text/css" href="~/CSS/ProfileUser.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/ProductDetail.css" />
+    <script type="text/javascript" src= "JS/Productdetail.js"></script>
+</head>
+<body>
+    <form id="form1" runat="server">
+               <div id="tophead">
+          <asp:LinkButton ID="Home" runat="server" Text="Home" 
+              CssClass="hyperlike-common" PostBackUrl="~/Home.aspx" />
+   <asp:LinkButton ID="howtoorder" runat="server" Text="How to Order" 
+              CssClass="hyperlike-common" PostBackUrl="~/HowtoOrder.aspx" />
+    <asp:LinkButton ID="support" runat="server" Text="Supports" CssClass="hyperlike-common" PostBackUrl="~/Support.aspx" />
+    <asp:LinkButton ID="register" runat="server" Text="Register" CssClass="hyperlike-common" PostBackUrl="~/Account/Register.aspx" />
+    <asp:LinkButton ID="login" runat="server" Text="Login" CssClass="hyperlike-common" PostBackUrl="~/Account/Login.aspx" />
+    <asp:LinkButton ID="Logout" runat="server" Text="Logout" CssClass="hyperlike-common" Visible="False" OnClick="Logout_Click" />
+    <asp:LinkButton ID="user" runat="server" Text="" CssClass="hyperlike-common" Visible="False" 
+                       OnClick="user_Click" />
+   
+
+</div>
+        <table class="auto-style3">
+    <tr>
+        <td class="logo">
+            <asp:Image ID="logo" runat="server" ImageUrl="~/Image/Logo.png" CssClass="logo" Width="403px"
+                Height="226px" Style="margin-bottom: 0px" /></td>
+        <td class="auto-style2">
+            <asp:TextBox ID="txtsearch" runat="server" CssClass="search-input" placeholder="Search..." />
+        </td>
+        <td>&nbsp;&nbsp;<asp:Button ID="search" runat="server" Text="Search" 
+                CssClass="flexible-button" OnClick="search_Click" />
+            &nbsp;&nbsp;<asp:Button ID="Button4" runat="server" Text="Cart" CssClass="flexible-button" />
+        </td>
+    </tr>
+</table>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
+        </div>
+    </form>
+</body>
+</html>

@@ -1,72 +1,142 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPageHome.master.cs"
-    Inherits="MasterPage" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPageHome.master.cs" Inherits="MasterPageHome" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>ThaiHerb</title>
     <asp:ContentPlaceHolder ID="head" runat="server" />
-    <link rel="stylesheet" type="text/css" href="~/CSS/StyleSheet.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/MasterHome.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/Product.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/ProductDetail.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/HowtoOrder.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/Subport.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/Tracking.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/ProfileUser.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/Review.css" />
+    <link rel="stylesheet" type="text/css" href= "~/CSS/Payment.css" />
+
+    <script src="Productdetail.js"></script>
+    <style>
+        .auto-style1 {
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <div id="tophead">
-            <asp:LinkButton ID="howtoorder" runat="server" Text="How to Order" CssClass="hyperlike-common" />&nbsp;
-            <asp:Label ID="Label1" runat="server" Text="|" />&nbsp;
-            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Login.aspx" Text="Support"
-                CssClass="hyperlike-common" />&nbsp;
-            <asp:Label ID="Label3" runat="server" Text="|" />&nbsp;
-            <asp:HyperLink ID="register" runat="server" NavigateUrl="~/Register.aspx" Text="Register"
-                CssClass="hyperlike-common" />&nbsp;
-            <asp:Label ID="Label2" runat="server" Text="|" />&nbsp;
-            <asp:HyperLink ID="login" runat="server" NavigateUrl="~/Login.aspx" Text="Login"
-                CssClass="hyperlike-common" />
+            <asp:LinkButton ID="Home" runat="server" Text="Home" 
+                CssClass="hyperlike-common" OnClick="Home_Click" />
+            <asp:LinkButton ID="howtoorder" runat="server" Text="How to Order" 
+                CssClass="hyperlike-common" PostBackUrl="~/HowtoOrder.aspx" />
+            <asp:LinkButton ID="support" runat="server" Text="Supports" CssClass="hyperlike-common" PostBackUrl="~/Support.aspx" />
+            <asp:LinkButton ID="register" runat="server" Text="Register" CssClass="hyperlike-common" PostBackUrl="~/Account/Register.aspx" />
+            <asp:LinkButton ID="login" runat="server" Text="Login" CssClass="hyperlike-common" PostBackUrl="~/Account/Login.aspx" />
+            <asp:LinkButton ID="Logout" runat="server" Text="Logout" CssClass="hyperlike-common" Visible="False" OnClick="Logout_Click" />
+            <asp:LinkButton ID="user" runat="server" Text="" CssClass="hyperlike-common" 
+                Visible="False" OnClick="user_Click" />
         </div>
-        <div id="logo">
-            <asp:Image ID="Image1" runat="server" ImageUrl="~/Image/Green_Leaf_Minimalist__Organic_Shop_Logo-removebg-preview.png"
-                CssClass="logo" />
-        </div>
-        <div class="search-bar">
-            <asp:TextBox ID="TextBox1" runat="server" CssClass="search-input" placeholder="Search..." />&nbsp;
-            <asp:Button ID="Button1" runat="server" Text="Search" CssClass="flexible-button" />&nbsp;
-            <asp:Button ID="Button2" runat="server" Text="Cart" CssClass="flexible-button" />
-        </div>
-        <div id="typeproduct">
-            <table style="width: 100%;" class="tabletypeproduct">
+        <table class="auto-style3">
+            <tr>
+                <td class="logo">
+                    <asp:Image ID="logo" runat="server" ImageUrl="~/Image/Logo.png" CssClass="logo" Width="403px"
+                        Height="226px" Style="margin-bottom: 0px" /></td>
+                <td class="auto-style2">
+                    <asp:TextBox ID="txtsearch" runat="server" CssClass="search-input" placeholder="🔍Search..." />
+                </td>
+                <td>&nbsp;&nbsp;<asp:Button ID="search" runat="server" Text="🔍Search" CssClass="flexible-button" OnClick="search_Click" />
+                    &nbsp;&nbsp;<asp:Button ID="Button4" runat="server" Text="🛒Cart" CssClass="flexible-button" OnClick="Button4_Click" />
+                </td>
+            </tr>
+        </table>
+        <div class="typeproduct">
+            <table class="auto-style1">
                 <tr>
                     <td>
-                        <asp:LinkButton ID="LinkButton1" runat="server" Text="สมุนไพรเเห้ง" CssClass="hyperlike-common" />
+                        <asp:LinkButton ID="lbl1" runat="server" Text="สมุนไพรแห้ง" 
+                            CssClass="hyperlike-common" OnClick="LinkButton_Click" />
                     </td>
                     <td>
-                        <asp:LinkButton ID="LinkButton2" runat="server" Text="สมุนไพรรับประทาน" CssClass="hyperlike-common" />
+                        <asp:LinkButton ID="lbl2" runat="server" Text="สมุนไพรรับประทาน" 
+                            CssClass="hyperlike-common" OnClick="LinkButton_Click" />
                     </td>
                     <td>
-                        <asp:LinkButton ID="LinkButton3" runat="server" Text="สมุนไพรเกี่ยวกับเส้นผม" CssClass="hyperlike-common" />
+                        <asp:LinkButton ID="lbl3" runat="server" Text="สมุนไพรเกี่ยวกับเส้นผม" 
+                            CssClass="hyperlike-common" OnClick="LinkButton_Click" />
                     </td>
                     <td>
-                        <asp:LinkButton ID="LinkButton4" runat="server" Text="สมุนไพรเกี่ยวกับใบหน้า" CssClass="hyperlike-common" />
+                        <asp:LinkButton ID="lbl4" runat="server" Text="สมุนไพรเกี่ยวกับใบหน้า" 
+                            CssClass="hyperlike-common" OnClick="LinkButton_Click" />
                     </td>
                     <td>
-                        <asp:LinkButton ID="LinkButton5" runat="server" Text="สมุนไพรเกี่ยวกับช่องปาก" CssClass="hyperlike-common" />
+                        <asp:LinkButton ID="lbl5" runat="server" Text="สมุนไพรเกี่ยวกับช่องปาก" 
+                            CssClass="hyperlike-common" OnClick="LinkButton_Click" />
                     </td>
                     <td>
-                        <asp:LinkButton ID="LinkButton6" runat="server" Text="อาหารเสริม" CssClass="hyperlike-common" />
+                        <asp:LinkButton ID="lbl6" runat="server" Text="อาหารเสริม" 
+                            CssClass="hyperlike-common" OnClick="LinkButton_Click" />
                     </td>
                     <td>
-                        <asp:LinkButton ID="LinkButton7" runat="server" Text="สมุนไพรขัดผิว" CssClass="hyperlike-common" />
+                        <asp:LinkButton ID="lbl7" runat="server" Text="สมุนไพรขัดผิว" 
+                            CssClass="hyperlike-common" OnClick="LinkButton_Click" />
                     </td>
-                  
                 </tr>
             </table>
         </div>
         <div>
-
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
         </div>
-        <div id="footer">
+        <div><asp:Label ID="lblserch" runat="server" Text=""></asp:Label></div>
+    </form>
+
+<script>
+    window.onload = function () {
+        underlineLinks();
+        setLinkSelected();
+    };
+
+    function underlineLinks() {
+        var links = document.querySelectorAll('.hyperlike-common');
+        links.forEach(function (link) {
+            link.addEventListener('click', function () {
+                links.forEach(function (l) {
+                    l.classList.remove('selected');
+                });
+                this.classList.add('selected');
+                localStorage.setItem('selectedLink', this.id);
+            });
+        });
+    }
+
+    function setLinkSelected() {
+        var selectedLinkId = localStorage.getItem('selectedLink');
+        if (selectedLinkId) {
+            var selectedLink = document.getElementById(selectedLinkId);
+            if (selectedLink) {
+                selectedLink.classList.add('selected');
+            }
+        }
+    }
+
+    function previewImage(event) {
+        var input = event.target;
+        var mainImage = document.getElementById('mainImage');
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                mainImage.src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
+</script>
+            <div id="footer">
             สงวนลิขสิทธิ์ © บริษัทไทยเฮิร์บ (ประเทศไทย) จำกัด
         </div>
-    </form>
 </body>
+
 </html>
