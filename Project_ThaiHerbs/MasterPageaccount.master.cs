@@ -41,18 +41,17 @@ public partial class MasterPageaccount : System.Web.UI.MasterPage
     protected void user_Click(object sender, EventArgs e)
     {
         string type = Session["usertype"].ToString();
-        if (Session["Login"] != null)
+        if (type == "admin" || type == "owner")
         {
-            if (type == "admin")
-            {
-                Response.Redirect("~/Admin/AdminPage.aspx");
-            }
-            else
-            {
-                Response.Redirect("~/ProfileUser.aspx");
-            }
+            Response.Redirect("~/Admin/AdminPage.aspx");
         }
+        else
+        {
+            Response.Redirect("~/ProfileUser.aspx");
+        }
+
     }
+
 }
 
 

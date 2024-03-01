@@ -70,7 +70,7 @@ public partial class MasterPageHome : System.Web.UI.MasterPage
         string type = Session["usertype"].ToString();
         if (Session["Login"] != null)
         {
-            if (type == "admin")
+            if (type == "admin" || type == "owner")
             {
                 Response.Redirect("~/Admin/AdminPage.aspx");
             }

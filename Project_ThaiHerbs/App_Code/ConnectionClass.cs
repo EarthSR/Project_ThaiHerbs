@@ -483,70 +483,41 @@ public class ConnectionClass
         return proamount; // คืนค่า proamount ที่ถูกต้อง
     }
 
-    public static void UpdateAvailableQuantity(int productId, int amount)
-    {
-        try
+        public static void UpdateAvailableQuantity(int productId, int amount)
         {
+            try
             {
                 conn.Open();
                 string updateQuery = "UPDATE product SET pamount = pamount - @Amount WHERE productid = @ProductId";
+
+                // Clear any existing parameters
+                command.Parameters.Clear();
+
                 command.CommandText = updateQuery;
+                command.Parameters.AddWithValue("@Amount", amount);
+                command.Parameters.AddWithValue("@ProductId", productId);
+
+                int rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected == 0)
                 {
-                    command.Parameters.AddWithValue("@Amount", amount);
-                    command.Parameters.AddWithValue("@ProductId", productId);
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected == 0)
-                    {
-                        throw new Exception("Product not found or quantity not updated.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Quantity updated successfully.");
-                    }
+                    throw new Exception("Product not found or quantity not updated.");
+                }
+                else
+                {
+                    Console.WriteLine("Quantity updated successfully.");
                 }
             }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error updating quantity: " + ex.Message);
-        }
-        finally
-        {
-            conn.Close();
-        }
-    }
-    public static void ClearCart(int userId)
-    {
-        string connectionString = ConfigurationManager.ConnectionStrings["dbWebThaiHerbs"].ToString();
-
-        using (SqlConnection conn = new SqlConnection(connectionString))
-        {
-            string deleteQuery = "DELETE FROM cart WHERE userid = @UserId";
-
-            using (SqlCommand command = new SqlCommand(deleteQuery, conn))
+            catch (Exception ex)
             {
-                command.Parameters.AddWithValue("@UserId", userId);
-
-                try
-                {
-                    conn.Open();
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                    {
-                        Console.WriteLine("Cart items deleted successfully.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("No cart items found for the user.");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error deleting cart items: " + ex.Message);
-                }
+                Console.WriteLine("Error updating quantity: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
             }
         }
-    }
+
+
 
     public static string Insertorderdetail(int productId, double priceOfProduct, int userId, int amount, string status)
     {
